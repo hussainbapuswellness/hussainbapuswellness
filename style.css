@@ -1,0 +1,198 @@
+/* ===========================
+   HUSSAIN BAPU'S WELLNESS
+   OFFICIAL WEBSITE STYLE
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#082a23;
+    color:#ffffff;
+}
+
+.container{
+    width:90%;
+    max-width:1300px;
+    margin:auto;
+}
+
+/* HEADER */
+
+header{
+    background:linear-gradient(rgba(0,40,30,.88),rgba(0,40,30,.88)),
+    url("https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=1600&q=80");
+    background-size:cover;
+    background-position:center;
+    min-height:100vh;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.hero h1{
+    font-size:65px;
+    color:#d4af37;
+    letter-spacing:2px;
+    margin-bottom:20px;
+}
+
+.hero h2{
+    font-size:32px;
+    margin-bottom:25px;
+    color:white;
+}
+
+.hero p{
+    max-width:850px;
+    margin:auto;
+    line-height:1.9;
+    font-size:20px;
+    color:#eeeeee;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:40px;
+    padding:18px 45px;
+    background:#d4af37;
+    color:#082a23;
+    text-decoration:none;
+    font-weight:bold;
+    border-radius:50px;
+    transition:.3s;
+}
+
+.btn:hover{
+    background:white;
+}
+
+/* SECTION */
+
+section{
+    padding:90px 0;
+}
+
+.section-title{
+    text-align:center;
+    color:#d4af37;
+    font-size:42px;
+    margin-bottom:60px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:#10382d;
+    padding:35px;
+    border-radius:18px;
+    text-align:center;
+    border:1px solid rgba(212,175,55,.25);
+    transition:.35s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+.card h3{
+    color:#d4af37;
+    margin-bottom:18px;
+}
+
+.card p{
+    color:#dddddd;
+    line-height:1.8;
+}
+
+/* ABOUT */
+
+.about{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+}
+
+.about img{
+    width:100%;
+    border-radius:20px;
+    border:5px solid #d4af37;
+}
+
+.about h2{
+    color:#d4af37;
+    margin-bottom:25px;
+}
+
+.about p{
+    line-height:2;
+    color:#eeeeee;
+}
+
+/* CONTACT */
+
+.contact-box{
+    background:#10382d;
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+}
+
+.contact-box h3{
+    color:#d4af37;
+    margin-bottom:20px;
+}
+
+.contact-box p{
+    margin:12px 0;
+}
+
+/* FOOTER */
+
+footer{
+    background:#041814;
+    text-align:center;
+    padding:35px;
+    color:#cccccc;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:42px;
+}
+
+.hero h2{
+font-size:24px;
+}
+
+.hero p{
+font-size:17px;
+}
+
+.about{
+grid-template-columns:1fr;
+}
+
+.section-title{
+font-size:34px;
+}
+
+}
