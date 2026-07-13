@@ -209,3 +209,28 @@ font-size:34px;
 }
 
 }
+/* OUR PRESENCE */
+
+#presence{
+
+padding:90px 0;
+
+background:#0b3128;
+
+}
+
+#presence .card{
+
+min-height:280px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+flex-direction:column;
+
+}
