@@ -190,6 +190,19 @@ font-size:17px;
 .about{
 grid-template-columns:1fr;
 }
+   /* ONLINE SECTION */
+
+#online{
+padding:90px 0;
+background:#082a23;
+}
+
+#online .card{
+min-height:240px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
 
 .section-title{
 font-size:34px;
