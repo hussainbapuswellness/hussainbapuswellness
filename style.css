@@ -259,3 +259,25 @@ flex-direction:column;
 text-align:center;
 
 }
+.footer{
+background:#061f19;
+padding:50px 20px;
+text-align:center;
+border-top:2px solid #c8a44d;
+margin-top:60px;
+}
+
+.footer h3{
+color:#d4af37;
+font-size:28px;
+margin-bottom:20px;
+font-family:'Cinzel',serif;
+}
+
+.footer p{
+color:#ddd;
+font-size:17px;
+line-height:1.8;
+max-width:900px;
+margin:12px auto;
+   }
