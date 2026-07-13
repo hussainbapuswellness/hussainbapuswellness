@@ -234,3 +234,28 @@ text-align:center;
 flex-direction:column;
 
 }
+/* CONTACT */
+
+#contact{
+
+padding:90px 0;
+
+background:#08231c;
+
+}
+
+#contact .card{
+
+min-height:320px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+flex-direction:column;
+
+text-align:center;
+
+}
