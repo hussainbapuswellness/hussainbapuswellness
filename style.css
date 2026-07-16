@@ -412,8 +412,13 @@ color:#ffffff;
     margin-bottom:18px;
 }
 .logo{
-    width:140px;
-    height:140px;
+    width:170px !important;
+    height:170px !important;
+    object-fit:contain;
     display:block;
-    margin:0 auto 15px;
+    margin:0 auto 20px;
+    border-radius:20px;
+    padding:8px;
+    background:rgba(255,255,255,0.05);
+    box-shadow:0 0 35px rgba(212,175,55,0.45);
 }
