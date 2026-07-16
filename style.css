@@ -365,3 +365,17 @@ color:#06291f;
 transform:scale(1.1);
 box-shadow:0 0 20px rgba(212,175,55,.6);
 }
+.tagline{
+    font-size:22px;
+    color:#f5d76e;
+    font-weight:600;
+    margin:15px 0;
+    letter-spacing:1px;
+}
+
+.sub{
+    max-width:850px;
+    margin:auto;
+    line-height:1.9;
+    font-size:20px;
+}
