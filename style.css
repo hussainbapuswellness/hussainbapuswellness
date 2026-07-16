@@ -398,3 +398,16 @@ transition:.3s;
 .footer-links a:hover{
 color:#ffffff;
 }
+.footer-tagline{
+    color:#d4af37;
+    font-size:18px;
+    font-weight:700;
+    margin:10px 0;
+}
+
+.footer-trust{
+    color:#ffffff;
+    font-size:15px;
+    opacity:.9;
+    margin-bottom:18px;
+}
