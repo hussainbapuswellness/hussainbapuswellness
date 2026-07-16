@@ -411,3 +411,9 @@ color:#ffffff;
     opacity:.9;
     margin-bottom:18px;
 }
+.logo{
+    width:140px;
+    height:140px;
+    display:block;
+    margin:0 auto 15px;
+}
