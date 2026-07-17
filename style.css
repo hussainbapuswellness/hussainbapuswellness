@@ -441,3 +441,27 @@ color:#ffffff;
 .logo:hover{
     transform:scale(1.03);
 }
+.hero-logos{
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    gap:28px;
+    margin-bottom:35px;
+    flex-wrap:wrap;
+}
+
+.main-logo{
+    width:240px;
+    filter:drop-shadow(0 0 35px rgba(212,175,55,.45));
+    transition:.4s;
+}
+
+.main-logo:hover{
+    transform:scale(1.05);
+}
+
+.heritage-logo{
+    width:130px;
+    border-radius:14px;
+    filter:drop-shadow(0 0 20px rgba(212,175,55,.30));
+}
