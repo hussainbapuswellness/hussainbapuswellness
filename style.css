@@ -29,8 +29,7 @@ body{
 
 header{
     background:
-    linear-gradient(rgba(5,20,12,0.72), rgba(5,20,12,0.82)),
-    url("hero-bg.jpg.png");
+    background:#08281f;
 
     background-size:cover;
     background-position:center top;
