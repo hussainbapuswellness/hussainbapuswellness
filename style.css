@@ -117,7 +117,8 @@ section{
 }
 .card{
     position:relative;
-    overflow:visible;
+overflow:hidden;
+z-index:1;
 
     background:linear-gradient(160deg,#124235,#0b2d25 55%,#08231d);
 
@@ -137,18 +138,14 @@ inset 0 1px 0 rgba(255,255,255,.06);
 }
 .card::before{
     content:"";
-
     position:absolute;
-
-    top:0;
-    left:0;
-
-    width:100%;
-    height:5px;
-
-    background:linear-gradient(90deg,#d4af37,#f7e18a,#d4af37);
-
-    opacity:.95;
+    width:220px;
+    height:220px;
+    background:radial-gradient(circle, rgba(212,175,55,.18) 0%, transparent 70%);
+    top:-120px;
+    right:-120px;
+    border-radius:50%;
+    pointer-events:none;
 }
 .card:hover{
 
