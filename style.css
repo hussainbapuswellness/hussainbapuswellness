@@ -563,6 +563,13 @@ border-radius:22px;
 box-shadow:0 20px 70px rgba(0,0,0,.45);
 
 }
+.hero{
+    width:100%;
+    max-width:1100px;
+    margin:0 auto;
+    padding:30px 0 70px;
+    text-align:center;
+}
 /* PREMIUM BUTTON COLORS */
 
 .gold{
