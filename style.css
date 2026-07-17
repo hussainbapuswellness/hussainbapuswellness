@@ -464,3 +464,18 @@ color:#ffffff;
     border-radius:14px;
     filter:drop-shadow(0 0 20px rgba(212,175,55,.30));
 }
+.hero-banner{
+
+width:100%;
+
+max-width:1100px;
+
+display:block;
+
+margin:0 auto 35px;
+
+border-radius:22px;
+
+box-shadow:0 20px 70px rgba(0,0,0,.45);
+
+}
