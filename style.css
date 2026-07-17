@@ -45,12 +45,26 @@ header{
 }
 
 .hero h1{
-    font-size:65px;
-    color:#d4af37;
-    letter-spacing:2px;
-    margin-bottom:20px;
-}
 
+    font-family:'Cinzel',serif;
+
+    font-size:clamp(40px,6vw,72px);
+
+    font-weight:700;
+
+    color:#d4af37;
+
+    line-height:1.15;
+
+    letter-spacing:1.5px;
+
+    margin:28px 0 18px;
+
+    text-shadow:
+        0 0 10px rgba(212,175,55,.25),
+        0 3px 18px rgba(0,0,0,.55);
+
+}
 .hero h2{
     font-size:32px;
     margin-bottom:25px;
@@ -371,12 +385,18 @@ color:#06291f;
 transform:scale(1.1);
 box-shadow:0 0 20px rgba(212,175,55,.6);
 }
-.tagline{
-    font-size:22px;
-    color:#f5d76e;
-    font-weight:600;
-    margin:15px 0;
+.hero .tagline{
+
+    font-family:'Cinzel',serif;
+
+    font-size:24px;
+
+    color:#f1d77a;
+
     letter-spacing:1px;
+
+    margin-bottom:18px;
+
 }
 
 .sub{
