@@ -28,7 +28,6 @@ body{
 /* HEADER */
 
 header{
-    background:
     background:#08281f;
 
     background-size:cover;
@@ -43,6 +42,7 @@ header{
     text-align:center;
 
     padding:40px 20px;
+    padding-top:110px;
 }
 
 .hero h1{
