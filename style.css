@@ -33,7 +33,7 @@ header{
     url("hero-bg.jpg.png");
 
     background-size:cover;
-    background-position:center;
+    background-position:center top;
     background-repeat:no-repeat;
 
     min-height:100vh;
@@ -447,7 +447,7 @@ color:#ffffff;
     align-items:flex-end;
     gap:28px;
     margin-bottom:35px;
-    flex-wrap:wrap;
+    flex-wrap:nowrap;
 }
 
 .main-logo{
