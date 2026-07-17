@@ -481,3 +481,24 @@ border-radius:22px;
 box-shadow:0 20px 70px rgba(0,0,0,.45);
 
 }
+/* PREMIUM BUTTON COLORS */
+
+.gold{
+    background:linear-gradient(135deg,#d4af37,#f7e27a);
+    color:#082a23;
+    border:1px solid rgba(255,255,255,.15);
+}
+
+.gold:hover{
+    background:linear-gradient(135deg,#f7e27a,#d4af37);
+}
+
+.green{
+    background:linear-gradient(135deg,#0f6b4a,#1f9d6a);
+    color:#ffffff;
+    border:1px solid rgba(255,255,255,.15);
+}
+
+.green:hover{
+    background:linear-gradient(135deg,#1f9d6a,#0f6b4a);
+}
