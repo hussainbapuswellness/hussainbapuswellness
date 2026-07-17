@@ -28,16 +28,12 @@ body{
 /* HEADER */
 
 header{
-
     background:
-    linear-gradient(
-        rgba(0,20,15,0.55),
-        rgba(0,20,15,0.65)
-    ),
-    url("hero-bg.jpg");
+    linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.70)),
+    url("hero-bg.jpg.png");
 
     background-size:cover;
-    background-position:center center;
+    background-position:center;
     background-repeat:no-repeat;
 
     min-height:100vh;
@@ -47,8 +43,7 @@ header{
     justify-content:center;
     text-align:center;
 
-    padding:120px 20px 70px;
-
+    padding:110px 20px 40px;
 }
 
 .hero h1{
