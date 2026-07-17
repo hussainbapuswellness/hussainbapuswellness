@@ -502,3 +502,57 @@ box-shadow:0 20px 70px rgba(0,0,0,.45);
 .green:hover{
     background:linear-gradient(135deg,#1f9d6a,#0f6b4a);
 }
+/* PREMIUM MOBILE HERO */
+
+@media (max-width:768px){
+
+header{
+    min-height:100vh;
+    background-position:center center;
+    background-size:cover;
+    padding:30px 15px;
+}
+
+.hero{
+    max-width:100%;
+}
+
+.main-logo{
+    width:150px;
+    margin-bottom:20px;
+}
+
+.heritage-logo{
+    width:95px;
+    margin-top:15px;
+}
+
+.hero h1{
+    font-size:42px;
+    line-height:1.2;
+}
+
+.hero .tagline{
+    font-size:20px;
+}
+
+.hero .sub{
+    font-size:16px;
+    line-height:1.8;
+    padding:0 10px;
+}
+
+.buttons{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    align-items:center;
+}
+
+.btn{
+    width:90%;
+    max-width:320px;
+    text-align:center;
+}
+
+}
