@@ -418,10 +418,26 @@ color:#ffffff;
     margin-bottom:18px;
 }
 .logo{
-    width:320px !important;
-    height:auto !important;
-    max-width:90%;
-    object-fit:contain;
+    width:300px;
+    max-width:80%;
+    height:auto;
+
     display:block;
-    margin:0 auto 20px;
+    margin:0 auto 30px;
+
+    border-radius:50%;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(6px);
+
+    padding:12px;
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.45),
+        0 0 35px rgba(212,175,55,.45);
+
+    transition:.4s ease;
+}
+
+.logo:hover{
+    transform:scale(1.03);
 }
