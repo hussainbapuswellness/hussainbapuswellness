@@ -115,35 +115,41 @@ section{
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
     gap:30px;
 }
-
 .card{
+    position:relative;
+    overflow:hidden;
 
-    background:rgba(18,50,40,.55);
+    background:linear-gradient(145deg,#10382d,#0b2d25);
 
-    backdrop-filter:blur(14px);
+    border:1px solid rgba(212,175,55,.22);
 
-    -webkit-backdrop-filter:blur(14px);
+    border-radius:22px;
 
-    padding:38px 32px;
-
-    border-radius:24px;
+    padding:35px 28px;
 
     text-align:center;
 
-    border:1px solid rgba(212,175,55,.28);
+    transition:all .45s ease;
 
     box-shadow:
-        0 12px 35px rgba(0,0,0,.35),
+        0 12px 30px rgba(0,0,0,.35),
         inset 0 1px 0 rgba(255,255,255,.05);
-
-    transition:all .4s ease;
-
-    overflow:hidden;
-
-    position:relative;
-
 }
+.card::before{
+    content:"";
 
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:5px;
+
+    background:linear-gradient(90deg,#d4af37,#f7e18a,#d4af37);
+
+    opacity:.95;
+}
 .card:hover{
 
     transform:translateY(-12px) scale(1.02);
@@ -151,10 +157,10 @@ section{
     border-color:#d4af37;
 
     box-shadow:
-        0 20px 45px rgba(0,0,0,.45),
-        0 0 22px rgba(212,175,55,.18);
-
+        0 22px 45px rgba(0,0,0,.45),
+        0 0 25px rgba(212,175,55,.22);
 }
+
 
 .card h3{
 
