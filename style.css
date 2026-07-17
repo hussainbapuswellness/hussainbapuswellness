@@ -151,36 +151,33 @@ rgba(255,255,255,.01)
 .card::before{
     content:"";
     position:absolute;
-    width:220px;
-    height:220px;
-    background:radial-gradient(circle, rgba(212,175,55,.18) 0%, transparent 70%);
-    top:-120px;
-    right:-120px;
-    border-radius:50%;
-    pointer-events:none;
-   .card::after{
+    top:0;
+    left:0;
+    width:100%;
+    height:4px;
+    background:linear-gradient(90deg,#f8e08a,#d4af37,#f8e08a);
+}
+.card::after{
     content:"";
     position:absolute;
-    top:-120%;
-    left:-50%;
-    width:60%;
-    height:300%;
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.18),
-        transparent
-    );
-    transform:rotate(25deg);
-    transition:.8s;
-   }
+    top:-120px;
+    right:-120px;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:radial-gradient(circle,
+        rgba(212,175,55,.18) 0%,
+        transparent 70%);
+    pointer-events:none;
+}
 
 .card:hover{
     transform:translateY(-12px) scale(1.03);
     box-shadow:
     0 25px 60px rgba(0,0,0,.45),
     0 0 25px rgba(212,175,55,.18);
-   }
+    transform:scale(1.15);
+}
 
 .card h3{
     padding-top:45px;
