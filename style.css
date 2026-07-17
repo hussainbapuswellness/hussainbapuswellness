@@ -117,7 +117,7 @@ section{
 }
 .card{
     position:relative;
-    overflow:hidden;
+    overflow:visible;
 
     background:linear-gradient(145deg,#10382d,#0b2d25);
 
@@ -165,14 +165,14 @@ section{
 
     position:absolute;
 
-    top:-28px;
+    top:-18px;
     left:50%;
 
     transform:translateX(-50%);
 
     width:56px;
     height:56px;
-
+    z-index:2;
     border-radius:50%;
 
     background:radial-gradient(circle,#f7d96b,#d4af37);
@@ -185,7 +185,7 @@ section{
 }
 
 .card h3{
-
+    padding-top:45px;
     margin-top:22px;
 
     color:#d4af37;
