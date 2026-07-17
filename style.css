@@ -574,4 +574,7 @@ header{
     text-align:center;
 }
 
+.hero .highlight{
+    color:#f8e8a6;
+    font-weight:600;
 }
