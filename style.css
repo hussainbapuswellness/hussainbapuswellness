@@ -372,13 +372,21 @@ padding:50px 20px;
 text-align:center;
 border-top:2px solid #c8a44d;
 margin-top:60px;
+   border-top:1px solid rgba(212,175,55,.45);
+box-shadow:0 -10px 35px rgba(212,175,55,.08);
+padding:45px 20px;
 }
 
 .footer h3{
-color:#d4af37;
-font-size:28px;
-margin-bottom:20px;
-font-family:'Cinzel',serif;
+    color:#d4af37;
+    font-family:'Cinzel',serif;
+    font-size:34px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    margin-bottom:18px;
+    text-shadow:
+        0 0 10px rgba(212,175,55,.20),
+        0 3px 15px rgba(0,0,0,.45);
 }
 
 .footer p{
