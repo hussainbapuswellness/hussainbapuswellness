@@ -56,7 +56,8 @@ header{
 
     line-height:1.15;
 
-    letter-spacing:1.5px;
+    letter-spacing:2.5px;
+   text-transform:uppercase;
 
     margin:28px 0 18px;
 
@@ -465,7 +466,8 @@ box-shadow:0 0 20px rgba(212,175,55,.6);
 
     font-family:'Cinzel',serif;
 
-    font-size:24px;
+    font-size:26px;
+   font-weight:600;
 
     color:#f1d77a;
 
@@ -571,9 +573,11 @@ display:block;
 
 margin:0 auto 35px;
 
-border-radius:22px;
+border-radius:28px;
 
-box-shadow:0 20px 70px rgba(0,0,0,.45);
+box-shadow:
+0 25px 80px rgba(0,0,0,.45),
+0 0 30px rgba(212,175,55,.12);
 
 }
 .hero{
@@ -639,8 +643,10 @@ header{
 }
 
 .hero .sub{
-    font-size:16px;
-    line-height:1.8;
+    font-size:18px;
+    line-height:2;
+   max-width:900px;
+margin:30px auto;
     padding:0 10px;
 }
 
