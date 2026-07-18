@@ -683,7 +683,7 @@ margin:30px auto;
 .card,
 .hero,
 .section-title{
-    animation:fadeUp .8s ease both;
+    animation:fadeUp 1s ease both;
 }
 
 @keyframes fadeUp{
