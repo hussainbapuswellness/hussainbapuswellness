@@ -700,6 +700,8 @@ margin:30px auto;
 }
 .call-float i,
 .whatsapp-float i{
-    font-size:28px;
+    font-size:30px;
+    color:#fff;
+    display:block;
     line-height:1;
 }
