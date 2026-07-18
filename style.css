@@ -678,24 +678,3 @@ margin:30px auto;
     color:#f8e8a6;
     font-weight:600;
 }
-/* PREMIUM FADE ANIMATION */
-
-.card,
-.hero,
-.section-title{
-    animation:fadeUp 1s ease both;
-}
-
-@keyframes fadeUp{
-
-    from{
-        opacity:0;
-        transform:translateY(25px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-}
