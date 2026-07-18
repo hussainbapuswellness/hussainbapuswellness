@@ -698,3 +698,8 @@ margin:30px auto;
     color:#f8e8a6;
     font-weight:600;
 }
+.call-float i,
+.whatsapp-float i{
+    font-size:28px;
+    line-height:1;
+}
