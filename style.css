@@ -114,8 +114,11 @@ section{
 .section-title{
     text-align:center;
     color:#d4af37;
-    font-size:42px;
-    margin-bottom:60px;
+    font-size:46px;
+    margin-bottom:70px;
+   letter-spacing:1px;
+   text-shadow:
+0 2px 12px rgba(212,175,55,.18);
 }
 
 .cards{
