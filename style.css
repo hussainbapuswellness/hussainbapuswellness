@@ -126,8 +126,12 @@ z-index:1;
 
     border-radius:24px;
 
-    padding:35px 28px;
+    padding:42px 30px;
+min-height:300px;
 
+display:flex;
+flex-direction:column;
+justify-content:center;
     text-align:center;
 
     transition:all .45s ease;
@@ -180,27 +184,20 @@ rgba(255,255,255,.01)
 }
 
 .card h3{
-    padding-top:45px;
-    margin-top:22px;
-
     color:#d4af37;
-
-    font-size:22px;
-
+    font-size:24px;
     font-weight:700;
-
-    letter-spacing:.5px;
-
-    margin-bottom:18px;
+    line-height:1.35;
+    margin-bottom:20px;
 }
 
 .card p{
-
     color:#e6e6e6;
-
-    line-height:1.9;
-
-    font-size:15px;
+    font-size:17px;
+    line-height:1.8;
+    font-weight:400;
+    max-width:95%;
+    margin:0 auto;
 }
 /* ABOUT */
 
