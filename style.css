@@ -40,7 +40,8 @@ url("premium-bg.jpg.png") center center / cover;
     align-items:center;
     justify-content:center;
     text-align:center;
-
+    width:100%;
+    overflow:hidden;
     padding:110px 20px 40px;
 }
 
