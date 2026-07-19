@@ -197,14 +197,16 @@ position:relative;
 backdrop-filter:blur(8px);
 -webkit-backdrop-filter:blur(8px);
 
-background:
-linear-gradient(
-145deg,
-rgba(255,255,255,.05),
-rgba(255,255,255,.01)
-),
-#10382d;
-}
+background:rgba(8,40,32,.42);
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+
+border:1px solid rgba(255,255,255,.12);
+
+box-shadow:
+0 15px 40px rgba(0,0,0,.35),
+0 0 30px rgba(212,175,55,.10);
+   
 .card::before{
     content:"";
     position:absolute;
