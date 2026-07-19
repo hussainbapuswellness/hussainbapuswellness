@@ -15,27 +15,13 @@ html{
 
 body{
     font-family:Arial,Helvetica,sans-serif;
-
     color:#ffffff;
 
     background:
-    radial-gradient(circle at top left,
-    rgba(212,175,55,.08),
-    transparent 30%),
+    linear-gradient(rgba(5,22,18,.72),rgba(5,22,18,.72)),
+    url("premium-bg.jpg.png") center center / cover fixed;
 
-    radial-gradient(circle at bottom right,
-    rgba(212,175,55,.06),
-    transparent 35%),
-
-    linear-gradient(
-    180deg,
-    #041814 0%,
-    #08231d 20%,
-    #0b3128 45%,
-    #08231d 70%,
-    #041814 100%);
-
-    background-attachment:fixed;
+    background-color:#082a23;
 }
 
 .container{
