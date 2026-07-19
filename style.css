@@ -739,3 +739,51 @@ font-size:16px;
 color:#eee;
 line-height:1.6;
 }
+/* ===== QUICK NAVIGATION ===== */
+
+#quick-links{
+    padding:70px 20px;
+    text-align:center;
+}
+
+#quick-links h2{
+    color:#d4af37;
+    font-size:38px;
+    margin-bottom:35px;
+    font-family:'Cinzel',serif;
+}
+
+#quick-links .cards{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:18px;
+}
+
+#quick-links .card{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:180px;
+    min-height:70px;
+
+    padding:16px 20px;
+
+    text-decoration:none;
+    color:#ffffff;
+    font-size:16px;
+    font-weight:600;
+
+    border-radius:14px;
+    background:#10382d;
+    border:1px solid rgba(212,175,55,.25);
+
+    transition:.3s;
+}
+
+#quick-links .card:hover{
+    background:#d4af37;
+    color:#082a23;
+    transform:translateY(-4px);
+}
