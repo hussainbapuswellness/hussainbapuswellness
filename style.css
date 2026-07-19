@@ -16,13 +16,7 @@ html{
 body{
     font-family:Arial,Helvetica,sans-serif;
     color:#ffffff;
-
-    background:
-    linear-gradient(rgba(5,22,18,.72),rgba(5,22,18,.72)),
-    url("premium-bg.jpg.png") center center / cover fixed;
-
-    background-color:#082a23;
-}
+    background:#082a23;
 
 .container{
     width:90%;
@@ -34,9 +28,8 @@ body{
 
 header{
     background:
-linear-gradient(rgba(6,20,16,.72),rgba(6,20,16,.72)),
-url("premium-bg.jpg.png") center center / cover fixed;
-
+linear-gradient(rgba(5,22,18,.45),rgba(5,22,18,.60)),
+url("premium-bg.jpg.png") center center / cover;
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
