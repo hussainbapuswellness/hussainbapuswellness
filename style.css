@@ -806,26 +806,30 @@ line-height:1.6;
     color:#082a23;
     transform:translateY(-4px);
 }
-section{
-position:relative;
-overflow:hidden;
-}
-
 section::before{
 content:"";
 position:absolute;
 top:0;
 left:50%;
 transform:translateX(-50%);
-width:90%;
-height:1px;
 
-background:
-linear-gradient(
+width:260px;
+height:3px;
+
+border-radius:50px;
+
+background:linear-gradient(
 90deg,
 transparent,
-rgba(212,175,55,.25),
-transparent);
+#d4af37 15%,
+#f7e27a 50%,
+#d4af37 85%,
+transparent
+);
+
+box-shadow:
+0 0 12px rgba(212,175,55,.45),
+0 0 22px rgba(212,175,55,.25);
 
 pointer-events:none;
 }
