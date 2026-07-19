@@ -47,7 +47,9 @@ body{
 /* HEADER */
 
 header{
-    background:#08281f;
+    background:
+linear-gradient(rgba(6,20,16,.72),rgba(6,20,16,.72)),
+url("premium-bg.jpg.png") center center / cover fixed;
 
     background-size:cover;
     background-position:center;
