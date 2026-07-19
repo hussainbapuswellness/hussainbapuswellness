@@ -297,6 +297,7 @@ font-size:17px;
 .about{
 grid-template-columns:1fr;
 }
+}
    /* ONLINE SECTION */
 
 #online{
@@ -700,4 +701,5 @@ margin:30px auto;
     color:#fff;
     display:block;
     line-height:1;
+}
 }
