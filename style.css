@@ -703,3 +703,39 @@ margin:30px auto;
     line-height:1;
 }
 }
+.hero-stats{
+display:flex;
+justify-content:center;
+gap:30px;
+margin-top:50px;
+flex-wrap:wrap;
+}
+
+.stat{
+background:rgba(255,255,255,.05);
+border:1px solid rgba(212,175,55,.25);
+padding:25px;
+width:230px;
+border-radius:18px;
+backdrop-filter:blur(8px);
+transition:.3s;
+}
+
+.stat:hover{
+transform:translateY(-8px);
+border-color:#d4af37;
+box-shadow:0 15px 35px rgba(212,175,55,.18);
+}
+
+.stat h3{
+font-size:32px;
+color:#d4af37;
+margin-bottom:12px;
+font-family:'Cinzel',serif;
+}
+
+.stat p{
+font-size:16px;
+color:#eee;
+line-height:1.6;
+}
