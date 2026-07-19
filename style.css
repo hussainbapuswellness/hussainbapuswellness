@@ -615,7 +615,7 @@ color:#ffffff;
 .hero-banner{
 
 width:100%;
-max-width:1100px;
+max-width:100%;
 
 display:block;
 
@@ -636,7 +636,6 @@ animation:bannerGlow 5s ease-in-out infinite;
 }
 .hero{
     width:100%;
-    max-width:1100px;
     margin:0 auto;
     padding:30px 20px 70px;
     text-align:center;
