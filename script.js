@@ -6,15 +6,34 @@ const btnEn = document.getElementById("btn-en");
 const btnHi = document.getElementById("btn-hi");
 const btnGu = document.getElementById("btn-gu");
 
-btnEn.addEventListener("click", () => {
-    alert("English Selected");
+function applyLanguage(lang){
+
+document.getElementById("hero-title").textContent =
+translations[lang].heroTitle;
+
+document.getElementById("hero-subtitle").textContent =
+translations[lang].heroSubtitle;
+
+document.getElementById("quick-navigation-title").textContent =
+translations[lang].quickNavigation;
+
+}
+
+btnEn.addEventListener("click",()=>{
+
+applyLanguage("en");
+
 });
 
-btnHi.addEventListener("click", () => {
-    alert("हिन्दी चुनी गई");
+btnHi.addEventListener("click",()=>{
+
+applyLanguage("hi");
+
 });
 
-btnGu.addEventListener("click", () => {
-    alert("ગુજરાતી પસંદ કરવામાં આવી");
+btnGu.addEventListener("click",()=>{
+
+applyLanguage("gu");
+
 });
 });
