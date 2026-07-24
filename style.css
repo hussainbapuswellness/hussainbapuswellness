@@ -27,12 +27,13 @@ body{
 
 /* HEADER */
     header{
-    background:transparent;
-linear-gradient(rgba(5,22,18,.45),rgba(5,22,18,.60)),
-url("premium-bg.jpg.png") center center / cover;
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
+    background:
+linear-gradient(rgba(5,22,18,.45), rgba(5,22,18,.60)),
+url("premium-bg.jpg.png");
+
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
 
     min-height:100vh;
 
