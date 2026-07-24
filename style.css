@@ -17,18 +17,6 @@ body{
     font-family:Arial,Helvetica,sans-serif;
     color:#ffffff;
 
-    background:
-    linear-gradient(
-        rgba(5,22,18,.82),
-        rgba(5,22,18,.82)
-    ),
-    url("herbal-background.jpg");
-
-    background-size:cover;
-    background-position:center top;
-    background-repeat:no-repeat;
-    background-attachment: scroll;
-
     background-color:#082a23;
     }
 .container{
@@ -140,7 +128,18 @@ box-shadow:
 section{
     padding:90px 0;
     position:relative;
-    overflow:visible;
+
+    background:
+    linear-gradient(
+        rgba(5,22,18,.82),
+        rgba(5,22,18,.82)
+    ),
+    url("herbal-background.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:scroll;
 }
 
 .section-title{
