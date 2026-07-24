@@ -25,9 +25,9 @@ body{
     url("herbal-background.jpg");
 
     background-size:cover;
-    background-position:center;
+    background-position:center top;
     background-repeat:no-repeat;
-    background-attachment:fixed;
+    background-attachment: scroll;
 
     background-color:#082a23;
     }
@@ -38,9 +38,8 @@ body{
 }
 
 /* HEADER */
-
-header{
-    background:
+    header{
+    background:transparent;
 linear-gradient(rgba(5,22,18,.45),rgba(5,22,18,.60)),
 url("premium-bg.jpg.png") center center / cover;
     background-size:cover;
@@ -138,9 +137,7 @@ box-shadow:
 
 }
 /* SECTION */
-
 section{
-    section{
     padding:90px 0;
     position:relative;
     overflow:visible;
