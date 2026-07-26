@@ -42,6 +42,22 @@ aboutCard5Text:"Private guidance with sincerity, confidentiality and compassion 
 
 aboutCard6Title:"Family Values",
 aboutCard6Text:"Faith, honesty and genuine care remain the foundation of every consultation.",
+  heroHighlight:"100+ Years of Family Heritage",
+
+heroLine1:"Traditional Wisdom • Trusted Care • Modern Wellness • Blessings • Peace • Guidance",
+
+heroLine2:"Serving Families Across India, USA & Worldwide with Traditional Wisdom, Trust and Compassion.",
+
+heroLine3:"Spiritual Guidance • Duaa & Prayer • Taweez • Herbal Wellness • Personal & Family Consultation • Worldwide Online Support",
+
+stat1Title:"100+",
+stat1Text:"Years of Family Heritage",
+
+stat2Title:"Worldwide",
+stat2Text:"Online Guidance",
+
+stat3Title:"India • USA",
+stat3Text:"Serving Families",
 },
 
 hi:{
@@ -86,6 +102,22 @@ aboutCard5Text:"हर व्यक्ति के लिए गोपनीय
 
 aboutCard6Title:"पारिवारिक मूल्य",
 aboutCard6Text:"विश्वास, ईमानदारी और सच्ची सेवा हमारी पहचान है।",
+  heroHighlight:"100+ वर्षों की पारिवारिक विरासत",
+
+heroLine1:"पारंपरिक ज्ञान • विश्वसनीय देखभाल • आधुनिक वेलनेस • बरकत • शांति • मार्गदर्शन",
+
+heroLine2:"भारत, अमेरिका और विश्वभर के परिवारों की विश्वास और करुणा के साथ सेवा।",
+
+heroLine3:"आध्यात्मिक मार्गदर्शन • दुआ • तावीज़ • हर्बल वेलनेस • व्यक्तिगत एवं पारिवारिक परामर्श • विश्वव्यापी ऑनलाइन सहायता",
+
+stat1Title:"100+",
+stat1Text:"वर्षों की पारिवारिक विरासत",
+
+stat2Title:"विश्वव्यापी",
+stat2Text:"ऑनलाइन मार्गदर्शन",
+
+stat3Title:"भारत • अमेरिका",
+stat3Text:"परिवारों की सेवा",
 },
 
 gu:{
@@ -130,6 +162,22 @@ aboutCard5Text:"દરેક વ્યક્તિ માટે ગોપની�
 
 aboutCard6Title:"પારિવારિક મૂલ્યો",
 aboutCard6Text:"વિશ્વાસ, ઈમાનદારી અને સાચી સેવા અમારી ઓળખ છે.",
+  heroHighlight:"100+ વર્ષની પારિવારિક વારસા",
+
+heroLine1:"પરંપરાગત જ્ઞાન • વિશ્વાસપાત્ર સેવા • આધુનિક વેલનેસ • આશીર્વાદ • શાંતિ • માર્ગદર્શન",
+
+heroLine2:"ભારત, અમેરિકા અને સમગ્ર વિશ્વના પરિવારોને વિશ્વાસ અને કરુણા સાથે સેવા.",
+
+heroLine3:"આધ્યાત્મિક માર્ગદર્શન • દુઆ • તાવીઝ • હર્બલ વેલનેસ • વ્યક્તિગત અને પારિવારિક માર્ગદર્શન • વિશ્વવ્યાપી ઓનલાઇન સહાય",
+
+stat1Title:"100+",
+stat1Text:"વર્ષોની પારિવારિક વારસા",
+
+stat2Title:"વિશ્વવ્યાપી",
+stat2Text:"ઓનલાઇન માર્ગદર્શન",
+
+stat3Title:"ભારત • અમેરિકા",
+stat3Text:"પરિવારોની સેવા",
 }
 
 };
