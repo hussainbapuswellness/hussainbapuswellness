@@ -120,6 +120,9 @@ story6Text:"Natural herbal wellness products inspired by traditional knowledge f
 
 story7Title:"👤 Personal Consultation",
 story7Text:"Private consultation with sincerity, confidentiality and compassionate guidance for every individual and family.",
+productTitle:"🚀 Coming Soon",
+productText:"We are currently preparing our wellness product range with great care and dedication. Our products will be launched after completing research, quality assurance and product development. Stay connected with Hussain Bapu's Wellness for upcoming announcements and future launches.",
+productBtn:"Get Updates on WhatsApp",
 },
 
 hi:{
@@ -242,6 +245,9 @@ story6Text:"दैनिक पारिवारिक स्वास्थ्
 
 story7Title:"👤 व्यक्तिगत परामर्श",
 story7Text:"हर व्यक्ति और परिवार के लिए गोपनीय तथा करुणामय व्यक्तिगत मार्गदर्शन।",
+productTitle:"🚀 जल्द आ रहा है",
+productText:"हम अपने वेलनेस उत्पादों को पूरी सावधानी और गुणवत्ता के साथ तैयार कर रहे हैं। शोध और गुणवत्ता परीक्षण पूरा होने के बाद इन्हें लॉन्च किया जाएगा। नवीनतम जानकारी के लिए हमारे साथ जुड़े रहें।",
+productBtn:"व्हाट्सएप पर अपडेट प्राप्त करें",
 },
 
 gu:{
@@ -364,6 +370,9 @@ story6Text:"દૈનિક પરિવારના આરોગ્ય મા�
 
 story7Title:"👤 વ્યક્તિગત માર્ગદર્શન",
 story7Text:"દરેક વ્યક્તિ અને પરિવાર માટે ગોપનીય તથા કરુણાભર્યું વ્યક્તિગત માર્ગદર્શન.",
+productTitle:"🚀 ટૂંક સમયમાં આવી રહ્યું છે",
+productText:"અમે અમારા વેલનેસ પ્રોડક્ટ્સને સંપૂર્ણ કાળજી અને ગુણવત્તા સાથે તૈયાર કરી રહ્યા છીએ. સંશોધન અને ગુણવત્તા પરીક્ષણ પૂર્ણ થયા પછી જ લોન્ચ કરવામાં આવશે. નવી માહિતી માટે અમારી સાથે જોડાયેલા રહો.",
+productBtn:"વોટ્સએપ પર અપડેટ મેળવો",
 }
 
 };
