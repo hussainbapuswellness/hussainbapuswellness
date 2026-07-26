@@ -57,6 +57,23 @@ document.getElementById("stat2-text").textContent = translations[lang].stat2Text
 
 document.getElementById("stat3-title").textContent = translations[lang].stat3Title;
 document.getElementById("stat3-text").textContent = translations[lang].stat3Text;
+  document.getElementById("service1-title").textContent = translations[lang].service1Title;
+document.getElementById("service1-text").textContent = translations[lang].service1Text;
+
+document.getElementById("service2-title").textContent = translations[lang].service2Title;
+document.getElementById("service2-text").textContent = translations[lang].service2Text;
+
+document.getElementById("service3-title").textContent = translations[lang].service3Title;
+document.getElementById("service3-text").textContent = translations[lang].service3Text;
+
+document.getElementById("service4-title").textContent = translations[lang].service4Title;
+document.getElementById("service4-text").textContent = translations[lang].service4Text;
+
+document.getElementById("service5-title").textContent = translations[lang].service5Title;
+document.getElementById("service5-text").textContent = translations[lang].service5Text;
+
+document.getElementById("service6-title").textContent = translations[lang].service6Title;
+document.getElementById("service6-text").textContent = translations[lang].service6Text;
 }
 
 btnEn.addEventListener("click",()=>{
