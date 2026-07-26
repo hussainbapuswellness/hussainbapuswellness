@@ -41,6 +41,22 @@ document.querySelector("#about .cards .card:nth-child(5) p").textContent = trans
 
 document.querySelector("#about .cards .card:nth-child(6) h3").textContent = translations[lang].aboutCard6Title;
 document.querySelector("#about .cards .card:nth-child(6) p").textContent = translations[lang].aboutCard6Text;
+  document.getElementById("hero-highlight").textContent = translations[lang].heroHighlight;
+
+document.getElementById("hero-line1").textContent = translations[lang].heroLine1;
+
+document.getElementById("hero-line2").textContent = translations[lang].heroLine2;
+
+document.getElementById("hero-line3").textContent = translations[lang].heroLine3;
+
+document.getElementById("stat1-title").textContent = translations[lang].stat1Title;
+document.getElementById("stat1-text").textContent = translations[lang].stat1Text;
+
+document.getElementById("stat2-title").textContent = translations[lang].stat2Title;
+document.getElementById("stat2-text").textContent = translations[lang].stat2Text;
+
+document.getElementById("stat3-title").textContent = translations[lang].stat3Title;
+document.getElementById("stat3-text").textContent = translations[lang].stat3Text;
 }
 
 btnEn.addEventListener("click",()=>{
