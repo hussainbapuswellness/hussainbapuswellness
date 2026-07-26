@@ -74,6 +74,23 @@ document.getElementById("service5-text").textContent = translations[lang].servic
 
 document.getElementById("service6-title").textContent = translations[lang].service6Title;
 document.getElementById("service6-text").textContent = translations[lang].service6Text;
+document.getElementById("why1-title").textContent = translations[lang].why1Title;
+document.getElementById("why1-text").textContent = translations[lang].why1Text;
+
+document.getElementById("why2-title").textContent = translations[lang].why2Title;
+document.getElementById("why2-text").textContent = translations[lang].why2Text;
+
+document.getElementById("why3-title").textContent = translations[lang].why3Title;
+document.getElementById("why3-text").textContent = translations[lang].why3Text;
+
+document.getElementById("why4-title").textContent = translations[lang].why4Title;
+document.getElementById("why4-text").textContent = translations[lang].why4Text;
+
+document.getElementById("why5-title").textContent = translations[lang].why5Title;
+document.getElementById("why5-text").textContent = translations[lang].why5Text;
+
+document.getElementById("why6-title").textContent = translations[lang].why6Title;
+document.getElementById("why6-text").textContent = translations[lang].why6Text;
 }
 
 btnEn.addEventListener("click",()=>{
