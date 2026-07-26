@@ -91,6 +91,14 @@ document.getElementById("why5-text").textContent = translations[lang].why5Text;
 
 document.getElementById("why6-title").textContent = translations[lang].why6Title;
 document.getElementById("why6-text").textContent = translations[lang].why6Text;
+document.getElementById("nav-about").textContent = translations[lang].navAbout;
+document.getElementById("nav-services").textContent = translations[lang].navServices;
+document.getElementById("nav-why").textContent = translations[lang].navWhy;
+document.getElementById("nav-story").textContent = translations[lang].navStory;
+document.getElementById("nav-products").textContent = translations[lang].navProducts;
+document.getElementById("nav-global").textContent = translations[lang].navGlobal;
+document.getElementById("nav-presence").textContent = translations[lang].navPresence;
+document.getElementById("nav-contact").textContent = translations[lang].navContact;
 }
 
 btnEn.addEventListener("click",()=>{
