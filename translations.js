@@ -24,7 +24,7 @@ globalTitle:"Worldwide Consultation & Support",
 
 presenceTitle:"Serving India & USA",
 
-contactTitle:"Contact Us"
+contactTitle:"Contact Us",
 aboutCard1Title:"100+ Years Heritage",
 aboutCard1Text:"Serving families through generations with trust, sincerity and traditional wisdom.",
 
@@ -68,7 +68,7 @@ globalTitle:"विश्वव्यापी परामर्श",
 
 presenceTitle:"भारत एवं अमेरिका में सेवा",
 
-contactTitle:"संपर्क करें"
+contactTitle:"संपर्क करें",
 aboutCard1Title:"100+ वर्षों की विरासत",
 aboutCard1Text:"पीढ़ियों से विश्वास, ईमानदारी और पारंपरिक ज्ञान के साथ परिवारों की सेवा।",
 
@@ -112,7 +112,7 @@ globalTitle:"વિશ્વવ્યાપી માર્ગદર્શન",
 
 presenceTitle:"ભારત અને અમેરિકા સેવા",
 
-contactTitle:"અમારો સંપર્ક કરો"
+contactTitle:"અમારો સંપર્ક કરો",
 aboutCard1Title:"100+ વર્ષની વારસા",
 aboutCard1Text:"પેઢીઓથી વિશ્વાસ, નિષ્ઠા અને પરંપરાગત જ્ઞાન સાથે પરિવારોની સેવા.",
 
