@@ -100,6 +100,26 @@ navProducts:"Products",
 navGlobal:"Worldwide Consultation",
 navPresence:"Serving India & USA",
 navContact:"Contact Us",
+story1Title:"🌿 Our Heritage",
+story1Text:"Hussain Bapu's Wellness is built upon more than 100 years of family tradition, trust and sincere guidance passed from one generation to the next.",
+
+story2Title:"🤝 Our Mission",
+story2Text:"To serve every individual and family with honesty, compassion, privacy and natural wellness inspired by traditional knowledge.",
+
+story3Title:"⭐ Our Vision",
+story3Text:"To become one of India's most trusted wellness brands while preserving our family values and heritage.",
+
+story4Title:"🤲 Duaa & Prayer Support",
+story4Text:"We continue a long-standing tradition of offering heartfelt Duaa and prayer support with respect, privacy and compassion for those seeking guidance.",
+
+story5Title:"📿 Taweez & Spiritual Guidance",
+story5Text:"Traditional spiritual guidance and Taweez support are offered with sincerity while respecting individual beliefs and family values.",
+
+story6Title:"🌿 Natural Herbal Wellness",
+story6Text:"Natural herbal wellness products inspired by traditional knowledge for daily family wellness.",
+
+story7Title:"👤 Personal Consultation",
+story7Text:"Private consultation with sincerity, confidentiality and compassionate guidance for every individual and family.",
 },
 
 hi:{
@@ -202,6 +222,26 @@ navProducts:"उत्पाद",
 navGlobal:"विश्वव्यापी परामर्श",
 navPresence:"भारत एवं अमेरिका",
 navContact:"संपर्क करें",
+story1Title:"🌿 हमारी विरासत",
+story1Text:"हुसैन बापूज़ वेलनेस 100+ वर्षों की पारिवारिक परंपरा, विश्वास और सच्चे मार्गदर्शन पर आधारित है।",
+
+story2Title:"🤝 हमारा मिशन",
+story2Text:"ईमानदारी, करुणा, गोपनीयता और प्राकृतिक वेलनेस के साथ प्रत्येक व्यक्ति और परिवार की सेवा करना।",
+
+story3Title:"⭐ हमारा विज़न",
+story3Text:"पारिवारिक मूल्यों और विरासत को सुरक्षित रखते हुए भारत के सबसे विश्वसनीय वेलनेस ब्रांडों में से एक बनना।",
+
+story4Title:"🤲 दुआ एवं प्रार्थना सहायता",
+story4Text:"सम्मान, गोपनीयता और करुणा के साथ दुआ और प्रार्थना सहायता की हमारी पारंपरिक सेवा।",
+
+story5Title:"📿 तावीज़ एवं आध्यात्मिक मार्गदर्शन",
+story5Text:"व्यक्तिगत आस्था और पारिवारिक मूल्यों का सम्मान करते हुए पारंपरिक मार्गदर्शन।",
+
+story6Title:"🌿 प्राकृतिक हर्बल वेलनेस",
+story6Text:"दैनिक पारिवारिक स्वास्थ्य के लिए पारंपरिक ज्ञान से प्रेरित प्राकृतिक हर्बल वेलनेस।",
+
+story7Title:"👤 व्यक्तिगत परामर्श",
+story7Text:"हर व्यक्ति और परिवार के लिए गोपनीय तथा करुणामय व्यक्तिगत मार्गदर्शन।",
 },
 
 gu:{
@@ -304,6 +344,26 @@ navProducts:"પ્રોડક્ટ્સ",
 navGlobal:"વિશ્વવ્યાપી માર્ગદર્શન",
 navPresence:"ભારત અને અમેરિકા",
 navContact:"સંપર્ક કરો",
+story1Title:"🌿 અમારી વારસા",
+story1Text:"હુસૈન બાપુઝ વેલનેસ 100+ વર્ષની પારિવારિક પરંપરા, વિશ્વાસ અને નિષ્ઠાપૂર્વકના માર્ગદર્શન પર આધારિત છે.",
+
+story2Title:"🤝 અમારું મિશન",
+story2Text:"ઈમાનદારી, કરુણા, ગોપનીયતા અને કુદરતી વેલનેસ સાથે દરેક વ્યક્તિ અને પરિવારની સેવા કરવી.",
+
+story3Title:"⭐ અમારું વિઝન",
+story3Text:"અમારી પારિવારિક મૂલ્યો અને વારસાને જાળવી રાખીને ભારતના સૌથી વિશ્વાસપાત્ર વેલનેસ બ્રાન્ડમાં સ્થાન મેળવવું.",
+
+story4Title:"🤲 દુઆ અને પ્રાર્થના સહાય",
+story4Text:"સન્માન, ગોપનીયતા અને કરુણાથી દુઆ અને પ્રાર્થનાની પરંપરાગત સેવા ચાલુ રાખવી.",
+
+story5Title:"📿 તાવીઝ અને આધ્યાત્મિક માર્ગદર્શન",
+story5Text:"વ્યક્તિગત માન્યતાઓ અને પારિવારિક મૂલ્યોનો માન રાખીને પરંપરાગત માર્ગદર્શન.",
+
+story6Title:"🌿 કુદરતી હર્બલ વેલનેસ",
+story6Text:"દૈનિક પરિવારના આરોગ્ય માટે પરંપરાગત જ્ઞાનથી પ્રેરિત કુદરતી હર્બલ વેલનેસ.",
+
+story7Title:"👤 વ્યક્તિગત માર્ગદર્શન",
+story7Text:"દરેક વ્યક્તિ અને પરિવાર માટે ગોપનીય તથા કરુણાભર્યું વ્યક્તિગત માર્ગદર્શન.",
 }
 
 };
