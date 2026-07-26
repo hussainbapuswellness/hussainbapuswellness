@@ -58,6 +58,23 @@ stat2Text:"Online Guidance",
 
 stat3Title:"India • USA",
 stat3Text:"Serving Families",
+  service1Title:"🤲 Duaa",
+service1Text:"Personal prayers and spiritual guidance for peace, hope and blessings.",
+
+service2Title:"📿 Taweez Guidance",
+service2Text:"Traditional guidance provided with sincerity and respect according to family heritage.",
+
+service3Title:"🌿 Herbal Remedies",
+service3Text:"Natural wellness solutions inspired by traditional herbal knowledge.",
+
+service4Title:"💬 Personal Consultation",
+service4Text:"Private consultation with complete confidentiality and personal attention.",
+
+service5Title:"👨‍👩‍👧 Family Wellness",
+service5Text:"Support for individuals and families with care, trust and compassion.",
+
+service6Title:"💻 Online Consultation",
+service6Text:"Consult with us from anywhere through WhatsApp and online appointments.",
 },
 
 hi:{
@@ -118,6 +135,23 @@ stat2Text:"ऑनलाइन मार्गदर्शन",
 
 stat3Title:"भारत • अमेरिका",
 stat3Text:"परिवारों की सेवा",
+  service1Title:"🤲 दुआ",
+service1Text:"शांति, उम्मीद और बरकत के लिए व्यक्तिगत दुआ और आध्यात्मिक मार्गदर्शन।",
+
+service2Title:"📿 तावीज़ मार्गदर्शन",
+service2Text:"पारिवारिक विरासत के अनुसार सम्मान और ईमानदारी के साथ मार्गदर्शन।",
+
+service3Title:"🌿 हर्बल उपचार",
+service3Text:"पारंपरिक हर्बल ज्ञान से प्रेरित प्राकृतिक वेलनेस समाधान।",
+
+service4Title:"💬 व्यक्तिगत परामर्श",
+service4Text:"पूर्ण गोपनीयता के साथ व्यक्तिगत परामर्श।",
+
+service5Title:"👨‍👩‍👧 पारिवारिक वेलनेस",
+service5Text:"व्यक्तियों और परिवारों के लिए विश्वास और देखभाल के साथ सहायता।",
+
+service6Title:"💻 ऑनलाइन परामर्श",
+service6Text:"व्हाट्सएप और ऑनलाइन अपॉइंटमेंट के माध्यम से दुनिया के किसी भी स्थान से परामर्श करें।",
 },
 
 gu:{
@@ -178,6 +212,23 @@ stat2Text:"ઓનલાઇન માર્ગદર્શન",
 
 stat3Title:"ભારત • અમેરિકા",
 stat3Text:"પરિવારોની સેવા",
+  service1Title:"🤲 દુઆ",
+service1Text:"શાંતિ, આશા અને આશીર્વાદ માટે વ્યક્તિગત દુઆ અને આધ્યાત્મિક માર્ગદર્શન.",
+
+service2Title:"📿 તાવીઝ માર્ગદર્શન",
+service2Text:"પારિવારિક પરંપરા મુજબ નિષ્ઠા અને સન્માન સાથે માર્ગદર્શન.",
+
+service3Title:"🌿 હર્બલ ઉપચાર",
+service3Text:"પરંપરાગત હર્બલ જ્ઞાનથી પ્રેરિત કુદરતી વેલનેસ ઉપચાર.",
+
+service4Title:"💬 વ્યક્તિગત માર્ગદર્શન",
+service4Text:"સંપૂર્ણ ગોપનીયતા સાથે વ્યક્તિગત માર્ગદર્શન.",
+
+service5Title:"👨‍👩‍👧 પારિવારિક વેલનેસ",
+service5Text:"વ્યક્તિઓ અને પરિવારો માટે વિશ્વાસ અને કાળજી સાથે સહાય.",
+
+service6Title:"💻 ઓનલાઇન માર્ગદર્શન",
+service6Text:"વોટ્સએપ અને ઓનલાઇન એપોઇન્ટમેન્ટ દ્વારા વિશ્વના કોઈપણ સ્થળેથી માર્ગદર્શન મેળવો.",
 }
 
 };
