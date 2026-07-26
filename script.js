@@ -16,14 +16,14 @@ translations[lang].heroSubtitle;
 
 document.getElementById("quick-navigation-title").textContent =
 translations[lang].quickNavigation;
-document.querySelector("#about .section-title").textContent = translations[lang].aboutTitle;
-document.querySelector("#services .section-title").textContent = translations[lang].servicesTitle;
-document.querySelector("#why .section-title").textContent = translations[lang].whyTitle;
-document.querySelector("#story .section-title").textContent = translations[lang].storyTitle;
-document.querySelector("#products .section-title").textContent = translations[lang].productsTitle;
-document.querySelector("#global .section-title").textContent = translations[lang].globalTitle;
-document.querySelector("#presence .section-title").textContent = translations[lang].presenceTitle;
-document.querySelector("#contact .section-title").textContent = translations[lang].contactTitle;
+document.getElementById("about-title").textContent = translations[lang].aboutTitle;
+document.getElementById("services-title").textContent = translations[lang].servicesTitle;
+document.getElementById("why-title").textContent = translations[lang].whyTitle;
+document.getElementById("story-title").textContent = translations[lang].storyTitle;
+document.getElementById("products-title").textContent = translations[lang].productsTitle;
+document.getElementById("global-title").textContent = translations[lang].globalTitle;
+document.getElementById("presence-title").textContent = translations[lang].presenceTitle;
+document.getElementById("contact-title").textContent = translations[lang].contactTitle;
 }
 
 btnEn.addEventListener("click",()=>{
