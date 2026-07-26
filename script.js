@@ -99,6 +99,26 @@ document.getElementById("nav-products").textContent = translations[lang].navProd
 document.getElementById("nav-global").textContent = translations[lang].navGlobal;
 document.getElementById("nav-presence").textContent = translations[lang].navPresence;
 document.getElementById("nav-contact").textContent = translations[lang].navContact;
+document.getElementById("story1-title").textContent = translations[lang].story1Title;
+document.getElementById("story1-text").textContent = translations[lang].story1Text;
+
+document.getElementById("story2-title").textContent = translations[lang].story2Title;
+document.getElementById("story2-text").textContent = translations[lang].story2Text;
+
+document.getElementById("story3-title").textContent = translations[lang].story3Title;
+document.getElementById("story3-text").textContent = translations[lang].story3Text;
+
+document.getElementById("story4-title").textContent = translations[lang].story4Title;
+document.getElementById("story4-text").textContent = translations[lang].story4Text;
+
+document.getElementById("story5-title").textContent = translations[lang].story5Title;
+document.getElementById("story5-text").textContent = translations[lang].story5Text;
+
+document.getElementById("story6-title").textContent = translations[lang].story6Title;
+document.getElementById("story6-text").textContent = translations[lang].story6Text;
+
+document.getElementById("story7-title").textContent = translations[lang].story7Title;
+document.getElementById("story7-text").textContent = translations[lang].story7Text;
 }
 
 btnEn.addEventListener("click",()=>{
