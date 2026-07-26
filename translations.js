@@ -92,6 +92,14 @@ why5Text:"Consult from anywhere through WhatsApp and online appointments.",
 
 why6Title:"⭐ Trusted Guidance",
 why6Text:"Providing guidance with faith, responsibility and genuine care.",
+navAbout:"About Us",
+navServices:"Our Services",
+navWhy:"Why Choose Us",
+navStory:"Story & Heritage",
+navProducts:"Products",
+navGlobal:"Worldwide Consultation",
+navPresence:"Serving India & USA",
+navContact:"Contact Us",
 },
 
 hi:{
@@ -186,6 +194,14 @@ why5Text:"व्हाट्सएप और ऑनलाइन अपॉइं�
 
 why6Title:"⭐ विश्वसनीय मार्गदर्शन",
 why6Text:"विश्वास, जिम्मेदारी और सच्ची सेवा के साथ मार्गदर्शन।",
+navAbout:"हमारे बारे में",
+navServices:"हमारी सेवाएँ",
+navWhy:"हमें क्यों चुनें",
+navStory:"हमारी विरासत",
+navProducts:"उत्पाद",
+navGlobal:"विश्वव्यापी परामर्श",
+navPresence:"भारत एवं अमेरिका",
+navContact:"संपर्क करें",
 },
 
 gu:{
@@ -280,6 +296,14 @@ why5Text:"વોટ્સએપ અને ઓનલાઇન એપોઇન્�
 
 why6Title:"⭐ વિશ્વાસપાત્ર માર્ગદર્શન",
 why6Text:"વિશ્વાસ, જવાબદારી અને સાચી સેવા સાથે માર્ગદર્શન.",
+navAbout:"અમારા વિશે",
+navServices:"અમારી સેવાઓ",
+navWhy:"અમને કેમ પસંદ કરો",
+navStory:"અમારી વારસાગાથા",
+navProducts:"પ્રોડક્ટ્સ",
+navGlobal:"વિશ્વવ્યાપી માર્ગદર્શન",
+navPresence:"ભારત અને અમેરિકા",
+navContact:"સંપર્ક કરો",
 }
 
 };
