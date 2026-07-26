@@ -75,6 +75,23 @@ service5Text:"Support for individuals and families with care, trust and compassi
 
 service6Title:"💻 Online Consultation",
 service6Text:"Consult with us from anywhere through WhatsApp and online appointments.",
+  why1Title:"🤝 Trusted Family Heritage",
+why1Text:"More than 100 years of family tradition, honesty and trust.",
+
+why2Title:"🌿 Natural Wellness",
+why2Text:"Traditional herbal knowledge combined with modern wellness principles.",
+
+why3Title:"🔒 Complete Privacy",
+why3Text:"Every consultation is handled with respect and complete confidentiality.",
+
+why4Title:"❤️ Personal Care",
+why4Text:"Every person receives personal attention with sincerity and compassion.",
+
+why5Title:"🌍 Online Support",
+why5Text:"Consult from anywhere through WhatsApp and online appointments.",
+
+why6Title:"⭐ Trusted Guidance",
+why6Text:"Providing guidance with faith, responsibility and genuine care.",
 },
 
 hi:{
@@ -152,6 +169,23 @@ service5Text:"व्यक्तियों और परिवारों क
 
 service6Title:"💻 ऑनलाइन परामर्श",
 service6Text:"व्हाट्सएप और ऑनलाइन अपॉइंटमेंट के माध्यम से दुनिया के किसी भी स्थान से परामर्श करें।",
+  why1Title:"🤝 विश्वसनीय पारिवारिक विरासत",
+why1Text:"100+ वर्षों की पारिवारिक परंपरा, ईमानदारी और विश्वास।",
+
+why2Title:"🌿 प्राकृतिक वेलनेस",
+why2Text:"पारंपरिक हर्बल ज्ञान और आधुनिक वेलनेस का समन्वय।",
+
+why3Title:"🔒 पूर्ण गोपनीयता",
+why3Text:"हर परामर्श पूरी गोपनीयता और सम्मान के साथ किया जाता है।",
+
+why4Title:"❤️ व्यक्तिगत देखभाल",
+why4Text:"हर व्यक्ति को व्यक्तिगत ध्यान और सच्ची सेवा प्रदान की जाती है।",
+
+why5Title:"🌍 ऑनलाइन सहायता",
+why5Text:"व्हाट्सएप और ऑनलाइन अपॉइंटमेंट के माध्यम से दुनिया के किसी भी स्थान से परामर्श करें।",
+
+why6Title:"⭐ विश्वसनीय मार्गदर्शन",
+why6Text:"विश्वास, जिम्मेदारी और सच्ची सेवा के साथ मार्गदर्शन।",
 },
 
 gu:{
@@ -229,6 +263,23 @@ service5Text:"વ્યક્તિઓ અને પરિવારો માટ
 
 service6Title:"💻 ઓનલાઇન માર્ગદર્શન",
 service6Text:"વોટ્સએપ અને ઓનલાઇન એપોઇન્ટમેન્ટ દ્વારા વિશ્વના કોઈપણ સ્થળેથી માર્ગદર્શન મેળવો.",
+  why1Title:"🤝 વિશ્વાસપાત્ર પારિવારિક વારસા",
+why1Text:"100+ વર્ષની પારિવારિક પરંપરા, ઈમાનદારી અને વિશ્વાસ.",
+
+why2Title:"🌿 કુદરતી વેલનેસ",
+why2Text:"પરંપરાગત હર્બલ જ્ઞાન અને આધુનિક વેલનેસનું સંયોજન.",
+
+why3Title:"🔒 સંપૂર્ણ ગોપનીયતા",
+why3Text:"દરેક માર્ગદર્શન સંપૂર્ણ ગોપનીયતા અને સન્માન સાથે આપવામાં આવે છે.",
+
+why4Title:"❤️ વ્યક્તિગત સંભાળ",
+why4Text:"દરેક વ્યક્તિને વ્યક્તિગત ધ્યાન અને નિષ્ઠાપૂર્વક સેવા આપવામાં આવે છે.",
+
+why5Title:"🌍 ઓનલાઇન સહાય",
+why5Text:"વોટ્સએપ અને ઓનલાઇન એપોઇન્ટમેન્ટ દ્વારા વિશ્વના કોઈપણ સ્થળેથી માર્ગદર્શન મેળવો.",
+
+why6Title:"⭐ વિશ્વાસપાત્ર માર્ગદર્શન",
+why6Text:"વિશ્વાસ, જવાબદારી અને સાચી સેવા સાથે માર્ગદર્શન.",
 }
 
 };
