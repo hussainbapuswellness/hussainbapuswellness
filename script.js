@@ -16,7 +16,14 @@ translations[lang].heroSubtitle;
 
 document.getElementById("quick-navigation-title").textContent =
 translations[lang].quickNavigation;
-
+document.querySelector("#about .section-title").textContent = translations[lang].aboutTitle;
+document.querySelector("#services .section-title").textContent = translations[lang].servicesTitle;
+document.querySelector("#why .section-title").textContent = translations[lang].whyTitle;
+document.querySelector("#story .section-title").textContent = translations[lang].storyTitle;
+document.querySelector("#products .section-title").textContent = translations[lang].productsTitle;
+document.querySelector("#global .section-title").textContent = translations[lang].globalTitle;
+document.querySelector("#presence .section-title").textContent = translations[lang].presenceTitle;
+document.querySelector("#contact .section-title").textContent = translations[lang].contactTitle;
 }
 
 btnEn.addEventListener("click",()=>{
