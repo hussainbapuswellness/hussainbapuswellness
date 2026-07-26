@@ -119,6 +119,9 @@ document.getElementById("story6-text").textContent = translations[lang].story6Te
 
 document.getElementById("story7-title").textContent = translations[lang].story7Title;
 document.getElementById("story7-text").textContent = translations[lang].story7Text;
+document.getElementById("product-title").textContent = translations[lang].productTitle;
+document.getElementById("product-text").textContent = translations[lang].productText;
+document.getElementById("product-btn").textContent = translations[lang].productBtn;
 }
 
 btnEn.addEventListener("click",()=>{
