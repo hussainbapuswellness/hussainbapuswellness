@@ -60,6 +60,7 @@ btnGu.addEventListener("click",()=>{
 applyLanguage("gu");
 
 });
-});
+  
 const savedLanguage = localStorage.getItem("language") || "en";
 applyLanguage(savedLanguage);
+});  
