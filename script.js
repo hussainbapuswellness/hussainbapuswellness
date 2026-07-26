@@ -24,6 +24,23 @@ document.getElementById("products-title").textContent = translations[lang].produ
 document.getElementById("global-title").textContent = translations[lang].globalTitle;
 document.getElementById("presence-title").textContent = translations[lang].presenceTitle;
 document.getElementById("contact-title").textContent = translations[lang].contactTitle;
+document.querySelector("#about .cards .card:nth-child(1) h3").textContent = translations[lang].aboutCard1Title;
+document.querySelector("#about .cards .card:nth-child(1) p").textContent = translations[lang].aboutCard1Text;
+
+document.querySelector("#about .cards .card:nth-child(2) h3").textContent = translations[lang].aboutCard2Title;
+document.querySelector("#about .cards .card:nth-child(2) p").textContent = translations[lang].aboutCard2Text;
+
+document.querySelector("#about .cards .card:nth-child(3) h3").textContent = translations[lang].aboutCard3Title;
+document.querySelector("#about .cards .card:nth-child(3) p").textContent = translations[lang].aboutCard3Text;
+
+document.querySelector("#about .cards .card:nth-child(4) h3").textContent = translations[lang].aboutCard4Title;
+document.querySelector("#about .cards .card:nth-child(4) p").textContent = translations[lang].aboutCard4Text;
+
+document.querySelector("#about .cards .card:nth-child(5) h3").textContent = translations[lang].aboutCard5Title;
+document.querySelector("#about .cards .card:nth-child(5) p").textContent = translations[lang].aboutCard5Text;
+
+document.querySelector("#about .cards .card:nth-child(6) h3").textContent = translations[lang].aboutCard6Title;
+document.querySelector("#about .cards .card:nth-child(6) p").textContent = translations[lang].aboutCard6Text;
 }
 
 btnEn.addEventListener("click",()=>{
