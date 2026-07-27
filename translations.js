@@ -123,6 +123,17 @@ story7Text:"Private consultation with sincerity, confidentiality and compassiona
 productTitle:"🚀 Coming Soon",
 productText:"We are currently preparing our wellness product range with great care and dedication. Our products will be launched after completing research, quality assurance and product development. Stay connected with Hussain Bapu's Wellness for upcoming announcements and future launches.",
 productBtn:"Get Updates on WhatsApp",
+global1Title:"🌍 Online Video Consultation",
+global1Text:"Get personal guidance from anywhere in the world through secure online video consultation.",
+
+global2Title:"📦📦 Worldwide Courier Support",
+global2Text:"Herbal wellness products, Taweez and guidance can be provided through trusted courier services wherever available.",
+
+global3Title:"📅 Appointment Booking",
+global3Text:"Book your consultation in advance for a convenient and personalized experience.",
+
+global4Title:"💬 WhatsApp Guidance",
+global4Text:"Connect with Hussain Bapu's Wellness through WhatsApp for guidance, appointments and support.",
 },
 
 hi:{
@@ -248,6 +259,17 @@ story7Text:"हर व्यक्ति और परिवार के लि
 productTitle:"🚀 जल्द आ रहा है",
 productText:"हम अपने वेलनेस उत्पादों को पूरी सावधानी और गुणवत्ता के साथ तैयार कर रहे हैं। शोध और गुणवत्ता परीक्षण पूरा होने के बाद इन्हें लॉन्च किया जाएगा। नवीनतम जानकारी के लिए हमारे साथ जुड़े रहें।",
 productBtn:"व्हाट्सएप पर अपडेट प्राप्त करें",
+global1Title:"🌍 ऑनलाइन वीडियो परामर्श",
+global1Text:"दुनिया के किसी भी स्थान से सुरक्षित ऑनलाइन वीडियो परामर्श प्राप्त करें।",
+
+global2Title:"📦📦 विश्वव्यापी कूरियर सहायता",
+global2Text:"जहाँ उपलब्ध हो, वहाँ विश्वसनीय कूरियर सेवा द्वारा हर्बल उत्पाद, तावीज़ और मार्गदर्शन उपलब्ध कराया जा सकता है।",
+
+global3Title:"📅 अपॉइंटमेंट बुकिंग",
+global3Text:"सुविधाजनक और व्यक्तिगत अनुभव के लिए पहले से अपॉइंटमेंट बुक करें।",
+
+global4Title:"💬 व्हाट्सएप मार्गदर्शन",
+global4Text:"मार्गदर्शन, अपॉइंटमेंट और सहायता के लिए व्हाट्सएप पर हमसे जुड़ें।",
 },
 
 gu:{
@@ -373,6 +395,17 @@ story7Text:"દરેક વ્યક્તિ અને પરિવાર મ�
 productTitle:"🚀 ટૂંક સમયમાં આવી રહ્યું છે",
 productText:"અમે અમારા વેલનેસ પ્રોડક્ટ્સને સંપૂર્ણ કાળજી અને ગુણવત્તા સાથે તૈયાર કરી રહ્યા છીએ. સંશોધન અને ગુણવત્તા પરીક્ષણ પૂર્ણ થયા પછી જ લોન્ચ કરવામાં આવશે. નવી માહિતી માટે અમારી સાથે જોડાયેલા રહો.",
 productBtn:"વોટ્સએપ પર અપડેટ મેળવો",
+global1Title:"🌍 ઓનલાઇન વિડિયો માર્ગદર્શન",
+global1Text:"વિશ્વના કોઈપણ સ્થળેથી સુરક્ષિત ઓનલાઇન વિડિયો માર્ગદર્શન મેળવો.",
+
+global2Title:"📦📦 વિશ્વવ્યાપી કુરિયર સેવા",
+global2Text:"જ્યાં ઉપલબ્ધ હોય ત્યાં વિશ્વસનીય કુરિયર દ્વારા હર્બલ પ્રોડક્ટ્સ, તાવીઝ અને માર્ગદર્શન મોકલી શકાય છે.",
+
+global3Title:"📅 એપોઇન્ટમેન્ટ બુકિંગ",
+global3Text:"સુવિધાજનક અને વ્યક્તિગત અનુભવ માટે પહેલેથી એપોઇન્ટમેન્ટ બુક કરો.",
+
+global4Title:"💬 વોટ્સએપ માર્ગદર્શન",
+global4Text:"માર્ગદર્શન, એપોઇન્ટમેન્ટ અને સહાય માટે વોટ્સએપ દ્વારા અમારો સંપર્ક કરો.",
 }
 
 };
