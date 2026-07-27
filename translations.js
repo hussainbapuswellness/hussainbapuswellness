@@ -134,6 +134,14 @@ global3Text:"Book your consultation in advance for a convenient and personalized
 
 global4Title:"💬 WhatsApp Guidance",
 global4Text:"Connect with Hussain Bapu's Wellness through WhatsApp for guidance, appointments and support.",
+presence1Title:"🇮🇳 India",
+presence1Text:"Hussain Bapu's Wellness & Baba Farid Ji (R.A.) Heritage\n\n📍 Valsad, Gujarat\n\n📞 India Contact\n💬 WhatsApp Available\n📅 Appointment Available",
+
+presence2Title:"🌍 100+ Years of Heritage",
+presence2Text:"Serving individuals and families with Duaa, Prayer Support, Taweez Guidance, Herbal Wellness and Personal Consultation.\n\nAvailable Worldwide.",
+
+presence3Title:"🇺🇸 USA",
+presence3Text:"Hussain Bapu's Wellness & Baba Farid Ji (R.A.) Heritage\n\n📍 California, USA\n\n📞 USA Contact\n💬 WhatsApp Available\n📅 Appointment Available",
 },
 
 hi:{
@@ -270,6 +278,14 @@ global3Text:"सुविधाजनक और व्यक्तिगत अ�
 
 global4Title:"💬 व्हाट्सएप मार्गदर्शन",
 global4Text:"मार्गदर्शन, अपॉइंटमेंट और सहायता के लिए व्हाट्सएप पर हमसे जुड़ें।",
+presence1Title:"🇮🇳 भारत",
+presence1Text:"हुसैन बापूज़ वेलनेस एवं बाबा फरीद जी (र.अ.) हेरिटेज\n\n📍 वलसाड, गुजरात\n\n📞 भारत संपर्क\n💬 व्हाट्सएप उपलब्ध\n📅 अपॉइंटमेंट उपलब्ध",
+
+presence2Title:"🌍 100+ वर्षों की विरासत",
+presence2Text:"दुआ, प्रार्थना सहायता, तावीज़, हर्बल वेलनेस और व्यक्तिगत मार्गदर्शन के साथ विश्वभर में सेवा।",
+
+presence3Title:"🇺🇸 अमेरिका",
+presence3Text:"हुसैन बापूज़ वेलनेस एवं बाबा फरीद जी (र.अ.) हेरिटेज\n\n📍 कैलिफोर्निया, अमेरिका\n\n📞 USA संपर्क\n💬 व्हाट्सएप उपलब्ध\n📅 अपॉइंटमेंट उपलब्ध",
 },
 
 gu:{
@@ -406,6 +422,14 @@ global3Text:"સુવિધાજનક અને વ્યક્તિગત �
 
 global4Title:"💬 વોટ્સએપ માર્ગદર્શન",
 global4Text:"માર્ગદર્શન, એપોઇન્ટમેન્ટ અને સહાય માટે વોટ્સએપ દ્વારા અમારો સંપર્ક કરો.",
+presence1Title:"🇮🇳 ભારત",
+presence1Text:"હુસૈન બાપુઝ વેલનેસ અને બાબા ફરીદ જી (ર.અ.) હેરિટેજ\n\n📍 વલસાડ, ગુજરાત\n\n📞 ભારત સંપર્ક\n💬 વોટ્સએપ ઉપલબ્ધ\n📅 એપોઇન્ટમેન્ટ ઉપલબ્ધ",
+
+presence2Title:"🌍 100+ વર્ષની વારસા",
+presence2Text:"દુઆ, પ્રાર્થના, તાવીઝ, હર્બલ વેલનેસ અને વ્યક્તિગત માર્ગદર્શન સાથે વિશ્વભરમાં સેવા.",
+
+presence3Title:"🇺🇸 અમેરિકા",
+presence3Text:"હુસૈન બાપુઝ વેલનેસ અને બાબા ફરીદ જી (ર.અ.) હેરિટેજ\n\n📍 કેલિફોર્નિયા, અમેરિકા\n\n📞 USA સંપર્ક\n💬 વોટ્સએપ ઉપલબ્ધ\n📅 એપોઇન્ટમેન્ટ ઉપલબ્ધ",
 }
 
 };
