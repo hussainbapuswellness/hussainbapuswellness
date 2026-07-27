@@ -148,6 +148,11 @@ document.getElementById("contact2-title").textContent = translations[lang].conta
 document.getElementById("contact2-text").innerText = translations[lang].contact2Text;
 
 document.getElementById("contact3-title").textContent = translations[lang].contact3Title;
+document.getElementById("footer-title").textContent = translations[lang].footerTitle;
+document.getElementById("footer-tagline").textContent = translations[lang].footerTagline;
+document.getElementById("footer-trust").textContent = translations[lang].footerTrust;
+document.getElementById("footer-description").textContent = translations[lang].footerDescription;
+document.getElementById("footer-copy").textContent = translations[lang].footerCopy;
 }
 
 btnEn.addEventListener("click",()=>{
