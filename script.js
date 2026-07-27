@@ -122,6 +122,17 @@ document.getElementById("story7-text").textContent = translations[lang].story7Te
 document.getElementById("product-title").textContent = translations[lang].productTitle;
 document.getElementById("product-text").textContent = translations[lang].productText;
 document.getElementById("product-btn").textContent = translations[lang].productBtn;
+document.getElementById("global1-title").textContent = translations[lang].global1Title;
+document.getElementById("global1-text").textContent = translations[lang].global1Text;
+
+document.getElementById("global2-title").textContent = translations[lang].global2Title;
+document.getElementById("global2-text").textContent = translations[lang].global2Text;
+
+document.getElementById("global3-title").textContent = translations[lang].global3Title;
+document.getElementById("global3-text").textContent = translations[lang].global3Text;
+
+document.getElementById("global4-title").textContent = translations[lang].global4Title;
+document.getElementById("global4-text").textContent = translations[lang].global4Text;
 }
 
 btnEn.addEventListener("click",()=>{
