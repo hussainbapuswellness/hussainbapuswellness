@@ -149,6 +149,11 @@ contact2Title:"🇺🇸 USA",
 contact2Text:"Hussain Bapu's Wellness & Baba Farid Ji (R.A.) Heritage\n\n📍 California, USA\n📞 +1 (213) 344-7075\n💬 WhatsApp Available\n📅 Appointment Available",
 
 contact3Title:"🌐 Connect With Us",
+footerTitle:"Hussain Bapu's Wellness & Baba Farid Ji (R.A.) Heritage",
+footerTagline:"Serving India 🇮🇳 • USA 🇺🇸 • Worldwide 🌍",
+footerTrust:"100+ Years of Family Heritage • Traditional Wisdom • Trusted Care",
+footerDescription:"Serving India & Worldwide with Duaa • Prayer • Spiritual Guidance • Herbal Wellness • Personal Consultation",
+footerCopy:"© 2026 Hussain Bapu's Wellness. All Rights Reserved.",
 },
 
 hi:{
@@ -300,6 +305,11 @@ contact2Title:"🇺🇸 अमेरिका",
 contact2Text:"Hussain Bapu's Wellness & Baba Farid Ji (R.A.) Heritage\n\n📍 कैलिफ़ोर्निया, USA\n📞 +1 (213) 344-7075\n💬 व्हाट्सऐप उपलब्ध\n📅 अपॉइंटमेंट उपलब्ध",
 
 contact3Title:"🌐 हमसे जुड़ें",
+footerTitle:"हुसैन बापूज़ वेलनेस एवं बाबा फरीद जी (र.अ.) हेरिटेज",
+footerTagline:"भारत 🇮🇳 • अमेरिका 🇺🇸 • विश्वभर 🌍 सेवा",
+footerTrust:"100+ वर्षों की पारिवारिक विरासत • पारंपरिक ज्ञान • विश्वसनीय सेवा",
+footerDescription:"दुआ • प्रार्थना • आध्यात्मिक मार्गदर्शन • हर्बल वेलनेस • व्यक्तिगत परामर्श",
+footerCopy:"© 2026 हुसैन बापूज़ वेलनेस। सर्वाधिकार सुरक्षित।",
 },
 
 gu:{
@@ -451,6 +461,11 @@ contact2Title:"🇺🇸 અમેરિકા",
 contact2Text:"Hussain Bapu's Wellness & Baba Farid Ji (R.A.) Heritage\n\n📍 California, USA\n📞 +1 (213) 344-7075\n💬 WhatsApp ઉપલબ્ધ\n📅 Appointment ઉપલબ્ધ",
 
 contact3Title:"🌐 અમારો સંપર્ક",
+footerTitle:"હુસૈન બાપુઝ વેલનેસ તથા બાબા ફરીદ જી (ર.અ.) હેરિટેજ",
+footerTagline:"ભારત 🇮🇳 • અમેરિકા 🇺🇸 • વિશ્વભરમાં સેવા 🌍",
+footerTrust:"100+ વર્ષની પારિવારિક વારસા • પરંપરાગત જ્ઞાન • વિશ્વાસુ સેવા",
+footerDescription:"દુઆ • પ્રાર્થના • આધ્યાત્મિક માર્ગદર્શન • હર્બલ વેલનેસ • વ્યક્તિગત માર્ગદર્શન",
+footerCopy:"© 2026 હુસૈન બાપુઝ વેલનેસ. સર્વ હકો સુરક્ષિત.",
 }
 
 };
