@@ -133,6 +133,14 @@ document.getElementById("global3-text").textContent = translations[lang].global3
 
 document.getElementById("global4-title").textContent = translations[lang].global4Title;
 document.getElementById("global4-text").textContent = translations[lang].global4Text;
+document.getElementById("presence1-title").textContent = translations[lang].presence1Title;
+document.getElementById("presence1-text").textContent = translations[lang].presence1Text;
+
+document.getElementById("presence2-title").textContent = translations[lang].presence2Title;
+document.getElementById("presence2-text").textContent = translations[lang].presence2Text;
+
+document.getElementById("presence3-title").textContent = translations[lang].presence3Title;
+document.getElementById("presence3-text").textContent = translations[lang].presence3Text;
 }
 
 btnEn.addEventListener("click",()=>{
