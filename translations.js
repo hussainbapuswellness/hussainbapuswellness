@@ -142,6 +142,13 @@ presence2Text:"Serving individuals and families with Duaa, Prayer Support, Tawee
 
 presence3Title:"🇺🇸 USA",
 presence3Text:"Hussain Bapu's Wellness & Baba Farid Ji (R.A.) Heritage\n\n📍 California, USA\n\n📞 USA Contact\n💬 WhatsApp Available\n📅 Appointment Available",
+contact1Title:"🇮🇳 India",
+contact1Text:"Hussain Bapu's Wellness & Baba Farid Ji (R.A.) Heritage\n\n📍 Valsad, Gujarat\n📞 +91 99740 07108\n📞 +91 98256 59373\n💬 WhatsApp Available\n📅 Appointment Available",
+
+contact2Title:"🇺🇸 USA",
+contact2Text:"Hussain Bapu's Wellness & Baba Farid Ji (R.A.) Heritage\n\n📍 California, USA\n📞 +1 (213) 344-7075\n💬 WhatsApp Available\n📅 Appointment Available",
+
+contact3Title:"🌐 Connect With Us",
 },
 
 hi:{
@@ -286,6 +293,13 @@ presence2Text:"दुआ, प्रार्थना सहायता, ता
 
 presence3Title:"🇺🇸 अमेरिका",
 presence3Text:"हुसैन बापूज़ वेलनेस एवं बाबा फरीद जी (र.अ.) हेरिटेज\n\n📍 कैलिफोर्निया, अमेरिका\n\n📞 USA संपर्क\n💬 व्हाट्सएप उपलब्ध\n📅 अपॉइंटमेंट उपलब्ध",
+contact1Title:"🇮🇳 भारत",
+contact1Text:"Hussain Bapu's Wellness & Baba Farid Ji (R.A.) Heritage\n\n📍 वलसाड, गुजरात\n📞 +91 99740 07108\n📞 +91 98256 59373\n💬 व्हाट्सऐप उपलब्ध\n📅 अपॉइंटमेंट उपलब्ध",
+
+contact2Title:"🇺🇸 अमेरिका",
+contact2Text:"Hussain Bapu's Wellness & Baba Farid Ji (R.A.) Heritage\n\n📍 कैलिफ़ोर्निया, USA\n📞 +1 (213) 344-7075\n💬 व्हाट्सऐप उपलब्ध\n📅 अपॉइंटमेंट उपलब्ध",
+
+contact3Title:"🌐 हमसे जुड़ें",
 },
 
 gu:{
@@ -430,6 +444,13 @@ presence2Text:"દુઆ, પ્રાર્થના, તાવીઝ, હર�
 
 presence3Title:"🇺🇸 અમેરિકા",
 presence3Text:"હુસૈન બાપુઝ વેલનેસ અને બાબા ફરીદ જી (ર.અ.) હેરિટેજ\n\n📍 કેલિફોર્નિયા, અમેરિકા\n\n📞 USA સંપર્ક\n💬 વોટ્સએપ ઉપલબ્ધ\n📅 એપોઇન્ટમેન્ટ ઉપલબ્ધ",
+contact1Title:"🇮🇳 ભારત",
+contact1Text:"Hussain Bapu's Wellness & Baba Farid Ji (R.A.) Heritage\n\n📍 વલસાડ, ગુજરાત\n📞 +91 99740 07108\n📞 +91 98256 59373\n💬 WhatsApp ઉપલબ્ધ\n📅 Appointment ઉપલબ્ધ",
+
+contact2Title:"🇺🇸 અમેરિકા",
+contact2Text:"Hussain Bapu's Wellness & Baba Farid Ji (R.A.) Heritage\n\n📍 California, USA\n📞 +1 (213) 344-7075\n💬 WhatsApp ઉપલબ્ધ\n📅 Appointment ઉપલબ્ધ",
+
+contact3Title:"🌐 અમારો સંપર્ક",
 }
 
 };
