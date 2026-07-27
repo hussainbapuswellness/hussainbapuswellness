@@ -998,3 +998,92 @@ color:#4285F4;
 left:140%;
 
 }
+/* ===== Premium Language Switcher ===== */
+
+.language{
+position:fixed;
+top:20px;
+right:20px;
+z-index:9999;
+
+display:flex;
+gap:12px;
+
+padding:10px 14px;
+
+background:rgba(255,255,255,.15);
+backdrop-filter:blur(15px);
+-webkit-backdrop-filter:blur(15px);
+
+border:1px solid rgba(255,255,255,.25);
+border-radius:50px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+
+.language button{
+
+min-width:90px;
+height:46px;
+
+border:none;
+border-radius:30px;
+
+cursor:pointer;
+
+font-size:15px;
+font-weight:700;
+
+font-family:'Poppins',sans-serif;
+
+background:linear-gradient(135deg,#d4af37,#f7d774);
+
+color:#143d2a;
+
+transition:.3s ease;
+
+box-shadow:0 5px 15px rgba(0,0,0,.18);
+
+}
+
+.language button:hover{
+
+transform:translateY(-3px) scale(1.05);
+
+background:linear-gradient(135deg,#14532d,#1d7a4b);
+
+color:#fff;
+
+box-shadow:0 12px 22px rgba(0,0,0,.30);
+
+}
+
+.language button:active{
+
+transform:scale(.97);
+
+}
+
+@media(max-width:768px){
+
+.language{
+
+top:10px;
+right:10px;
+
+gap:8px;
+
+padding:8px;
+
+}
+
+.language button{
+
+min-width:70px;
+height:40px;
+
+font-size:13px;
+
+}
+
+}
