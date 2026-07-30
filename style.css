@@ -350,40 +350,7 @@ justify-content:center;
 font-size:34px;
 }
 
-/* OUR PRESENCE */
 
-#presence{
-
-padding:90px 0;
-
-background:#0b3128;
-
-}
-
-#presence .card{
-
-min-height:280px;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-text-align:center;
-
-flex-direction:column;
-
-}
-/* CONTACT */
-
-#contact{
-
-padding:90px 0;
-
-background:#08231c;
-
-}
 
 #contact .card{
 
@@ -429,11 +396,8 @@ font-size:17px;
 line-height:1.8;
 max-width:900px;
 margin:12px auto;
-   }
-#global{
-padding:80px 20px;
-background:#06281f;
 }
+
 /* Floating WhatsApp Button */
 
 .whatsapp-float{
