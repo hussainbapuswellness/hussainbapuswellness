@@ -1155,3 +1155,108 @@ font-size:18px;
 line-height:2;
 color:#444;
 }
+/* ===== Heritage Finishing ===== */
+
+.person h5,
+.heritage-image h5{
+margin-top:18px;
+font-size:24px;
+font-family:'Cinzel',serif;
+color:#0b3128;
+font-weight:700;
+}
+
+.person span,
+.heritage-image span{
+display:block;
+margin-top:8px;
+font-size:17px;
+font-weight:600;
+color:#b58d1b;
+line-height:1.6;
+}
+
+.heritage-row img{
+transition:.45s ease;
+border:4px solid #ffffff;
+}
+
+.heritage-row img:hover{
+transform:translateY(-10px) scale(1.03);
+box-shadow:
+0 28px 60px rgba(0,0,0,.22),
+0 0 30px rgba(212,175,55,.35);
+}
+
+.heritage-btn{
+text-align:center;
+margin-top:70px;
+}
+
+.heritage-btn .btn{
+padding:18px 42px;
+font-size:18px;
+border-radius:14px;
+}
+
+.heritage-row::before{
+content:"";
+position:absolute;
+left:0;
+right:0;
+height:1px;
+background:linear-gradient(
+90deg,
+transparent,
+rgba(212,175,55,.45),
+transparent
+);
+margin-top:-30px;
+}
+
+.heritage-row{
+position:relative;
+}
+
+@media(max-width:900px){
+
+.heritage-row{
+flex-direction:column;
+text-align:center;
+gap:35px;
+}
+
+.heritage-content{
+text-align:center;
+}
+
+.heritage-image.large img{
+width:300px;
+}
+
+.heritage-image img{
+width:270px;
+}
+
+.person img{
+width:200px;
+height:250px;
+}
+
+.heritage-content h3{
+font-size:30px;
+}
+
+.heritage-content h4{
+font-size:19px;
+}
+
+.heritage-content p{
+font-size:17px;
+}
+
+.dual-images{
+gap:20px;
+}
+
+   }
