@@ -1260,3 +1260,49 @@ gap:20px;
 }
 
 }
+/* ===== HERITAGE PREMIUM LAYOUT V2 ===== */
+
+.heritage-row{
+    display:flex;
+    align-items:center;
+    gap:50px;
+    padding:55px 0;
+    border-bottom:1px solid rgba(212,178,62,.25);
+}
+
+.heritage-content{
+    flex:1;
+}
+
+.heritage-content p{
+    max-width:700px;
+}
+
+.dual-images{
+    display:flex;
+    gap:22px;
+    align-items:center;
+}
+
+.person{
+    text-align:center;
+    min-width:180px;
+}
+
+.person h5{
+    margin-top:14px;
+    margin-bottom:6px;
+}
+
+.person span{
+    display:block;
+    font-size:14px;
+}
+
+.heritage-line{
+    width:90px;
+    height:4px;
+    background:#d4b23e;
+    margin:25px 0;
+    border-radius:50px;
+}
