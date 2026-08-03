@@ -181,7 +181,12 @@ const appointmentForm = document.getElementById("appointmentForm");
 if (appointmentForm){
 
 appointmentForm.addEventListener("submit",function(){
+const randomID =
+"HBW-2026-" +
+Math.floor(100000 + Math.random()*900000);
 
+document.getElementById("appointmentID").innerHTML =
+randomID;
 appointmentForm.style.display="none";
 
 document.getElementById("successBox").style.display="block";
