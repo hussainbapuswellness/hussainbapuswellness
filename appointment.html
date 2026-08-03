@@ -6,13 +6,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Book Consultation | Hussain Bapu's Wellness</title>
+<title>
+Book Appointment | Hussain Bapu's Wellness
+</title>
 
-<meta name="description" content="Book your Online Consultation or Physical Darbar Visit with Hussain Bapu's Wellness.">
+<meta name="description"
+content="Book your Online Consultation or Physical Darbar Visit with Hussain Bapu's Wellness.">
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+href="style.css">
 
 </head>
 
@@ -24,18 +29,31 @@
 
 <div class="hero">
 
-<h1>📅 Book Your Consultation</h1>
+<h1>
+
+📅 Book Your Consultation
+
+</h1>
 
 <p class="sub">
 
 Thank you for choosing
-<b>Hussain Bapu's Wellness</b>.
 
-Please complete the form below.
+<b>
+
+Hussain Bapu's Wellness
+
+</b>
+
+<br><br>
+
+Please complete the consultation request form below.
 
 After reviewing your request,
 
-our team will personally confirm your appointment.
+our team will personally contact you
+
+and confirm your appointment.
 
 </p>
 
@@ -45,7 +63,7 @@ our team will personally confirm your appointment.
 
 </header>
 
-<section>
+<section id="appointment">
 
 <div class="container">
 
@@ -57,25 +75,28 @@ Consultation Request Form
 
 </h2>
 
-<form id="appointmentForm" onsubmit="return false;">
+<form
+id="appointmentForm">
 
 <label>👤 Full Name *</label>
-<input type="text" required>
+<input type="text" name="name" required>
 
 <label>📱 Mobile Number *</label>
-<input type="tel" required>
+<input type="tel" name="mobile" required>
 
 <label>💬 WhatsApp Number *</label>
-<input type="tel" required>
+<input type="tel" name="whatsapp" required>
+
+<label>📧 Email Address *</label>
+<input type="email" name="email" required>
 
 <label>🎂 Age *</label>
-<input type="number" min="1" max="120" required>
+<input type="number" name="age" min="1" max="120" required>
 
 <label>⚧ Gender *</label>
+<select name="gender" required>
 
-<select required>
-
-<option value="">Select</option>
+<option value="">Select Gender</option>
 
 <option>Male</option>
 
@@ -86,24 +107,21 @@ Consultation Request Form
 </select>
 
 <label>🌍 Country *</label>
-
-<input type="text" required>
+<input type="text" name="country" required>
 
 <label>🏙 State *</label>
-
-<input type="text" required>
+<input type="text" name="state" required>
 
 <label>📍 City *</label>
-
-<input type="text" required>
+<input type="text" name="city" required>
 
 <label>🕌 Consultation Type *</label>
 
-<select required>
+<select name="consultationType" required>
 
-<option value="">Select</option>
+<option value="">Select Consultation</option>
 
-<option>🌍 Online Video Consultation</option>
+<option>🌎 Online Video Consultation</option>
 
 <option>🕌 Physical Darbar Visit</option>
 
@@ -111,13 +129,13 @@ Consultation Request Form
 
 <label>📂 Problem Category *</label>
 
-<select required>
+<select name="problemCategory" required>
 
 <option value="">Select Category</option>
 
-<option>🔮 Spiritual / Ruhani Problems</option>
+<option>🔮 Ruhani / Spiritual Problems</option>
 
-<option>👻 Paranormal (Jinn / Aseb / Evil Effects)</option>
+<option>👻 Paranormal (Jinn, Aseb, Evil Effects)</option>
 
 <option>🏡 Home & Family Problems</option>
 
@@ -137,28 +155,53 @@ Consultation Request Form
 
 </select>
 
-<label>📝 Brief Description *</label>
+<label>📝 Describe Your Problem *</label>
 
-<textarea rows="6" required></textarea>
+<textarea
+name="problem"
+rows="7"
+required></textarea>
+<br><br>
+
+<label class="checkbox">
+
+<input
+type="checkbox"
+required>
+
+I confirm that all information provided is true and I agree to be contacted by Hussain Bapu's Wellness regarding my consultation request.
+
+</label>
 
 <br><br>
 
-<button class="btn gold" type="submit">
+<button
+type="submit"
+class="btn gold submit-btn">
 
 📅 Submit Consultation Request
 
 </button>
 
 </form>
-<div id="successBox" style="display:none;">
 
-<h2 style="color:#d4af37;text-align:center;margin-top:40px;">
+<div
+id="successBox"
+style="display:none;">
 
-✅ Consultation Request Submitted
+<h2
+style="color:#d4af37;
+text-align:center;
+margin-top:40px;">
+
+✅ Consultation Request Submitted Successfully
 
 </h2>
 
-<p style="text-align:center;font-size:18px;line-height:1.9;">
+<p
+style="text-align:center;
+font-size:18px;
+line-height:2;">
 
 Thank you for contacting
 
@@ -170,45 +213,32 @@ Your consultation request has been received successfully.
 
 <br><br>
 
-📄 Status :
-<div style="margin:25px 0;">
+Our team will carefully review your request.
 
-<h3 style="color:#d4af37;">
+<br><br>
+
+After verification, your Appointment ID, consultation schedule and further instructions will be sent through your registered WhatsApp number and Email Address.
+
+</p>
+
+<div
+style="margin:30px 0;text-align:center;">
+
+<h3
+style="color:#d4af37;">
 
 Appointment ID
 
 </h3>
 
-<h2 id="appointmentID"
-
-style="letter-spacing:2px;">
+<h2
+id="appointmentID">
 
 HBW-2026-000001
 
 </h2>
 
 </div>
-<b>Pending Verification</b>
-
-<br><br>
-
-Our team will review your request carefully.
-
-Once approved,
-
-you will receive
-
-your Appointment ID,
-
-date,
-
-time,
-
-and confirmation
-
-through WhatsApp.
-
-</p>
 
 </div>
 
@@ -217,6 +247,9 @@ through WhatsApp.
 </div>
 
 </section>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script src="appointment.js"></script>
 
 </body>
 
