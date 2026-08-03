@@ -1,4 +1,11 @@
 // =============================
+// EmailJS Initialization
+// =============================
+
+emailjs.init({
+    publicKey: "Dyu-RHERtn1dLFfzS"
+});
+// =============================
 // Hussain Bapu's Wellness
 // Appointment System
 // =============================
