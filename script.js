@@ -176,3 +176,24 @@ applyLanguage("gu");
 const savedLanguage = localStorage.getItem("language") || "en";
 applyLanguage(savedLanguage);
 });  
+const appointmentForm = document.getElementById("appointmentForm");
+
+if (appointmentForm){
+
+appointmentForm.addEventListener("submit",function(){
+
+appointmentForm.style.display="none";
+
+document.getElementById("successBox").style.display="block";
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+});
+
+}
