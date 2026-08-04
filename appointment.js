@@ -1,12 +1,11 @@
 // =============================
 // EmailJS Initialization
 // =============================
-
 emailjs.init({
     publicKey: "Dyu-RHERtn1dLFfzS"
 });
+
 // =============================
-// Hussain Bapu's Wellness
 // Appointment System
 // =============================
 
@@ -15,15 +14,9 @@ const successBox = document.getElementById("successBox");
 const appointmentID = document.getElementById("appointmentID");
 
 function generateAppointmentID() {
-
-    const now = new Date();
-
-    const year = now.getFullYear();
-
+    const year = new Date().getFullYear();
     const random = Math.floor(100000 + Math.random() * 900000);
-
     return `HBW-${year}-${random}`;
-
 }
 
 form.addEventListener("submit", function (e) {
@@ -31,48 +24,52 @@ form.addEventListener("submit", function (e) {
     e.preventDefault();
 
     const id = generateAppointmentID();
+
     const templateParams = {
-    appointment_id: id,
-    name: form.name.value,
-    email: form.email.value,
-    phone: form.phone.value,
-    country: form.country.value,
-    consultation: form.consultation.value,
-    message: form.message.value
-};
+        appointment_id: id,
 
-emailjs.send(
-    "service_ogjealg",
-    "template_5qi5r1b",
-    templateParams
-)
-.then(function(response) {
+        name: form.name.value,
+        mobile: form.mobile.value,
+        whatsapp: form.whatsapp.value,
+        email: form.email.value,
 
-    console.log("SUCCESS!", response.status, response.text);
+        age: form.age.value,
+        gender: form.gender.value,
 
-    appointmentID.innerHTML = id;
-    form.style.display = "none";
-    successBox.style.display = "block";
-    successBox.scrollIntoView({
-        behavior: "smooth"
-    });
+        country: form.country.value,
+        state: form.state.value,
+        city: form.city.value,
 
-})
-.catch(function(error) {
+        consultation_type: form.consultationType.value,
+        problem_category: form.problemCategory.value,
+        problem: form.problem.value
+    };
 
-    alert("Email sending failed.");
-    console.log(error);
+    emailjs.send(
+        "service_ogjealg",
+        "template_5qi5r1b",
+        templateParams
+    )
 
-});
+    .then(function () {
 
-    appointmentID.innerHTML = id;
+        appointmentID.innerHTML = id;
 
-    form.style.display = "none";
+        form.style.display = "none";
+        successBox.style.display = "block";
 
-    successBox.style.display = "block";
+        successBox.scrollIntoView({
+            behavior: "smooth"
+        });
 
-    successBox.scrollIntoView({
-        behavior: "smooth"
+    })
+
+    .catch(function (error) {
+
+        console.error(error);
+
+        alert("❌ Email sending failed. Please try again.");
+
     });
 
 });
