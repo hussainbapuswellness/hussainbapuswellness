@@ -25,6 +25,15 @@ form.addEventListener("submit", async function (e) {
     const appointmentId = generateAppointmentID();
 
 const appointmentData = {
+const { data, error } = await supabaseClient
+    .from("clients")
+    .insert([appointmentData]);
+
+if (error) {
+    console.error(error);
+    alert("❌ Appointment save nahi hui. Please try again.");
+    return;
+}
 
 appointment_id: appointmentId,
 
@@ -84,7 +93,7 @@ problem: form.problem.value
 
     .then(function () {
 
-        appointmentID.innerHTML = id;
+        appointmentID.innerHTML = appointmentId;
 
         form.style.display = "none";
         successBox.style.display = "block";
