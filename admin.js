@@ -9,13 +9,11 @@ const { data, error } = await supabaseClient
 .order("Created_At", { ascending: false });
 
 if (error) {
-
-console.log(error);
-
-return;
-
+    console.log(error);
+    alert(JSON.stringify(error));
+    return;
 }
-
+alert(JSON.stringify(data));
 document.getElementById("totalPatients").innerHTML = data.length;
 
 let pending = data.filter(x => x.Appointment_Status == "Pending");
