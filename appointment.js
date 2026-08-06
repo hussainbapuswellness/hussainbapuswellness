@@ -2,13 +2,23 @@
 // EmailJS Initialization
 // =============================
 emailjs.init({
-    publicKey: "Dyu-RHERtn1dLFfzS"
+    publicKey: "sb_publishable_hleB_4JlNlCjiVqnd2uQuQ_HjioxhiD"
 });
+
+// =============================
+// Supabase Initialization
+// =============================
+const SUPABASE_URL = "https://rvejfommdzfdkwfgsqad.supabase.co";
+const SUPABASE_KEY = "YAHAN_APNI_PUBLISHABLE_KEY_PASTE_KARNA";
+
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 // =============================
 // Appointment System
 // =============================
-
 const form = document.getElementById("appointmentForm");
 const successBox = document.getElementById("successBox");
 const appointmentID = document.getElementById("appointmentID");
@@ -22,51 +32,41 @@ function generateAppointmentID() {
 form.addEventListener("submit", async function (e) {
 
     e.preventDefault();
+
     const appointmentId = generateAppointmentID();
 
-const appointmentData = {
-const { data, error } = await supabaseClient
-    .from("clients")
-    .insert([appointmentData]);
+    const appointmentData = {
 
-if (error) {
-    console.error(error);
-    alert("❌ Appointment save nahi hui. Please try again.");
-    return;
-}
+        Appointment_Id: appointmentId,
+        Full_Name: form.name.value,
+        Mobile: form.mobile.value,
+        Whatsapp: form.whatsapp.value,
+        Email: form.email.value,
+        Age: parseInt(form.age.value),
+        Gender: form.gender.value,
+        Country: form.country.value,
+        State: form.state.value,
+        City: form.city.value,
+        Consultation_Type: form.consultationType.value,
+        Problem_Category: form.problemCategory.value,
+        Problem_Short_Description: form.problem.value,
+        Appointment_Status: "Pending"
 
-appointment_id: appointmentId,
+    };
 
-full_name: form.name.value,
+    const { error } = await supabaseClient
+        .from("clients")
+        .insert([appointmentData]);
 
-mobile: form.mobile.value,
-
-whatsapp: form.whatsapp.value,
-
-email: form.email.value,
-
-age: parseInt(form.age.value),
-
-gender: form.gender.value,
-
-country: form.country.value,
-
-state: form.state.value,
-
-city: form.city.value,
-
-consultation_type: form.consultationType.value,
-
-problem_category: form.problemCategory.value,
-
-problem: form.problem.value
-
-};
-
-    const id = generateAppointmentID();
+    if (error) {
+        console.error(error);
+        alert("Database Error");
+        return;
+    }
 
     const templateParams = {
-        appointment_id: id,
+
+        appointment_id: appointmentId,
 
         name: form.name.value,
         mobile: form.mobile.value,
@@ -83,6 +83,7 @@ problem: form.problem.value
         consultation_type: form.consultationType.value,
         problem_category: form.problemCategory.value,
         problem: form.problem.value
+
     };
 
     emailjs.send(
@@ -104,11 +105,11 @@ problem: form.problem.value
 
     })
 
-    .catch(function (error) {
+    .catch(function (err) {
 
-        console.error(error);
+        console.error(err);
 
-        alert("❌ Email sending failed. Please try again.");
+        alert("Email Sending Failed");
 
     });
 
