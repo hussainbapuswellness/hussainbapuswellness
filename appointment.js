@@ -19,9 +19,40 @@ function generateAppointmentID() {
     return `HBW-${year}-${random}`;
 }
 
-form.addEventListener("submit", function (e) {
+form.addEventListener("submit", async function (e) {
 
     e.preventDefault();
+    const appointmentId = generateAppointmentID();
+
+const appointmentData = {
+
+appointment_id: appointmentId,
+
+full_name: form.name.value,
+
+mobile: form.mobile.value,
+
+whatsapp: form.whatsapp.value,
+
+email: form.email.value,
+
+age: parseInt(form.age.value),
+
+gender: form.gender.value,
+
+country: form.country.value,
+
+state: form.state.value,
+
+city: form.city.value,
+
+consultation_type: form.consultationType.value,
+
+problem_category: form.problemCategory.value,
+
+problem: form.problem.value
+
+};
 
     const id = generateAppointmentID();
 
