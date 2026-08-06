@@ -69,11 +69,11 @@ form.addEventListener("submit", async function (e) {
 
     if (error) {
 
-        console.error("Supabase Error :", error);
+    console.error(error);
 
-        alert("❌ Appointment Save Failed");
+    alert(JSON.stringify(error));
 
-        return;
+    return;
 
     }
 
