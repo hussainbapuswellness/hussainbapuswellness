@@ -2,14 +2,14 @@
 // EmailJS Initialization
 // =============================
 emailjs.init({
-    publicKey: "sb_publishable_hleB_4JlNlCjiVqnd2uQuQ_HjioxhiD"
+    publicKey: "Dyu-RHERtn1dLFfzS"
 });
 
 // =============================
 // Supabase Initialization
 // =============================
 const SUPABASE_URL = "https://rvejfommdzfdkwfgsqad.supabase.co";
-const SUPABASE_KEY = "YAHAN_APNI_PUBLISHABLE_KEY_PASTE_KARNA";
+const SUPABASE_KEY = "sb_publishable_hleB_4JlNlCjiVqnd2uQuQ_HjioxhiD";
 
 const supabaseClient = supabase.createClient(
     SUPABASE_URL,
