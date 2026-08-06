@@ -6,8 +6,6 @@ const { data, error } = await supabaseClient
 
 .select("*")
 
-.order("Created_At", { ascending: false });
-
 if (error) {
     console.log(error);
     alert(JSON.stringify(error));
