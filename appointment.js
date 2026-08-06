@@ -94,3 +94,12 @@ form.addEventListener("submit", async function (e) {
     });
 
 });
+// ======================================
+// Simple Console Messages
+// ======================================
+
+console.log("=================================");
+console.log("Hussain Bapu's Wellness");
+console.log("Appointment System Loaded");
+console.log("Supabase Connected");
+console.log("=================================");
