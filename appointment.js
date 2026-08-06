@@ -59,3 +59,38 @@ form.addEventListener("submit", async function (e) {
         Appointment_Status: "Pending"
 
     };
+    // Save Appointment in Supabase
+
+    const { data, error } = await supabaseClient
+
+        .from("clients")
+
+        .insert([appointmentData]);
+
+    if (error) {
+
+        console.error("Supabase Error :", error);
+
+        alert("❌ Appointment Save Failed");
+
+        return;
+
+    }
+
+    // Success Screen
+
+    appointmentID.innerHTML = appointmentId;
+
+    form.reset();
+
+    form.style.display = "none";
+
+    successBox.style.display = "block";
+
+    successBox.scrollIntoView({
+
+        behavior: "smooth"
+
+    });
+
+});
