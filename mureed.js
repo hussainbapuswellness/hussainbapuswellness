@@ -42,3 +42,10 @@ async function loadMureed() {
 }
 
 loadMureed();
+document
+.getElementById("addTreatmentBtn")
+.addEventListener("click", function () {
+
+alert("Treatment Manager Coming...");
+
+});
