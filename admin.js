@@ -1,4 +1,4 @@
-async function loadPatients() {
+async function loadMureeds() {
 
 const { data, error } = await supabaseClient
 
@@ -12,33 +12,33 @@ if (error) {
     return;
 }
 alert(JSON.stringify(data));
-document.getElementById("totalPatients").innerHTML = data.length;
+document.getElementById("totalMureeds").innerHTML = data.length;
 
 let pending = data.filter(x => x.Appointment_Status == "Pending");
 
 document.getElementById("pendingAppointments").innerHTML = pending.length;
 
-const tbody = document.querySelector("#patientsTable tbody");
+const tbody = document.querySelector("#mureedsTable tbody");
 
 tbody.innerHTML = "";
 
-data.forEach(patient => {
+data.forEach(mureed => {
 
 tbody.innerHTML += `
 
 <tr>
 
-<td>${patient.Appointment_Id}</td>
+<td>${mureed.Appointment_Id}</td>
 
-<td>${patient.Full_Name}</td>
+<td>${mureed.Full_Name}</td>
 
-<td>${patient.Mobile}</td>
+<td>${mureed.Mobile}</td>
 
-<td>${patient.Appointment_Status}</td>
+<td>${mureed.Appointment_Status}</td>
 
 <td>
 
-<button onclick="window.location.href='patient.html?id=${patient.Appointment_Id}'">
+<button onclick="window.location.href='mureed.html?id=${mureed.Appointment_Id}'">
 
 Open
 
@@ -54,4 +54,4 @@ Open
 
 }
 
-loadPatients();
+loadMureeds();
