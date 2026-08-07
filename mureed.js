@@ -2,7 +2,7 @@ const params = new URLSearchParams(window.location.search);
 
 const appointmentId = params.get("id");
 
-async function loadPatient() {
+async function loadMureed() {
 
     const { data, error } = await supabaseClient
 
@@ -18,7 +18,7 @@ async function loadPatient() {
 
         console.log(error);
 
-        alert("Patient Not Found");
+        alert("Mureed Not Found");
 
         return;
 
@@ -41,4 +41,4 @@ async function loadPatient() {
 
 }
 
-loadPatient();
+loadMureed();
