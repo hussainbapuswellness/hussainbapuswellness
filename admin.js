@@ -38,7 +38,7 @@ tbody.innerHTML += `
 
 <td>
 
-<button>
+<button onclick="window.location.href='patient.html?id=${patient.Appointment_Id}'">
 
 Open
 
