@@ -167,9 +167,174 @@ document
 .getElementById("addTreatmentBtn")
 .addEventListener("click", function () {
 
-    openTreatmentForm();
+    document.getElementById("treatmentForm").style.display = "block";
 
 });
+
+
+document
+.getElementById("cancelTreatmentBtn")
+.addEventListener("click", function () {
+
+    document.getElementById("treatmentForm").style.display = "none";
+
+});
+
+
+document
+.getElementById("saveTreatmentBtn")
+.addEventListener("click", async function () {
+
+    const treatmentType =
+        document.getElementById("Treatment_Type").value;
+
+    const category =
+        document.getElementById("Category").value;
+
+    const itemName =
+        document.getElementById("Item_Name").value;
+
+    const notes =
+        document.getElementById("Notes").value;
+
+
+    if (!treatmentType || !itemName) {
+
+        alert("Please select Treatment Type and enter Item Name.");
+
+        return;
+
+    }
+
+
+    const { data, error } = await supabaseClient
+
+        .from("Mureed_Treatment_History")
+
+        .insert([{
+
+            Appointment_Id: appointmentId,
+
+            Treatment_Type: treatmentType,
+
+            Category: category,
+
+            Item_Name: itemName,
+
+            Notes: notes
+
+        }])
+
+        .select();
+
+
+    if (error) {
+
+        console.log(error);
+
+        alert(
+            "TREATMENT SAVE ERROR\n\n" +
+            "Code: " + error.code +
+            "\n\nMessage: " + error.message
+        );
+
+        return;
+
+    }
+
+
+    alert("✅ Treatment Saved Successfully");
+
+
+    document.getElementById("Treatment_Type").value = "";
+    document.getElementById("Category").value = "";
+    document.getElementById("Item_Name").value = "";
+    document.getElementById("Notes").value = "";
+
+
+    document.getElementById("treatmentForm").style.display = "none";
+
+
+    loadTreatmentHistory();
+
+});
+async function loadTreatmentHistory() {
+
+    const { data, error } = await supabaseClient
+
+        .from("Mureed_Treatment_History")
+
+        .select("*")
+
+        .eq("Appointment_Id", appointmentId)
+
+        .order("Created_At", { ascending: false });
+
+
+    if (error) {
+
+        console.log(error);
+
+        return;
+
+    }
+
+
+    const treatmentHistory =
+        document.getElementById("treatmentHistory");
+
+
+    if (!data || data.length === 0) {
+
+        treatmentHistory.innerHTML =
+            "<p>No Treatment Added Yet</p>";
+
+        return;
+
+    }
+
+
+    treatmentHistory.innerHTML = "";
+
+
+    data.forEach(function (treatment) {
+
+        const card = document.createElement("div");
+
+        card.className = "card";
+
+        card.style.marginBottom = "15px";
+
+
+        card.innerHTML = `
+
+            <h3>${treatment.Treatment_Type || ""}</h3>
+
+            <p>
+                <b>Category:</b>
+                ${treatment.Category || ""}
+            </p>
+
+            <p>
+                <b>Item:</b>
+                ${treatment.Item_Name || ""}
+            </p>
+
+            <p>
+                <b>Notes:</b>
+                ${treatment.Notes || ""}
+            </p>
+
+        `;
+
+
+        treatmentHistory.appendChild(card);
+
+    });
+
+}
+
+loadTreatmentHistory();
 
 
 // ===============================
