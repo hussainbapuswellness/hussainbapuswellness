@@ -265,17 +265,19 @@ async function saveTreatment(
 
     if (error) {
 
-        console.log(error);
+    console.log("TREATMENT SAVE ERROR:", error);
 
-        alert(
-            "Treatment save failed:\n" +
-            JSON.stringify(error)
-        );
+    alert(
+        "TREATMENT SAVE ERROR\n\n" +
+        "Code: " + (error.code || "") + "\n\n" +
+        "Message: " + (error.message || "") + "\n\n" +
+        "Details: " + (error.details || "") + "\n\n" +
+        "Hint: " + (error.hint || "")
+    );
 
-        return;
+    return;
 
     }
-
 
     alert("Treatment Saved Successfully ✅");
 
