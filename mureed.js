@@ -5,68 +5,99 @@ const appointmentId = params.get("id");
 let currentMureed = null;
 
 
-// ===============================
+// ========================================
 // LOAD MUREED
-// ===============================
+// ========================================
 
 async function loadMureed() {
 
     const { data, error } = await supabaseClient
-
         .from("clients")
-
         .select("*")
-
         .eq("Appointment_Id", appointmentId)
-
         .single();
-
 
     if (error) {
 
-        console.log(error);
+        console.log("MUREED LOAD ERROR:", error);
 
-        alert("Mureed Not Found");
+        alert(
+            "Mureed Not Found\n\n" +
+            "Code: " + (error.code || "") +
+            "\n\nMessage: " + (error.message || "")
+        );
 
         return;
-
     }
-
 
     currentMureed = data;
 
 
-    document.getElementById("Appointment_Id").innerHTML = data.Appointment_Id;
-    document.getElementById("Full_Name").innerHTML = data.Full_Name;
-    document.getElementById("Mobile").innerHTML = data.Mobile;
-    document.getElementById("Whatsapp").innerHTML = data.Whatsapp;
-    document.getElementById("Email").innerHTML = data.Email;
-    document.getElementById("Age").innerHTML = data.Age;
-    document.getElementById("Gender").innerHTML = data.Gender;
-    document.getElementById("Country").innerHTML = data.Country;
-    document.getElementById("State").innerHTML = data.State;
-    document.getElementById("City").innerHTML = data.City;
-    document.getElementById("Consultation_Type").innerHTML = data.Consultation_Type;
-    document.getElementById("Problem_Category").innerHTML = data.Problem_Category;
-    document.getElementById("Problem_Short_Description").innerHTML = data.Problem_Short_Description;
-    document.getElementById("Appointment_Status").innerHTML = data.Appointment_Status;
+    document.getElementById("Appointment_Id").innerHTML =
+        data.Appointment_Id || "";
+
+    document.getElementById("Full_Name").innerHTML =
+        data.Full_Name || "";
+
+    document.getElementById("Mobile").innerHTML =
+        data.Mobile || "";
+
+    document.getElementById("Whatsapp").innerHTML =
+        data.Whatsapp || "";
+
+    document.getElementById("Email").innerHTML =
+        data.Email || "";
+
+    document.getElementById("Age").innerHTML =
+        data.Age || "";
+
+    document.getElementById("Gender").innerHTML =
+        data.Gender || "";
+
+    document.getElementById("Country").innerHTML =
+        data.Country || "";
+
+    document.getElementById("State").innerHTML =
+        data.State || "";
+
+    document.getElementById("City").innerHTML =
+        data.City || "";
+
+    document.getElementById("Consultation_Type").innerHTML =
+        data.Consultation_Type || "";
+
+    document.getElementById("Problem_Category").innerHTML =
+        data.Problem_Category || "";
+
+    document.getElementById("Problem_Short_Description").innerHTML =
+        data.Problem_Short_Description || "";
+
+    document.getElementById("Appointment_Status").innerHTML =
+        data.Appointment_Status || "";
 
 
+    // Treatment History load
     loadTreatmentHistory();
-
 }
 
 
-// ===============================
+
+// ========================================
 // LOAD TREATMENT HISTORY
-// ===============================
+// ========================================
 
 async function loadTreatmentHistory() {
 
-    const historyBox = document.getElementById("treatmentHistory");
+    const historyBox =
+        document.getElementById("treatmentHistory");
+
+    if (!historyBox) {
+        return;
+    }
 
 
-    historyBox.innerHTML = "<p>Loading Treatment History...</p>";
+    historyBox.innerHTML =
+        "<p>Loading Treatment History...</p>";
 
 
     const { data, error } = await supabaseClient
@@ -75,46 +106,61 @@ async function loadTreatmentHistory() {
 
         .select("*")
 
-        .eq("Mureed_Id", currentMureed.id)
+        .eq("Appointment_Id", appointmentId)
 
-        .order("Created_At", { ascending: false });
+        .order("Created_At", {
+            ascending: false
+        });
 
 
     if (error) {
 
-        console.log(error);
+        console.log(
+            "TREATMENT HISTORY LOAD ERROR:",
+            error
+        );
 
-        historyBox.innerHTML = "<p>Unable to load Treatment History.</p>";
+        historyBox.innerHTML =
+            "<p>Unable to load Treatment History.</p>";
 
         return;
-
     }
 
 
     if (!data || data.length === 0) {
 
-        historyBox.innerHTML = "<p>No Treatment Added Yet.</p>";
+        historyBox.innerHTML =
+            "<p>No Treatment Added Yet.</p>";
 
         return;
-
     }
 
 
     historyBox.innerHTML = "";
 
 
-    data.forEach(treatment => {
+    data.forEach(function (treatment) {
 
-        const date = treatment.Created_At
-            ? new Date(treatment.Created_At).toLocaleString()
-            : "";
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "card treatment-record";
 
 
-        historyBox.innerHTML += `
+        const date =
+            treatment.Created_At
+                ? new Date(
+                    treatment.Created_At
+                  ).toLocaleString()
+                : "";
 
-        <div class="card treatment-record">
 
-            <h3>${treatment.Treatment_Type || ""}</h3>
+        card.innerHTML = `
+
+            <h3>
+                ${treatment.Treatment_Type || ""}
+            </h3>
 
             <p>
                 <b>Category:</b>
@@ -134,12 +180,20 @@ async function loadTreatmentHistory() {
             ${
                 treatment.Image_Url
                 ?
-                `<p>
+                `
+                <p>
                     <b>Taweez Image:</b><br>
+
                     <img
-                    src="${treatment.Image_Url}"
-                    style="max-width:180px;margin-top:8px;border-radius:8px;">
-                </p>`
+                        src="${treatment.Image_Url}"
+                        style="
+                            max-width:180px;
+                            margin-top:8px;
+                            border-radius:8px;
+                        "
+                    >
+                </p>
+                `
                 :
                 ""
             }
@@ -148,312 +202,278 @@ async function loadTreatmentHistory() {
                 Added: ${date}
             </small>
 
-        </div>
-
-        <br>
-
         `;
+
+
+        historyBox.appendChild(card);
 
     });
 
 }
 
 
-// ===============================
-// ADD TREATMENT BUTTON
-// ===============================
 
-document
-.getElementById("addTreatmentBtn")
-.addEventListener("click", function () {
+// ========================================
+// OPEN TREATMENT FORM
+// ========================================
 
-    document.getElementById("treatmentForm").style.display = "block";
-
-});
+const addTreatmentBtn =
+    document.getElementById("addTreatmentBtn");
 
 
-document
-.getElementById("cancelTreatmentBtn")
-.addEventListener("click", function () {
+if (addTreatmentBtn) {
 
-    document.getElementById("treatmentForm").style.display = "none";
+    addTreatmentBtn.addEventListener(
+        "click",
+        function () {
 
-});
+            const form =
+                document.getElementById("treatmentForm");
+
+            if (form) {
+
+                form.style.display = "block";
+
+            }
+
+        }
+    );
+
+}
 
 
-document
-.getElementById("saveTreatmentBtn")
-.addEventListener("click", async function () {
+
+// ========================================
+// CANCEL TREATMENT
+// ========================================
+
+const cancelTreatmentBtn =
+    document.getElementById("cancelTreatmentBtn");
+
+
+if (cancelTreatmentBtn) {
+
+    cancelTreatmentBtn.addEventListener(
+        "click",
+        function () {
+
+            const form =
+                document.getElementById("treatmentForm");
+
+            if (form) {
+
+                form.style.display = "none";
+
+            }
+
+        }
+    );
+
+}
+
+
+
+// ========================================
+// SAVE TREATMENT
+// ========================================
+
+const saveTreatmentBtn =
+    document.getElementById("saveTreatmentBtn");
+
+
+if (saveTreatmentBtn) {
+
+    saveTreatmentBtn.addEventListener(
+        "click",
+        saveTreatment
+    );
+
+}
+
+
+
+// ========================================
+// SAVE TREATMENT FUNCTION
+// ========================================
+
+async function saveTreatment() {
+
+    if (!currentMureed) {
+
+        alert(
+            "Mureed information is not loaded yet."
+        );
+
+        return;
+    }
+
 
     const treatmentType =
-        document.getElementById("Treatment_Type").value;
+        document.getElementById(
+            "Treatment_Type"
+        ).value.trim();
+
 
     const category =
-        document.getElementById("Category").value;
+        document.getElementById(
+            "Category"
+        ).value.trim();
+
 
     const itemName =
-        document.getElementById("Item_Name").value;
+        document.getElementById(
+            "Item_Name"
+        ).value.trim();
+
 
     const notes =
-        document.getElementById("Notes").value;
+        document.getElementById(
+            "Notes"
+        ).value.trim();
 
 
     if (!treatmentType || !itemName) {
 
-        alert("Please select Treatment Type and enter Item Name.");
-
-        return;
-
-    }
-
-
-    const { data, error } = await supabaseClient
-
-        .from("Mureed_Treatment_History")
-
-        .insert([{
-
-            Appointment_Id: appointmentId,
-
-            Treatment_Type: treatmentType,
-
-            Category: category,
-
-            Item_Name: itemName,
-
-            Notes: notes
-
-        }])
-
-        .select();
-
-
-    if (error) {
-
-        console.log(error);
-
         alert(
-            "TREATMENT SAVE ERROR\n\n" +
-            "Code: " + error.code +
-            "\n\nMessage: " + error.message
+            "Please select Treatment Type and enter Item Name."
         );
 
         return;
-
     }
 
 
-    alert("✅ Treatment Saved Successfully");
+
+    // ====================================
+    // INSERT TREATMENT
+    // ====================================
+
+    const treatmentRecord = {
+
+        Mureed_Id:
+            currentMureed.id,
+
+        Appointment_Id:
+            currentMureed.Appointment_Id,
+
+        Treatment_Type:
+            treatmentType,
+
+        Category:
+            category,
+
+        Item_Name:
+            itemName,
+
+        Notes:
+            notes,
+
+        Image_Url:
+            null,
+
+        Print_Crop:
+            null
+
+    };
 
 
-    document.getElementById("Treatment_Type").value = "";
-    document.getElementById("Category").value = "";
-    document.getElementById("Item_Name").value = "";
-    document.getElementById("Notes").value = "";
+    console.log(
+        "TREATMENT RECORD:",
+        treatmentRecord
+    );
 
 
-    document.getElementById("treatmentForm").style.display = "none";
-
-
-    loadTreatmentHistory();
-
-});
-async function loadTreatmentHistory() {
-
-    const { data, error } = await supabaseClient
+    const { error } = await supabaseClient
 
         .from("Mureed_Treatment_History")
 
-        .select("*")
+        .insert([treatmentRecord]);
 
-        .eq("Appointment_Id", appointmentId)
 
-        .order("Created_At", { ascending: false });
-
+    // ====================================
+    // ERROR
+    // ====================================
 
     if (error) {
 
-        console.log(error);
+        console.log(
+            "TREATMENT SAVE ERROR:",
+            error
+        );
+
+
+        alert(
+            "TREATMENT SAVE ERROR\n\n" +
+
+            "Code: " +
+            (error.code || "") +
+
+            "\n\nMessage: " +
+            (error.message || "") +
+
+            "\n\nDetails: " +
+            (error.details || "") +
+
+            "\n\nHint: " +
+            (error.hint || "")
+        );
+
 
         return;
-
     }
 
 
-    const treatmentHistory =
-        document.getElementById("treatmentHistory");
 
-
-    if (!data || data.length === 0) {
-
-        treatmentHistory.innerHTML =
-            "<p>No Treatment Added Yet</p>";
-
-        return;
-
-    }
-
-
-    treatmentHistory.innerHTML = "";
-
-
-    data.forEach(function (treatment) {
-
-        const card = document.createElement("div");
-
-        card.className = "card";
-
-        card.style.marginBottom = "15px";
-
-
-        card.innerHTML = `
-
-            <h3>${treatment.Treatment_Type || ""}</h3>
-
-            <p>
-                <b>Category:</b>
-                ${treatment.Category || ""}
-            </p>
-
-            <p>
-                <b>Item:</b>
-                ${treatment.Item_Name || ""}
-            </p>
-
-            <p>
-                <b>Notes:</b>
-                ${treatment.Notes || ""}
-            </p>
-
-        `;
-
-
-        treatmentHistory.appendChild(card);
-
-    });
-
-}
-
-loadTreatmentHistory();
-
-
-// ===============================
-// TREATMENT FORM
-// ===============================
-
-function openTreatmentForm() {
-
-    const treatmentType = prompt(
-        "Treatment Type likho:\n\nTaweez\nHerbal\nWazifa"
-    );
-
-
-    if (!treatmentType) {
-
-        return;
-
-    }
-
-
-    const category = prompt(
-        "Category likho:"
-    );
-
-
-    const itemName = prompt(
-        "Item / Taweez / Herbal / Wazifa ka naam likho:"
-    );
-
-
-    const notes = prompt(
-        "Treatment Notes likho:"
-    );
-
-
-    saveTreatment(
-        treatmentType,
-        category,
-        itemName,
-        notes
-    );
-
-}
-
-
-// ===============================
-// SAVE TREATMENT
-// ===============================
-
-async function saveTreatment(
-    treatmentType,
-    category,
-    itemName,
-    notes
-) {
-
-
-    if (!currentMureed) {
-
-        alert("Mureed information not loaded.");
-
-        return;
-
-    }
-
-
-    const { data, error } = await supabaseClient
-
-        .from("Mureed_Treatment_History")
-
-        .insert([{
-
-            Mureed_Id: currentMureed.id,
-
-            Appointment_Id: currentMureed.Appointment_Id,
-
-            Treatment_Type: treatmentType,
-
-            Category: category,
-
-            Item_Name: itemName,
-
-            Notes: notes,
-
-            Image_Url: null,
-
-            Print_Crop: null
-
-        }])
-
-        .select();
-
-
-    if (error) {
-
-    console.log("TREATMENT SAVE ERROR:", error);
+    // ====================================
+    // SUCCESS
+    // ====================================
 
     alert(
-        "TREATMENT SAVE ERROR\n\n" +
-        "Code: " + (error.code || "") + "\n\n" +
-        "Message: " + (error.message || "") + "\n\n" +
-        "Details: " + (error.details || "") + "\n\n" +
-        "Hint: " + (error.hint || "")
+        "✅ Treatment Saved Successfully"
     );
 
-    return;
+
+    document.getElementById(
+        "Treatment_Type"
+    ).value = "";
+
+
+    document.getElementById(
+        "Category"
+    ).value = "";
+
+
+    document.getElementById(
+        "Item_Name"
+    ).value = "";
+
+
+    document.getElementById(
+        "Notes"
+    ).value = "";
+
+
+    const form =
+        document.getElementById(
+            "treatmentForm"
+        );
+
+
+    if (form) {
+
+        form.style.display = "none";
 
     }
 
-    alert("Treatment Saved Successfully ✅");
 
-
+    // Reload treatment history
     loadTreatmentHistory();
 
 }
 
 
-// ===============================
+
+// ========================================
 // START
-// ===============================
+// ========================================
 
 loadMureed();
