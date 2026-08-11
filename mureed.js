@@ -1,9 +1,11 @@
 // ======================================================
 // HUSSAIN BAPU'S WELLNESS
-// MUREED / TREATMENT PAGE - FINAL CLEAN VERSION
+// MUREED DETAILS + TREATMENT HISTORY
+// FINAL VERSION
 // ======================================================
 
 const params = new URLSearchParams(window.location.search);
+
 const appointmentId = params.get("id");
 
 let currentMureed = null;
@@ -16,52 +18,93 @@ let currentMureed = null;
 async function loadMureed() {
 
     if (!appointmentId) {
+
         alert("Appointment ID missing.");
+
         return;
     }
 
+
     const { data, error } = await supabaseClient
+
         .from("clients")
+
         .select("*")
+
         .eq("Appointment_Id", appointmentId)
+
         .single();
+
 
     if (error) {
 
-        console.error("MUREED LOAD ERROR:", error);
+        console.error(
+            "MUREED LOAD ERROR:",
+            error
+        );
+
 
         alert(
             "Mureed Not Found\n\n" +
-            "Code: " + (error.code || "") +
-            "\n\nMessage: " + (error.message || "")
+            "Code: " +
+            (error.code || "") +
+            "\n\nMessage: " +
+            (error.message || "")
         );
+
 
         return;
     }
+
 
     currentMureed = data;
 
 
     // ==================================================
-    // MUREED DETAILS
+    // DISPLAY MUREED DETAILS
     // ==================================================
 
     const fields = {
 
-        Appointment_Id: data.Appointment_Id,
-        Full_Name: data.Full_Name,
-        Mobile: data.Mobile,
-        Whatsapp: data.Whatsapp,
-        Email: data.Email,
-        Age: data.Age,
-        Gender: data.Gender,
-        Country: data.Country,
-        State: data.State,
-        City: data.City,
-        Consultation_Type: data.Consultation_Type,
-        Problem_Category: data.Problem_Category,
+        Appointment_Id:
+            data.Appointment_Id,
+
+        Full_Name:
+            data.Full_Name,
+
+        Mobile:
+            data.Mobile,
+
+        Whatsapp:
+            data.Whatsapp,
+
+        Email:
+            data.Email,
+
+        Age:
+            data.Age,
+
+        Gender:
+            data.Gender,
+
+        Country:
+            data.Country,
+
+        State:
+            data.State,
+
+        City:
+            data.City,
+
+        Consultation_Type:
+            data.Consultation_Type,
+
+        Problem_Category:
+            data.Problem_Category,
+
         Problem_Short_Description:
             data.Problem_Short_Description,
+
         Appointment_Status:
             data.Appointment_Status
 
@@ -70,11 +113,15 @@ async function loadMureed() {
 
     Object.keys(fields).forEach(function (id) {
 
-        const element = document.getElementById(id);
+        const element =
+            document.getElementById(id);
+
 
         if (element) {
+
             element.textContent =
                 fields[id] ?? "-";
+
         }
 
     });
@@ -85,6 +132,7 @@ async function loadMureed() {
     // ==================================================
 
     await loadTreatmentHistory();
+
 }
 
 
@@ -96,21 +144,16 @@ async function loadMureed() {
 async function loadTreatmentHistory() {
 
     const historyBox =
-        document.getElementById("treatmentHistory");
+        document.getElementById(
+            "treatmentHistory"
+        );
 
 
     if (!historyBox) {
+
         console.error(
-            "Element #treatmentHistory not found."
+            "treatmentHistory element not found."
         );
-        return;
-    }
-
-
-    if (!currentMureed) {
-
-        historyBox.innerHTML =
-            "<p>Mureed information not loaded.</p>";
 
         return;
     }
@@ -120,40 +163,37 @@ async function loadTreatmentHistory() {
         "<p>Loading Treatment History...</p>";
 
 
-    // IMPORTANT:
-    // clients table ka exact ID column = "I'd"
+    // ==================================================
+    // IMPORTANT
+    // USE APPOINTMENT ID DIRECTLY
     // ==================================================
 
-    const mureedId =
-        currentMureed["I'd"];
+    const { data, error } =
+
+        await supabaseClient
+
+            .from(
+                "Mureed_Treatment_History"
+            )
+
+            .select("*")
+
+            .eq(
+                "Appointment_Id",
+                appointmentId
+            )
+
+            .order(
+                "Created_At",
+                {
+                    ascending: false
+                }
+            );
 
 
-    if (!mureedId) {
-
-        console.error(
-            "Mureed ID not found:",
-            currentMureed
-        );
-
-        historyBox.innerHTML =
-            "<p>Mureed ID not found.</p>";
-
-        return;
-    }
-
-
-    const { data, error } = await supabaseClient
-
-        .from("Mureed_Treatment_History")
-
-        .select("*")
-
-        .eq("Mureed_Id", mureedId)
-
-        .order("Created_At", {
-            ascending: false
-        });
-
+    // ==================================================
+    // QUERY ERROR
+    // ==================================================
 
     if (error) {
 
@@ -162,12 +202,33 @@ async function loadTreatmentHistory() {
             error
         );
 
-        historyBox.innerHTML =
-            "<p>Unable to load Treatment History.</p>";
+
+        historyBox.innerHTML = `
+
+            <p>
+                Unable to load Treatment History.
+            </p>
+
+            <small>
+                ${error.message || ""}
+            </small>
+
+        `;
+
 
         return;
     }
 
+
+    console.log(
+        "TREATMENT HISTORY DATA:",
+        data
+    );
+
+
+    // ==================================================
+    // NO RECORD
+    // ==================================================
 
     if (!data || data.length === 0) {
 
@@ -178,17 +239,18 @@ async function loadTreatmentHistory() {
     }
 
 
+    // ==================================================
+    // CLEAR OLD CONTENT
+    // ==================================================
+
     historyBox.innerHTML = "";
 
 
-    data.forEach(function (treatment) {
+    // ==================================================
+    // DISPLAY EACH TREATMENT
+    // ==================================================
 
-        const date =
-            treatment.Created_At
-                ? new Date(
-                    treatment.Created_At
-                ).toLocaleString()
-                : "-";
+    data.forEach(function (treatment) {
 
 
         const card =
@@ -203,63 +265,99 @@ async function loadTreatmentHistory() {
             "15px";
 
 
-        // Treatment Type
+        // ------------------------------------------------
+        // TITLE
+        // ------------------------------------------------
+
         const title =
             document.createElement("h3");
+
 
         title.textContent =
             treatment.Treatment_Type || "-";
 
 
-        // Category
+        // ------------------------------------------------
+        // CATEGORY
+        // ------------------------------------------------
+
         const category =
             document.createElement("p");
+
 
         category.innerHTML =
             "<b>Category:</b> " +
             (treatment.Category || "-");
 
 
-        // Item
+        // ------------------------------------------------
+        // ITEM NAME
+        // ------------------------------------------------
+
         const item =
             document.createElement("p");
+
 
         item.innerHTML =
             "<b>Item:</b> " +
             (treatment.Item_Name || "-");
 
 
-        // Notes
+        // ------------------------------------------------
+        // NOTES
+        // ------------------------------------------------
+
         const notes =
             document.createElement("p");
+
 
         notes.innerHTML =
             "<b>Notes:</b> " +
             (treatment.Notes || "-");
 
 
-        // Date
+        // ------------------------------------------------
+        // CREATED DATE
+        // ------------------------------------------------
+
         const added =
             document.createElement("small");
+
+
+        const date =
+            treatment.Created_At
+                ? new Date(
+                    treatment.Created_At
+                ).toLocaleString()
+                : "-";
+
 
         added.textContent =
             "Added: " + date;
 
 
+        // ------------------------------------------------
+        // ADD CONTENT
+        // ------------------------------------------------
+
         card.appendChild(title);
+
         card.appendChild(category);
+
         card.appendChild(item);
+
         card.appendChild(notes);
 
 
-        // ==================================================
+        // ------------------------------------------------
         // IMAGE
-        // ==================================================
+        // ------------------------------------------------
 
         if (treatment.Image_Url) {
 
             const imageTitle =
                 document.createElement("p");
+
 
             imageTitle.innerHTML =
                 "<b>Taweez Image:</b>";
@@ -268,28 +366,43 @@ async function loadTreatmentHistory() {
             const image =
                 document.createElement("img");
 
+
             image.src =
                 treatment.Image_Url;
+
 
             image.style.maxWidth =
                 "180px";
 
+
             image.style.marginTop =
                 "8px";
+
 
             image.style.borderRadius =
                 "8px";
 
 
-            card.appendChild(imageTitle);
-            card.appendChild(image);
+            card.appendChild(
+                imageTitle
+            );
+
+
+            card.appendChild(
+                image
+            );
+
         }
 
 
-        card.appendChild(added);
+        card.appendChild(
+            added
+        );
 
 
-        historyBox.appendChild(card);
+        historyBox.appendChild(
+            card
+        );
 
     });
 
@@ -304,14 +417,20 @@ async function loadTreatmentHistory() {
 function openTreatmentForm() {
 
     const form =
-        document.getElementById("treatmentForm");
+        document.getElementById(
+            "treatmentForm"
+        );
 
 
     if (form) {
-        form.style.display = "block";
+
+        form.style.display =
+            "block";
+
     }
 
 }
+
 
 
 // ======================================================
@@ -321,11 +440,16 @@ function openTreatmentForm() {
 function closeTreatmentForm() {
 
     const form =
-        document.getElementById("treatmentForm");
+        document.getElementById(
+            "treatmentForm"
+        );
 
 
     if (form) {
-        form.style.display = "none";
+
+        form.style.display =
+            "none";
+
     }
 
 }
@@ -349,52 +473,32 @@ async function saveTreatment() {
 
 
     // ==================================================
-    // GET FORM VALUES
+    // FORM VALUES
     // ==================================================
 
-    const treatmentTypeElement =
+    const treatmentType =
         document.getElementById(
             "Treatment_Type"
-        );
-
-    const categoryElement =
-        document.getElementById(
-            "Category"
-        );
-
-    const itemNameElement =
-        document.getElementById(
-            "Item_Name"
-        );
-
-    const notesElement =
-        document.getElementById(
-            "Notes"
-        );
-
-
-    const treatmentType =
-        treatmentTypeElement
-            ? treatmentTypeElement.value.trim()
-            : "";
+        ).value.trim();
 
 
     const category =
-        categoryElement
-            ? categoryElement.value.trim()
-            : "";
+        document.getElementById(
+            "Category"
+        ).value.trim();
 
 
     const itemName =
-        itemNameElement
-            ? itemNameElement.value.trim()
-            : "";
+        document.getElementById(
+            "Item_Name"
+        ).value.trim();
 
 
     const notes =
-        notesElement
-            ? notesElement.value.trim()
-            : "";
+        document.getElementById(
+            "Notes"
+        ).value.trim();
+
 
 
     // ==================================================
@@ -423,30 +527,7 @@ async function saveTreatment() {
 
 
     // ==================================================
-    // CORRECT MUREED ID
-    // ==================================================
-
-    const mureedId =
-        currentMureed["I'd"];
-
-
-    if (!mureedId) {
-
-        alert(
-            "Mureed ID not found."
-        );
-
-        console.error(
-            currentMureed
-        );
-
-        return;
-    }
-
-
-
-    // ==================================================
-    // INSERT TREATMENT
+    // SAVE
     // ==================================================
 
     const { data, error } =
@@ -459,12 +540,14 @@ async function saveTreatment() {
 
             .insert([{
 
-                Mureed_Id:
-                    mureedId,
-
+                // Appointment ID is the main link
                 Appointment_Id:
-                    currentMureed
-                        .Appointment_Id,
+                    appointmentId,
+
+                // Keep Mureed ID also
+                // for future use
+                Mureed_Id:
+                    currentMureed["I'd"],
 
                 Treatment_Type:
                     treatmentType,
@@ -492,7 +575,7 @@ async function saveTreatment() {
 
 
     // ==================================================
-    // ERROR
+    // SAVE ERROR
     // ==================================================
 
     if (error) {
@@ -521,6 +604,7 @@ async function saveTreatment() {
 
         );
 
+
         return;
     }
 
@@ -546,17 +630,24 @@ async function saveTreatment() {
     // CLEAR FORM
     // ==================================================
 
-    if (treatmentTypeElement)
-        treatmentTypeElement.value = "";
+    document.getElementById(
+        "Treatment_Type"
+    ).value = "";
 
-    if (categoryElement)
-        categoryElement.value = "";
 
-    if (itemNameElement)
-        itemNameElement.value = "";
+    document.getElementById(
+        "Category"
+    ).value = "";
 
-    if (notesElement)
-        notesElement.value = "";
+
+    document.getElementById(
+        "Item_Name"
+    ).value = "";
+
+
+    document.getElementById(
+        "Notes"
+    ).value = "";
 
 
 
@@ -579,7 +670,7 @@ async function saveTreatment() {
 
 
 // ======================================================
-// PAGE BUTTONS
+// BUTTON EVENTS
 // ======================================================
 
 document.addEventListener(
@@ -639,14 +730,13 @@ document.addEventListener(
 
         }
 
-
     }
 );
 
 
 
 // ======================================================
-// START APPLICATION
+// START
 // ======================================================
 
 loadMureed();
