@@ -1052,6 +1052,7 @@ function selectMureed(
     }
 
 }
+
 // ======================================================
 // PART 3 / 5
 // APPOINTMENT CONFIRMATION + SUPABASE UPDATE
@@ -1266,8 +1267,19 @@ async function confirmAppointment() {
 
     try {
 
+        // ------------------------------------------------
+        // UPDATE CLIENT
+        // ------------------------------------------------
+        //
+        // IMPORTANT:
+        // .single() intentionally NOT used here.
+        //
+        // Supabase returns an array from .select().
+        // We safely handle that array below.
+        // ------------------------------------------------
+
         const {
-            data: updatedMureed,
+            data: updatedMureeds,
             error: updateError
         } = await supabaseClient
 
@@ -1282,8 +1294,7 @@ async function confirmAppointment() {
                 selectedMureed.Appointment_Id
             )
 
-            .select()
-            .single();
+            .select();
 
 
         // ------------------------------------------------
@@ -1300,10 +1311,28 @@ async function confirmAppointment() {
 
             alert(
                 "Appointment could not be saved.\n\n" +
+                "Error Code: " +
+                (
+                    updateError.code ||
+                    ""
+                ) +
+                "\n\n" +
                 "Error: " +
                 (
                     updateError.message ||
                     "Unknown error"
+                ) +
+                "\n\n" +
+                "Details: " +
+                (
+                    updateError.details ||
+                    ""
+                ) +
+                "\n\n" +
+                "Hint: " +
+                (
+                    updateError.hint ||
+                    ""
                 )
             );
 
@@ -1314,34 +1343,71 @@ async function confirmAppointment() {
 
 
         // ------------------------------------------------
-        // UPDATE LOCAL DATA
+        // CHECK UPDATED ROW
         // ------------------------------------------------
 
-        if (updatedMureed) {
+        if (
+            !Array.isArray(
+                updatedMureeds
+            ) ||
+            updatedMureeds.length === 0
+        ) {
 
-            selectedMureed =
+            console.error(
+                "NO CLIENT ROW RETURNED AFTER UPDATE:",
+                updatedMureeds
+            );
+
+
+            alert(
+                "Appointment could not be saved.\n\n" +
+                "No matching client record was returned by Supabase.\n\n" +
+                "Please check the Appointment ID and Supabase update policy."
+            );
+
+
+            return;
+
+        }
+
+
+        // ------------------------------------------------
+        // GET UPDATED MUREED
+        // ------------------------------------------------
+
+        const updatedMureed =
+            updatedMureeds[0];
+
+
+        // ------------------------------------------------
+        // UPDATE LOCAL SELECTED MUREED
+        // ------------------------------------------------
+
+        selectedMureed =
+            updatedMureed;
+
+
+        // ------------------------------------------------
+        // UPDATE LOCAL ARRAY
+        // ------------------------------------------------
+
+        const index =
+            allMureeds.findIndex(
+                function (item) {
+
+                    return (
+                        item.Appointment_Id ===
+                        updatedMureed.Appointment_Id
+                    );
+
+                }
+            );
+
+
+        if (index !== -1) {
+
+            allMureeds[index] =
                 updatedMureed;
-
-
-            const index =
-                allMureeds.findIndex(
-                    function (item) {
-
-                        return (
-                            item.Appointment_Id ===
-                            selectedMureed.Appointment_Id
-                        );
-
-                    }
-                );
-
-
-            if (index !== -1) {
-
-                allMureeds[index] =
-                    updatedMureed;
-
-            }
 
         }
 
@@ -1357,7 +1423,12 @@ async function confirmAppointment() {
 
 
         alert(
-            "Something went wrong while saving appointment."
+            "Something went wrong while saving appointment.\n\n" +
+            "Error: " +
+            (
+                error.message ||
+                "Unknown error"
+            )
         );
 
 
@@ -1578,6 +1649,7 @@ async function confirmAppointment() {
     );
 
         }
+        
 // ======================================================
 // PART 4 / 5
 // ATTRACTIVE WHATSAPP CONFIRMATION MESSAGE
