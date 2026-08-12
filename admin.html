@@ -4,7 +4,11 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>Admin Dashboard | Hussain Bapu's Wellness</title>
 
@@ -12,7 +16,9 @@
 
 </head>
 
+
 <body>
+
 
 <header>
 
@@ -26,39 +32,71 @@
 
 </header>
 
+
+
 <section>
 
 <div class="container">
+
+
+<!-- ==================================================
+     DASHBOARD SUMMARY
+================================================== -->
 
 <div class="card">
 
 <h2>📊 Mureed Dashboard</h2>
 
-<p>Total Mureeds :
-<span id="totalMureeds">0</span>
+<p>
+Total Mureeds:
+<strong id="totalMureeds">0</strong>
+</p>
 
-<p>Pending Appointments :
-<span id="pendingAppointments">0</span></p>
+<p>
+🔔 Pending Appointments:
+<strong id="pendingAppointments">0</strong>
+</p>
 
 </div>
+
+
+
+<!-- ==================================================
+     SEARCH
+================================================== -->
 
 <div class="card">
 
 <h2>🔍 Search Mureed</h2>
 
 <input
-type="text"
-id="searchBox"
-placeholder="Search Mureed Name / Mobile / Appointment ID">
+    type="text"
+    id="searchBox"
+    placeholder="Search Name / Mobile / Appointment ID"
+    autocomplete="off"
+>
 
 </div>
 
-<div class="card">
+
+
+<!-- ==================================================
+     APPOINTMENT LIST
+================================================== -->
+
 <div class="card">
 
 <h2>📅 Mureed Appointment List</h2>
 
-<table id="mureedsTable" border="1" width="100%">
+<div style="overflow-x:auto;">
+
+<table
+    id="mureedsTable"
+    border="1"
+    width="100%"
+    cellpadding="8"
+    cellspacing="0"
+>
 
 <thead>
 
@@ -86,11 +124,113 @@ placeholder="Search Mureed Name / Mobile / Appointment ID">
 
 </div>
 
+</div>
+
+
+
+<!-- ==================================================
+     SELECTED MUREED
+================================================== -->
+
+<div class="card">
+
+<h2>👤 Selected Mureed</h2>
+
+<div id="selectedMureedBox">
+
+<p>
+Select a Mureed from the appointment list.
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- ==================================================
+     APPOINTMENT CONFIRMATION
+================================================== -->
+
+<div
+    class="card"
+    id="confirmationCard"
+    style="display:none;"
+>
+
+<h2>✅ Confirm Appointment</h2>
+
+<p id="confirmationMureedName"></p>
+
+<p id="confirmationMobile"></p>
+
+<br>
+
+
+<label for="appointmentDate">
+
+<strong>📅 Appointment Date</strong>
+
+</label>
+
+<br>
+
+<input
+    type="date"
+    id="appointmentDate"
+>
+
+
+<br>
+<br>
+
+
+<label for="appointmentTime">
+
+<strong>🕐 Appointment Time</strong>
+
+</label>
+
+<br>
+
+<input
+    type="time"
+    id="appointmentTime"
+>
+
+
+<br>
+<br>
+
+
+<button
+    id="confirmAppointmentBtn"
+    class="gold-btn"
+>
+
+📲 Confirm & Open WhatsApp
+
+</button>
+
+</div>
+
+
+
+<!-- ==================================================
+     TREATMENT
+================================================== -->
+
 <div class="card">
 
 <h2>🩺 Mureed Treatment History</h2>
 
-<p>Select any Mureed from the Appointment List to view or add:</p>
+<p>
+
+Select any Mureed and open their Mureed page
+to view or add:
+
+</p>
+
 
 <ul>
 
@@ -101,24 +241,39 @@ placeholder="Search Mureed Name / Mobile / Appointment ID">
 <li>📿 Wazifa</li>
 
 </ul>
+
+
 <br>
 
-<button id="openMureedBtn" class="gold-btn" disabled>
+
+<button
+    id="openMureedBtn"
+    class="gold-btn"
+    disabled
+>
+
 📂 Open Selected Mureed
+
 </button>
-</div>
 
 </div>
+
 
 </div>
 
 </section>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+</script>
+
 
 <script src="supabase.js"></script>
 
 <script src="admin.js"></script>
+
 
 </body>
 
