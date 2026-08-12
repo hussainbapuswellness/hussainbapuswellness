@@ -1,121 +1,35 @@
 // ======================================================
 // HUSSAIN BAPU'S WELLNESS
-// ADMIN DASHBOARD — FINAL VERSION
+// ADMIN DASHBOARD
+// COMPLETE FINAL VERSION
 // ======================================================
 
-const BUSINESS_NAME =
-    "HUSSAIN BAPU'S WELLNESS & BABA FARID JI (R.A) HERITAGE";
 
-const BUSINESS_PHONE =
-    "91998556782";
+// ======================================================
+// WHATSAPP BUSINESS NUMBER
+// ======================================================
 
-const WEBSITE_URL =
-    "https://hussainbapuswellness-1o2i.vercel.app";
+const WHATSAPP_BUSINESS_NUMBER =
+    "919998556782";
 
-const BUSINESS_LOCATION =
-    "Valsad, Gujarat, India";
+
+// ======================================================
+// GLOBAL DATA
+// ======================================================
 
 let allMureeds = [];
+
 let selectedMureed = null;
 
 
 // ======================================================
-// SAFE DOM
+// SAFE ELEMENT GETTER
 // ======================================================
 
-function $(id) {
+function getElement(id) {
+
     return document.getElementById(id);
-}
 
-
-// ======================================================
-// ESCAPE HTML
-// ======================================================
-
-function escapeHtml(value) {
-
-    return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
-
-
-// ======================================================
-// SUPABASE CHECK
-// ======================================================
-
-function checkSupabase() {
-
-    if (
-        typeof supabaseClient === "undefined" ||
-        !supabaseClient
-    ) {
-
-        showDashboardError(
-            "Supabase connection is not available. Please check supabase.js."
-        );
-
-        return false;
-    }
-
-    return true;
-}
-
-
-// ======================================================
-// ERROR DISPLAY
-// ======================================================
-
-function showDashboardError(message) {
-
-    const tbody =
-        document.querySelector(
-            "#mureedsTable tbody"
-        );
-
-    if (tbody) {
-
-        tbody.innerHTML =
-            "<tr>" +
-            "<td colspan='5' style='padding:20px;color:#ffb3b3;'>" +
-            escapeHtml(message) +
-            "</td>" +
-            "</tr>";
-    }
-
-    const dashboardMessage =
-        $("dashboardLoadingMessage");
-
-    if (dashboardMessage) {
-
-        dashboardMessage.textContent =
-            message;
-    }
-
-    console.error(
-        "ADMIN DASHBOARD ERROR:",
-        message
-    );
-}
-
-
-// ======================================================
-// DASHBOARD LOADING MESSAGE
-// ======================================================
-
-function setDashboardMessage(message) {
-
-    const element =
-        $("dashboardLoadingMessage");
-
-    if (element) {
-
-        element.textContent =
-            message;
-    }
 }
 
 
@@ -125,180 +39,15 @@ function setDashboardMessage(message) {
 
 async function loadMureeds() {
 
-    if (!checkSupabase()) {
-        return;
-    }
-
     const tbody =
         document.querySelector(
             "#mureedsTable tbody"
         );
 
-    if (tbody) {
 
-        tbody.innerHTML =
-            "<tr>" +
-            "<td colspan='5'>" +
-            "Loading appointments..." +
-            "</td>" +
-            "</tr>";
-    }
-
-    setDashboardMessage(
-        "Loading dashboard..."
-    );
-
-
-    try {
-
-        const query =
-            supabaseClient
-                .from("clients")
-                .select("*");
-
-
-        const timeout =
-            new Promise(
-                function (_, reject) {
-
-                    setTimeout(
-                        function () {
-
-                            reject(
-                                new Error(
-                                    "Supabase request timed out. Check internet connection, Supabase URL/key, or table access."
-                                )
-                            );
-
-                        },
-                        15000
-                    );
-
-                }
-            );
-
-
-        const result =
-            await Promise.race([
-                query,
-                timeout
-            ]);
-
-
-        const data =
-            result.data;
-
-        const error =
-            result.error;
-
-
-        if (error) {
-
-            throw error;
-        }
-
-
-        allMureeds =
-            Array.isArray(data)
-                ? data
-                : [];
-
-
-        updateDashboardCounts();
-
-
-        renderMureeds(
-            allMureeds
-        );
-
-
-        setDashboardMessage(
-            allMureeds.length +
-            " Mureed(s) loaded."
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            "LOAD MUREEDS ERROR:",
-            error
-        );
-
-
-        const message =
-            error?.message ||
-            "Unable to load appointments.";
-
-
-        showDashboardError(
-            message
-        );
-
-
-        setDashboardMessage(
-            "Dashboard could not load."
-        );
-    }
-}
-
-
-// ======================================================
-// DASHBOARD COUNTS
-// ======================================================
-
-function updateDashboardCounts() {
-
-    const total =
-        allMureeds.length;
-
-
-    const pending =
-        allMureeds.filter(
-            function (mureed) {
-
-                return String(
-                    mureed.Appointment_Status ||
-                    ""
-                )
-                    .trim()
-                    .toLowerCase() ===
-                    "pending";
-            }
-        ).length;
-
-
-    const totalElement =
-        $("totalMureeds");
-
-    const pendingElement =
-        $("pendingAppointments");
-
-
-    if (totalElement) {
-
-        totalElement.textContent =
-            total;
-    }
-
-
-    if (pendingElement) {
-
-        pendingElement.textContent =
-            pending;
-    }
-}
-
-
-// ======================================================
-// RENDER MUREEDS
-// ======================================================
-
-function renderMureeds(mureeds) {
-
-    const tbody =
-        document.querySelector(
-            "#mureedsTable tbody"
+    const dashboardMessage =
+        getElement(
+            "dashboardMessage"
         );
 
 
@@ -309,55 +58,318 @@ function renderMureeds(mureeds) {
         );
 
         return;
+
+    }
+
+
+    tbody.innerHTML = `
+        <tr>
+            <td colspan="5"
+                style="text-align:center;">
+                Loading appointments...
+            </td>
+        </tr>
+    `;
+
+
+    if (!window.supabaseClient) {
+
+        console.error(
+            "supabaseClient is not available."
+        );
+
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="5"
+                    style="text-align:center;">
+                    Supabase connection is not available.
+                </td>
+            </tr>
+        `;
+
+
+        if (dashboardMessage) {
+
+            dashboardMessage.textContent =
+                "⚠️ Supabase connection unavailable.";
+
+        }
+
+        return;
+
+    }
+
+
+
+    try {
+
+
+        // ==================================================
+        // FETCH CLIENTS
+        // ==================================================
+
+        const result =
+            await supabaseClient
+                .from("clients")
+                .select("*");
+
+
+        const data =
+            result.data;
+
+
+        const error =
+            result.error;
+
+
+
+        // ==================================================
+        // ERROR
+        // ==================================================
+
+        if (error) {
+
+            console.error(
+                "SUPABASE LOAD ERROR:",
+                error
+            );
+
+
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="5"
+                        style="text-align:center;">
+                        Unable to load appointments.
+                    </td>
+                </tr>
+            `;
+
+
+            if (dashboardMessage) {
+
+                dashboardMessage.textContent =
+                    "⚠️ Unable to load dashboard data.";
+
+            }
+
+
+            return;
+
+        }
+
+
+
+        // ==================================================
+        // SAVE DATA
+        // ==================================================
+
+        allMureeds =
+            Array.isArray(data)
+                ? data
+                : [];
+
+
+
+        // ==================================================
+        // TOTAL
+        // ==================================================
+
+        const totalElement =
+            getElement(
+                "totalMureeds"
+            );
+
+
+        if (totalElement) {
+
+            totalElement.textContent =
+                allMureeds.length;
+
+        }
+
+
+
+        // ==================================================
+        // PENDING
+        // ==================================================
+
+        const pendingMureeds =
+            allMureeds.filter(
+                function (mureed) {
+
+                    return String(
+                        mureed.Appointment_Status || ""
+                    )
+                    .trim()
+                    .toLowerCase()
+                    === "pending";
+
+                }
+            );
+
+
+        const pendingElement =
+            getElement(
+                "pendingAppointments"
+            );
+
+
+        if (pendingElement) {
+
+            pendingElement.textContent =
+                pendingMureeds.length;
+
+        }
+
+
+
+        // ==================================================
+        // DASHBOARD MESSAGE
+        // ==================================================
+
+        if (dashboardMessage) {
+
+            if (allMureeds.length > 0) {
+
+                dashboardMessage.textContent =
+                    "✅ Dashboard loaded successfully.";
+
+            } else {
+
+                dashboardMessage.textContent =
+                    "No Mureed appointments found.";
+
+            }
+
+        }
+
+
+
+        // ==================================================
+        // RENDER
+        // ==================================================
+
+        renderMureeds(
+            allMureeds
+        );
+
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "ADMIN DASHBOARD ERROR:",
+            error
+        );
+
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="5"
+                    style="text-align:center;">
+                    Something went wrong while loading appointments.
+                </td>
+            </tr>
+        `;
+
+
+        if (dashboardMessage) {
+
+            dashboardMessage.textContent =
+                "⚠️ Dashboard loading failed.";
+
+        }
+
+    }
+
+}
+
+
+
+// ======================================================
+// RENDER MUREEDS
+// ======================================================
+
+function renderMureeds(
+    mureeds
+) {
+
+    const tbody =
+        document.querySelector(
+            "#mureedsTable tbody"
+        );
+
+
+    if (!tbody) {
+
+        return;
+
     }
 
 
     tbody.innerHTML = "";
 
 
+
+    // ==================================================
+    // EMPTY
+    // ==================================================
+
     if (
         !mureeds ||
         mureeds.length === 0
     ) {
 
-        tbody.innerHTML =
-            "<tr>" +
-            "<td colspan='5' style='padding:20px;'>" +
-            "No appointments found." +
-            "</td>" +
-            "</tr>";
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="5"
+                    style="text-align:center;">
+                    No appointments found.
+                </td>
+            </tr>
+        `;
 
         return;
+
     }
 
 
-    const sorted =
+
+    // ==================================================
+    // PENDING FIRST
+    // ==================================================
+
+    const sortedMureeds =
         [...mureeds].sort(
             function (a, b) {
 
                 const aPending =
                     String(
-                        a.Appointment_Status ||
-                        ""
+                        a.Appointment_Status || ""
                     )
-                        .toLowerCase() ===
-                    "pending";
+                    .trim()
+                    .toLowerCase()
+                    === "pending";
 
 
                 const bPending =
                     String(
-                        b.Appointment_Status ||
-                        ""
+                        b.Appointment_Status || ""
                     )
-                        .toLowerCase() ===
-                    "pending";
+                    .trim()
+                    .toLowerCase()
+                    === "pending";
 
 
                 if (
                     aPending &&
                     !bPending
                 ) {
+
                     return -1;
+
                 }
 
 
@@ -365,17 +377,26 @@ function renderMureeds(mureeds) {
                     !aPending &&
                     bPending
                 ) {
+
                     return 1;
+
                 }
 
 
                 return 0;
+
             }
         );
 
 
-    sorted.forEach(
+
+    // ==================================================
+    // ROWS
+    // ==================================================
+
+    sortedMureeds.forEach(
         function (mureed) {
+
 
             const row =
                 document.createElement(
@@ -383,85 +404,96 @@ function renderMureeds(mureeds) {
                 );
 
 
+
+            // Appointment ID
             const appointmentCell =
                 document.createElement(
                     "td"
                 );
 
+
             appointmentCell.textContent =
-                mureed.Appointment_Id ||
-                "-";
+                mureed.Appointment_Id || "-";
 
 
+
+            // Name
             const nameCell =
                 document.createElement(
                     "td"
                 );
 
+
             nameCell.textContent =
-                mureed.Full_Name ||
-                "-";
+                mureed.Full_Name || "-";
 
 
+
+            // Mobile
             const mobileCell =
                 document.createElement(
                     "td"
                 );
 
+
             mobileCell.textContent =
-                mureed.Mobile ||
-                mureed.Whatsapp ||
-                "-";
+                mureed.Mobile || "-";
 
 
+
+            // Status
             const statusCell =
                 document.createElement(
                     "td"
                 );
 
+
             statusCell.textContent =
-                mureed.Appointment_Status ||
-                "-";
+                mureed.Appointment_Status || "-";
 
 
+
+            // Action
             const actionCell =
                 document.createElement(
                     "td"
                 );
 
 
-            const button =
+            const selectButton =
                 document.createElement(
                     "button"
                 );
 
 
-            button.textContent =
-                "Select";
-
-
-            button.className =
-                "gold-btn";
-
-
-            button.type =
+            selectButton.type =
                 "button";
 
 
-            button.addEventListener(
+            selectButton.textContent =
+                "Select";
+
+
+            selectButton.className =
+                "gold-btn";
+
+
+            selectButton.addEventListener(
                 "click",
                 function () {
 
                     selectMureed(
                         mureed
                     );
+
                 }
             );
 
 
             actionCell.appendChild(
-                button
+                selectButton
             );
+
 
 
             row.appendChild(
@@ -488,34 +520,36 @@ function renderMureeds(mureeds) {
             tbody.appendChild(
                 row
             );
+
         }
     );
+
 }
+
 
 
 // ======================================================
 // SEARCH
 // ======================================================
 
-function setupSearch() {
+const searchBox =
+    getElement(
+        "searchBox"
+    );
 
-    const searchBox =
-        $("searchBox");
 
-
-    if (!searchBox) {
-        return;
-    }
-
+if (searchBox) {
 
     searchBox.addEventListener(
         "input",
         function () {
 
+
             const search =
                 this.value
                     .trim()
                     .toLowerCase();
+
 
 
             if (!search) {
@@ -525,111 +559,157 @@ function setupSearch() {
                 );
 
                 return;
+
             }
+
 
 
             const filtered =
                 allMureeds.filter(
                     function (mureed) {
 
+
+                        const name =
+                            String(
+                                mureed.Full_Name || ""
+                            )
+                            .toLowerCase();
+
+
+                        const mobile =
+                            String(
+                                mureed.Mobile || ""
+                            )
+                            .toLowerCase();
+
+
+                        const whatsapp =
+                            String(
+                                mureed.Whatsapp || ""
+                            )
+                            .toLowerCase();
+
+
+                        const appointmentId =
+                            String(
+                                mureed.Appointment_Id || ""
+                            )
+                            .toLowerCase();
+
+
+
                         return (
 
-                            String(
-                                mureed.Full_Name ||
-                                ""
+                            name.includes(
+                                search
                             )
-                                .toLowerCase()
-                                .includes(search)
 
                             ||
 
-                            String(
-                                mureed.Mobile ||
-                                ""
+                            mobile.includes(
+                                search
                             )
-                                .toLowerCase()
-                                .includes(search)
 
                             ||
 
-                            String(
-                                mureed.Whatsapp ||
-                                ""
+                            whatsapp.includes(
+                                search
                             )
-                                .toLowerCase()
-                                .includes(search)
 
                             ||
 
-                            String(
-                                mureed.Appointment_Id ||
-                                ""
+                            appointmentId.includes(
+                                search
                             )
-                                .toLowerCase()
-                                .includes(search)
 
                         );
+
                     }
                 );
+
 
 
             renderMureeds(
                 filtered
             );
+
         }
     );
+
 }
+
 
 
 // ======================================================
 // SELECT MUREED
 // ======================================================
 
-function selectMureed(mureed) {
+function selectMureed(
+    mureed
+) {
+
 
     selectedMureed =
         mureed;
 
 
+
+    // ==================================================
+    // SELECTED MUREED BOX
+    // ==================================================
+
     const box =
-        $("selectedMureedBox");
+        getElement(
+            "selectedMureedBox"
+        );
 
 
     if (box) {
 
-        box.innerHTML =
+        box.innerHTML = `
 
-            "<p><strong>Name:</strong> " +
-            escapeHtml(
-                mureed.Full_Name || "-"
-            ) +
-            "</p>" +
+            <p>
+                👤 <strong>Name:</strong>
+                ${escapeHtml(
+                    mureed.Full_Name || "-"
+                )}
+            </p>
 
-            "<p><strong>Appointment ID:</strong> " +
-            escapeHtml(
-                mureed.Appointment_Id || "-"
-            ) +
-            "</p>" +
+            <p>
+                📅 <strong>Appointment ID:</strong>
+                ${escapeHtml(
+                    mureed.Appointment_Id || "-"
+                )}
+            </p>
 
-            "<p><strong>Mobile:</strong> " +
-            escapeHtml(
-                mureed.Mobile ||
-                mureed.Whatsapp ||
-                "-"
-            ) +
-            "</p>" +
+            <p>
+                📱 <strong>Mobile:</strong>
+                ${escapeHtml(
+                    mureed.Mobile || "-"
+                )}
+            </p>
 
-            "<p><strong>Status:</strong> " +
-            escapeHtml(
-                mureed.Appointment_Status ||
-                "-"
-            ) +
-            "</p>";
+            <p>
+                📌 <strong>Status:</strong>
+                ${escapeHtml(
+                    mureed.Appointment_Status || "-"
+                )}
+            </p>
+
+        `;
+
     }
 
 
+
+    // ==================================================
+    // OPEN MUREED BUTTON
+    // ==================================================
+
     const openButton =
-        $("openMureedBtn");
+        getElement(
+            "openMureedBtn"
+        );
 
 
     if (openButton) {
@@ -641,225 +721,163 @@ function selectMureed(mureed) {
         openButton.onclick =
             function () {
 
+
+                const appointmentId =
+                    mureed.Appointment_Id;
+
+
+                if (!appointmentId) {
+
+                    alert(
+                        "Appointment ID not found."
+                    );
+
+                    return;
+
+                }
+
+
                 window.location.href =
                     "mureed.html?id=" +
                     encodeURIComponent(
-                        mureed.Appointment_Id
+                        appointmentId
                     );
+
             };
+
     }
 
 
-    setupConfirmationCard();
 
+    // ==================================================
+    // CONFIRMATION CARD
+    // ==================================================
 
     const confirmationCard =
-        $("confirmationCard");
+        getElement(
+            "confirmationCard"
+        );
 
 
     if (confirmationCard) {
 
         confirmationCard.style.display =
             "block";
+
     }
 
 
-    const nameElement =
-        $("confirmationMureedName");
+
+    // ==================================================
+    // MUREED NAME
+    // ==================================================
+
+    const confirmationName =
+        getElement(
+            "confirmationMureedName"
+        );
 
 
-    if (nameElement) {
+    if (confirmationName) {
 
-        nameElement.textContent =
+        confirmationName.textContent =
             "👤 Mureed: " +
             (
                 mureed.Full_Name ||
                 "-"
             );
+
     }
 
 
-    const mobileElement =
-        $("confirmationMobile");
+
+    // ==================================================
+    // WHATSAPP
+    // ==================================================
+
+    const confirmationMobile =
+        getElement(
+            "confirmationMobile"
+        );
 
 
-    if (mobileElement) {
+    if (confirmationMobile) {
 
-        mobileElement.textContent =
+        confirmationMobile.textContent =
             "📱 WhatsApp: " +
             (
                 mureed.Whatsapp ||
                 mureed.Mobile ||
                 "-"
             );
+
     }
 
 
-    const dateElement =
-        $("appointmentDate");
 
+    // ==================================================
+    // EXISTING DATE
+    // ==================================================
 
-    const timeElement =
-        $("appointmentTime");
-
-
-    if (dateElement) {
-
-        dateElement.value =
-            mureed.Appointment_Date ||
-            "";
-    }
-
-
-    if (timeElement) {
-
-        timeElement.value =
-            mureed.Appointment_Time ||
-            "";
-    }
-
-
-    // Scroll confirmation into view
-    if (confirmationCard) {
-
-        setTimeout(
-            function () {
-
-                confirmationCard.scrollIntoView({
-                    behavior: "smooth",
-                    block: "center"
-                });
-
-            },
-            100
-        );
-    }
-}
-
-
-// ======================================================
-// CREATE CONFIRMATION CARD IF MISSING
-// ======================================================
-
-function setupConfirmationCard() {
-
-    if ($("confirmationCard")) {
-        setupConfirmButton();
-        return;
-    }
-
-
-    const selectedBox =
-        $("selectedMureedBox");
-
-
-    if (!selectedBox) {
-        return;
-    }
-
-
-    const card =
-        document.createElement(
-            "div"
+    const dateInput =
+        getElement(
+            "appointmentDate"
         );
 
 
-    card.id =
-        "confirmationCard";
+    if (dateInput) {
+
+        dateInput.value =
+            normalizeDateValue(
+                mureed.Appointment_Date
+            );
+
+    }
 
 
-    card.className =
-        "card";
+
+    // ==================================================
+    // EXISTING TIME
+    // ==================================================
+
+    const timeInput =
+        getElement(
+            "appointmentTime"
+        );
 
 
-    card.style.marginTop =
-        "20px";
+    if (timeInput) {
 
+        timeInput.value =
+            normalizeTimeValue(
+                mureed.Appointment_Time
+            );
 
-    card.innerHTML =
+    }
 
-        "<h2>✅ Confirm Appointment</h2>" +
-
-        "<p id='confirmationMureedName'></p>" +
-
-        "<p id='confirmationMobile'></p>" +
-
-        "<label>" +
-        "📅 Appointment Date" +
-        "</label>" +
-
-        "<br><br>" +
-
-        "<input " +
-        "type='date' " +
-        "id='appointmentDate'>" +
-
-        "<br><br>" +
-
-        "<label>" +
-        "🕐 Appointment Time" +
-        "</label>" +
-
-        "<br><br>" +
-
-        "<input " +
-        "type='time' " +
-        "id='appointmentTime'>" +
-
-        "<br><br>" +
-
-        "<button " +
-        "id='confirmAppointmentBtn' " +
-        "class='gold-btn' " +
-        "type='button'>" +
-
-        "📱 Confirm & Open WhatsApp" +
-
-        "</button>";
-
-
-    selectedBox.parentNode.insertBefore(
-        card,
-        selectedBox.nextSibling
-    );
-
-
-    setupConfirmButton();
 }
+
 
 
 // ======================================================
 // CONFIRM BUTTON
 // ======================================================
 
-function setupConfirmButton() {
-
-    const button =
-        $("confirmAppointmentBtn");
-
-
-    if (!button) {
-        return;
-    }
+const confirmButton =
+    getElement(
+        "confirmAppointmentBtn"
+    );
 
 
-    if (
-        button.dataset.bound ===
-        "true"
-    ) {
-        return;
-    }
+if (confirmButton) {
 
-
-    button.dataset.bound =
-        "true";
-
-
-    button.addEventListener(
+    confirmButton.addEventListener(
         "click",
         confirmAppointment
     );
+
 }
+
 
 
 // ======================================================
@@ -868,6 +886,7 @@ function setupConfirmButton() {
 
 async function confirmAppointment() {
 
+
     if (!selectedMureed) {
 
         alert(
@@ -875,18 +894,39 @@ async function confirmAppointment() {
         );
 
         return;
+
     }
 
 
+
+    const dateInput =
+        getElement(
+            "appointmentDate"
+        );
+
+
+    const timeInput =
+        getElement(
+            "appointmentTime"
+        );
+
+
     const date =
-        $("appointmentDate")?.value ||
-        "";
+        dateInput
+            ? dateInput.value
+            : "";
 
 
     const time =
-        $("appointmentTime")?.value ||
-        "";
+        timeInput
+            ? timeInput.value
+            : "";
 
+
+
+    // ==================================================
+    // VALIDATION
+    // ==================================================
 
     if (!date) {
 
@@ -895,6 +935,7 @@ async function confirmAppointment() {
         );
 
         return;
+
     }
 
 
@@ -905,107 +946,13 @@ async function confirmAppointment() {
         );
 
         return;
+
     }
 
 
-    const appointmentId =
-        selectedMureed.Appointment_Id;
-
-
-    if (!appointmentId) {
-
-        alert(
-            "Appointment ID is missing."
-        );
-
-        return;
-    }
-
 
     // ==================================================
-    // SAVE APPOINTMENT IN SUPABASE
-    // ==================================================
-
-    try {
-
-        const updateData = {
-
-            Appointment_Date:
-                date,
-
-            Appointment_Time:
-                time,
-
-            Appointment_Status:
-                "Confirmed"
-        };
-
-
-        const {
-            error
-        } =
-            await supabaseClient
-                .from("clients")
-                .update(updateData)
-                .eq(
-                    "Appointment_Id",
-                    appointmentId
-                );
-
-
-        if (error) {
-
-            console.error(
-                "APPOINTMENT UPDATE ERROR:",
-                error
-            );
-
-
-            alert(
-                "Appointment could not be saved.\n\n" +
-                error.message
-            );
-
-            return;
-        }
-
-
-        // Update local object
-        selectedMureed.Appointment_Date =
-            date;
-
-        selectedMureed.Appointment_Time =
-            time;
-
-        selectedMureed.Appointment_Status =
-            "Confirmed";
-
-
-        updateDashboardCounts();
-
-
-        renderMureeds(
-            allMureeds
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            error
-        );
-
-
-        alert(
-            "Unable to save appointment."
-        );
-
-        return;
-    }
-
-
-    // ==================================================
-    // MUREED WHATSAPP NUMBER
+    // MUREED NUMBER
     // ==================================================
 
     let whatsappNumber =
@@ -1014,30 +961,33 @@ async function confirmAppointment() {
         "";
 
 
+
     whatsappNumber =
         String(
             whatsappNumber
         )
-            .replace(
-                /\D/g,
-                ""
-            );
+        .replace(
+            /\D/g,
+            ""
+        );
 
 
+
+    // India 10 digit number
     if (
-        whatsappNumber.length ===
-        10
+        whatsappNumber.length === 10
     ) {
 
         whatsappNumber =
             "91" +
             whatsappNumber;
+
     }
 
 
+
     if (
-        whatsappNumber.length <
-        12
+        whatsappNumber.length < 10
     ) {
 
         alert(
@@ -1045,7 +995,9 @@ async function confirmAppointment() {
         );
 
         return;
+
     }
+
 
 
     // ==================================================
@@ -1069,33 +1021,88 @@ async function confirmAppointment() {
         "Mureed";
 
 
+
     // ==================================================
-    // FINAL BRANDED WHATSAPP MESSAGE
+    // SAVE APPOINTMENT
+    // ==================================================
+
+    let updateData = {
+
+        Appointment_Status:
+            "Confirmed",
+
+        Appointment_Date:
+            date,
+
+        Appointment_Time:
+            time
+
+    };
+
+
+
+    try {
+
+
+        if (
+            selectedMureed.Appointment_Id
+        ) {
+
+
+            const updateResult =
+                await supabaseClient
+
+                    .from("clients")
+
+                    .update(
+                        updateData
+                    )
+
+                    .eq(
+                        "Appointment_Id",
+                        selectedMureed.Appointment_Id
+                    );
+
+
+
+            if (
+                updateResult.error
+            ) {
+
+                console.error(
+                    "APPOINTMENT UPDATE ERROR:",
+                    updateResult.error
+                );
+
+            }
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "UPDATE ERROR:",
+            error
+        );
+
+    }
+
+
+
+    // ==================================================
+    // BEAUTIFUL WHATSAPP MESSAGE
     // ==================================================
 
     const message =
 
-        "✨ *" +
-        BUSINESS_NAME +
-        "* ✨\n" +
+`✨ *HUSSAIN BAPU'S WELLNESS & BABA FARID JI (R.A) HERITAGE* ✨
 
-        "━━━━━━━━━━━━━━━━━━━━\n\n" +
+━━━━━━━━━━━━━━━━━━━━
 
-        "🌿 *Appointment Confirmation*\n\n" +
+🕌 *Appointment Confirmation*
 
-        "Dear *" +
-        mureedName +
-        "*,\n\n" +
+Dear *${mureedName}*,
 
-        "We are pleased to confirm your appointment with us. 🤝\n\n" +
-
-        "🆔 *Appointment ID:* " +
-        appointmentId +
-        "\n" +
-
-        "📅 *Date:* " +
-        formattedDate +
-        "\n" +
-
-        "🕐 *Time:* " +
-        for
+Your appointment with us has been *CONFIRM
