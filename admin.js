@@ -1,23 +1,37 @@
 // ======================================================
 // HUSSAIN BAPU'S WELLNESS
 // ADMIN DASHBOARD
-// APPOINTMENT + WHATSAPP WORKFLOW
+// APPOINTMENT + PREMIUM WHATSAPP WORKFLOW
 // ======================================================
 
 
 // ======================================================
-// WHATSAPP CONFIGURATION
-// ======================================================
-//
-// IMPORTANT:
-// Final public WhatsApp Business number launch se pehle
-// yaha centrally replace kiya jayega.
-//
-// Current personal number yaha permanently nahi rakhenge.
+// CENTRAL BUSINESS CONFIGURATION
 // ======================================================
 
+// FINAL PUBLIC WHATSAPP BUSINESS NUMBER
+// Format: country code + number, without + or spaces
 const WHATSAPP_BUSINESS_NUMBER =
-    "REPLACE_WITH_NEW_BUSINESS_NUMBER";
+    "919998556782";
+
+
+// WEBSITE
+// IMPORTANT:
+// Yaha apna final live website URL paste karna hai.
+const WEBSITE_URL =
+    "YOUR_LIVE_WEBSITE_URL";
+
+
+// GOOGLE MAPS
+// IMPORTANT:
+// Yaha apna final Google Maps location link paste karna hai.
+const GOOGLE_MAPS_URL =
+    "YOUR_GOOGLE_MAPS_LOCATION_URL";
+
+
+// FULL BRAND NAME
+const BRAND_NAME =
+    "HUSSAIN BAPU'S WELLNESS & BABA FARID JI (R.A) HERITAGE";
 
 
 
@@ -41,6 +55,14 @@ async function loadMureeds() {
         document.querySelector(
             "#mureedsTable tbody"
         );
+
+
+    if (!tbody) {
+        console.error(
+            "Mureeds table body not found."
+        );
+        return;
+    }
 
 
     tbody.innerHTML =
@@ -85,10 +107,18 @@ async function loadMureeds() {
     // TOTAL MUREEDS
     // ==================================================
 
-    document.getElementById(
-        "totalMureeds"
-    ).textContent =
-        allMureeds.length;
+    const totalElement =
+        document.getElementById(
+            "totalMureeds"
+        );
+
+
+    if (totalElement) {
+
+        totalElement.textContent =
+            allMureeds.length;
+
+    }
 
 
 
@@ -109,10 +139,18 @@ async function loadMureeds() {
         );
 
 
-    document.getElementById(
-        "pendingAppointments"
-    ).textContent =
-        pending.length;
+    const pendingElement =
+        document.getElementById(
+            "pendingAppointments"
+        );
+
+
+    if (pendingElement) {
+
+        pendingElement.textContent =
+            pending.length;
+
+    }
 
 
 
@@ -129,7 +167,7 @@ async function loadMureeds() {
 
 
 // ======================================================
-// RENDER MUREDS
+// RENDER MUREEDS
 // ======================================================
 
 function renderMureeds(mureeds) {
@@ -138,6 +176,11 @@ function renderMureeds(mureeds) {
         document.querySelector(
             "#mureedsTable tbody"
         );
+
+
+    if (!tbody) {
+        return;
+    }
 
 
     tbody.innerHTML = "";
@@ -218,6 +261,7 @@ function renderMureeds(mureeds) {
                 );
 
 
+            // APPOINTMENT ID
             const appointmentCell =
                 document.createElement(
                     "td"
@@ -228,6 +272,7 @@ function renderMureeds(mureeds) {
 
 
 
+            // NAME
             const nameCell =
                 document.createElement(
                     "td"
@@ -238,6 +283,7 @@ function renderMureeds(mureeds) {
 
 
 
+            // MOBILE
             const mobileCell =
                 document.createElement(
                     "td"
@@ -248,6 +294,7 @@ function renderMureeds(mureeds) {
 
 
 
+            // STATUS
             const statusCell =
                 document.createElement(
                     "td"
@@ -258,6 +305,7 @@ function renderMureeds(mureeds) {
 
 
 
+            // ACTION
             const actionCell =
                 document.createElement(
                     "td"
@@ -331,9 +379,15 @@ function renderMureeds(mureeds) {
 // SEARCH
 // ======================================================
 
-document
-    .getElementById("searchBox")
-    .addEventListener(
+const searchBox =
+    document.getElementById(
+        "searchBox"
+    );
+
+
+if (searchBox) {
+
+    searchBox.addEventListener(
         "input",
         function () {
 
@@ -394,6 +448,8 @@ document
         }
     );
 
+}
+
 
 
 // ======================================================
@@ -412,67 +468,65 @@ function selectMureed(mureed) {
         );
 
 
-    box.innerHTML = "";
+    if (box) {
+
+        box.innerHTML = "";
 
 
-    const name =
-        document.createElement(
-            "p"
-        );
+        const name =
+            document.createElement(
+                "p"
+            );
 
-    name.innerHTML =
-        "<strong>Name:</strong> " +
-        escapeHtml(
-            mureed.Full_Name || "-"
-        );
-
-
-
-    const appointment =
-        document.createElement(
-            "p"
-        );
-
-    appointment.innerHTML =
-        "<strong>Appointment ID:</strong> " +
-        escapeHtml(
-            mureed.Appointment_Id || "-"
-        );
+        name.innerHTML =
+            "<strong>Name:</strong> " +
+            escapeHtml(
+                mureed.Full_Name || "-"
+            );
 
 
+        const appointment =
+            document.createElement(
+                "p"
+            );
 
-    const mobile =
-        document.createElement(
-            "p"
-        );
-
-    mobile.innerHTML =
-        "<strong>Mobile:</strong> " +
-        escapeHtml(
-            mureed.Mobile || "-"
-        );
-
+        appointment.innerHTML =
+            "<strong>Appointment ID:</strong> " +
+            escapeHtml(
+                mureed.Appointment_Id || "-"
+            );
 
 
-    const status =
-        document.createElement(
-            "p"
-        );
+        const mobile =
+            document.createElement(
+                "p"
+            );
 
-    status.innerHTML =
-        "<strong>Status:</strong> " +
-        escapeHtml(
-            mureed.Appointment_Status || "-"
-        );
+        mobile.innerHTML =
+            "<strong>Mobile:</strong> " +
+            escapeHtml(
+                mureed.Mobile || "-"
+            );
 
 
-    box.appendChild(name);
+        const status =
+            document.createElement(
+                "p"
+            );
 
-    box.appendChild(appointment);
+        status.innerHTML =
+            "<strong>Status:</strong> " +
+            escapeHtml(
+                mureed.Appointment_Status || "-"
+            );
 
-    box.appendChild(mobile);
 
-    box.appendChild(status);
+        box.appendChild(name);
+        box.appendChild(appointment);
+        box.appendChild(mobile);
+        box.appendChild(status);
+
+    }
 
 
 
@@ -486,20 +540,24 @@ function selectMureed(mureed) {
         );
 
 
-    openButton.disabled =
-        false;
+    if (openButton) {
+
+        openButton.disabled =
+            false;
 
 
-    openButton.onclick =
-        function () {
+        openButton.onclick =
+            function () {
 
-            window.location.href =
-                "mureed.html?id=" +
-                encodeURIComponent(
-                    mureed.Appointment_Id
-                );
+                window.location.href =
+                    "mureed.html?id=" +
+                    encodeURIComponent(
+                        mureed.Appointment_Id
+                    );
 
-        };
+            };
+
+    }
 
 
 
@@ -513,29 +571,49 @@ function selectMureed(mureed) {
         );
 
 
-    confirmationCard.style.display =
-        "block";
+    if (confirmationCard) {
+
+        confirmationCard.style.display =
+            "block";
+
+    }
 
 
-    document.getElementById(
-        "confirmationMureedName"
-    ).textContent =
-        "👤 Mureed: " +
-        (
-            mureed.Full_Name ||
-            "-"
+    const confirmationName =
+        document.getElementById(
+            "confirmationMureedName"
         );
 
 
-    document.getElementById(
-        "confirmationMobile"
-    ).textContent =
-        "📱 WhatsApp: " +
-        (
-            mureed.Whatsapp ||
-            mureed.Mobile ||
-            "-"
+    if (confirmationName) {
+
+        confirmationName.textContent =
+            "👤 Mureed: " +
+            (
+                mureed.Full_Name ||
+                "-"
+            );
+
+    }
+
+
+    const confirmationMobile =
+        document.getElementById(
+            "confirmationMobile"
         );
+
+
+    if (confirmationMobile) {
+
+        confirmationMobile.textContent =
+            "📱 WhatsApp: " +
+            (
+                mureed.Whatsapp ||
+                mureed.Mobile ||
+                "-"
+            );
+
+    }
 
 
 
@@ -543,11 +621,19 @@ function selectMureed(mureed) {
     // EXISTING DATE
     // ==================================================
 
-    document.getElementById(
-        "appointmentDate"
-    ).value =
-        mureed.Appointment_Date ||
-        "";
+    const dateInput =
+        document.getElementById(
+            "appointmentDate"
+        );
+
+
+    if (dateInput) {
+
+        dateInput.value =
+            mureed.Appointment_Date ||
+            "";
+
+    }
 
 
 
@@ -555,11 +641,19 @@ function selectMureed(mureed) {
     // EXISTING TIME
     // ==================================================
 
-    document.getElementById(
-        "appointmentTime"
-    ).value =
-        mureed.Appointment_Time ||
-        "";
+    const timeInput =
+        document.getElementById(
+            "appointmentTime"
+        );
+
+
+    if (timeInput) {
+
+        timeInput.value =
+            mureed.Appointment_Time ||
+            "";
+
+    }
 
 }
 
@@ -569,11 +663,15 @@ function selectMureed(mureed) {
 // CONFIRM BUTTON
 // ======================================================
 
-document
-    .getElementById(
+const confirmButton =
+    document.getElementById(
         "confirmAppointmentBtn"
-    )
-    .addEventListener(
+    );
+
+
+if (confirmButton) {
+
+    confirmButton.addEventListener(
         "click",
         function () {
 
@@ -581,6 +679,8 @@ document
 
         }
     );
+
+}
 
 
 
@@ -654,7 +754,7 @@ async function confirmAppointment() {
         );
 
 
-    // India number
+    // INDIA NUMBER
     if (
         whatsappNumber.length === 10
     ) {
@@ -669,7 +769,7 @@ async function confirmAppointment() {
 
     if (
         !whatsappNumber ||
-        whatsappNumber.length < 10
+        whatsappNumber.length < 12
     ) {
 
         alert(
@@ -699,49 +799,171 @@ async function confirmAppointment() {
 
 
     // ==================================================
-    // MESSAGE
+    // SAVE APPOINTMENT FIRST
+    // ==================================================
+
+    const { error: updateError } =
+        await supabaseClient
+
+            .from("clients")
+
+            .update({
+
+                Appointment_Date:
+                    date,
+
+                Appointment_Time:
+                    time,
+
+                Appointment_Status:
+                    "Confirmed"
+
+            })
+
+            .eq(
+                "Appointment_Id",
+                selectedMureed.Appointment_Id
+            );
+
+
+    if (updateError) {
+
+        console.error(
+            "APPOINTMENT UPDATE ERROR:",
+            updateError
+        );
+
+
+        alert(
+            "Appointment save nahi hua.\n\n" +
+            "Code: " +
+            (updateError.code || "") +
+            "\n\nMessage: " +
+            (updateError.message || "")
+        );
+
+        return;
+    }
+
+
+
+    // ==================================================
+    // UPDATE LOCAL OBJECT
+    // ==================================================
+
+    selectedMureed.Appointment_Date =
+        date;
+
+    selectedMureed.Appointment_Time =
+        time;
+
+    selectedMureed.Appointment_Status =
+        "Confirmed";
+
+
+
+    // ==================================================
+    // MESSAGE DATA
     // ==================================================
 
     const mureedName =
         selectedMureed.Full_Name ||
-        "there";
+        "Dear Mureed";
 
 
-    const message =
+    const appointmentId =
+        selectedMureed.Appointment_Id ||
+        "-";
 
-        "Hello! Welcome to " +
-        "Hussain Bapu's Wellness.\n\n" +
 
-        "Dear " +
-        mureedName +
-        ",\n\n" +
-
-        "Your appointment has been confirmed.\n\n" +
-
-        "📅 Date: " +
-        formattedDate +
-        "\n" +
-
-        "🕐 Time: " +
-        formattedTime +
-        "\n\n" +
-
-        "For regular consultation, " +
-        "please use your scheduled appointment " +
-        "for an online consultation or visit " +
-        "our physical Darbar.\n\n" +
-
-        "For emergencies, please contact us " +
-        "by phone only when absolutely necessary.\n\n" +
-
-        "Thank you,\n" +
-
-        "Hussain Bapu's Wellness";
+    const consultationType =
+        selectedMureed.Consultation_Type ||
+        "Consultation";
 
 
 
     // ==================================================
-    // WHATSAPP
+    // PREMIUM WHATSAPP MESSAGE
+    // ==================================================
+
+    const message =
+
+        "✨ *" +
+        BRAND_NAME +
+        "* ✨\n\n" +
+
+        "━━━━━━━━━━━━━━━━━━\n" +
+
+        "🌿 *APPOINTMENT CONFIRMED*\n" +
+
+        "━━━━━━━━━━━━━━━━━━\n\n" +
+
+        "Dear *" +
+        mureedName +
+        "*,\n\n" +
+
+        "Thank you for choosing our wellness and heritage services.\n\n" +
+
+        "Your consultation appointment has been successfully confirmed.\n\n" +
+
+        "📋 *APPOINTMENT DETAILS*\n\n" +
+
+        "🆔 Appointment ID: *" +
+        appointmentId +
+        "*\n" +
+
+        "📅 Date: *" +
+        formattedDate +
+        "*\n" +
+
+        "⏰ Time: *" +
+        formattedTime +
+        "*\n" +
+
+        "💬 Consultation: *" +
+        consultationType +
+        "*\n\n" +
+
+        "━━━━━━━━━━━━━━━━━━\n\n" +
+
+        "📍 *VISIT / CONSULTATION*\n\n" +
+
+        "For an *Online Consultation*, please be available at your scheduled time.\n\n" +
+
+        "For a *Physical Darbar Visit*, kindly visit us at the scheduled time.\n\n" +
+
+        "📍 Location:\n" +
+        GOOGLE_MAPS_URL +
+        "\n\n" +
+
+        "━━━━━━━━━━━━━━━━━━\n\n" +
+
+        "⚠️ *IMPORTANT*\n\n" +
+
+        "For urgent or emergency situations, please contact us by phone only when necessary.\n\n" +
+
+        "For regular consultations, kindly book an appointment through our website and follow the scheduled appointment time.\n\n" +
+
+        "🌐 Website:\n" +
+        WEBSITE_URL +
+        "\n\n" +
+
+        "━━━━━━━━━━━━━━━━━━\n\n" +
+
+        "🤝 Thank you for choosing\n\n" +
+
+        "*" +
+        BRAND_NAME +
+        "*\n\n" +
+
+        "🌿 *Traditional Wisdom • Trusted Care • Modern Wellness*\n\n" +
+
+        "━━━━━━━━━━━━━━━━━━";
+
+
+
+    // ==================================================
+    // WHATSAPP URL
     // ==================================================
 
     const whatsappUrl =
@@ -758,6 +980,17 @@ async function confirmAppointment() {
 
 
 
+    // ==================================================
+    // SUCCESS MESSAGE
+    // ==================================================
+
+    console.log(
+        "Appointment confirmed:",
+        selectedMureed.Appointment_Id
+    );
+
+
+    // OPEN WHATSAPP
     window.location.href =
         whatsappUrl;
 
@@ -866,25 +1099,4 @@ function escapeHtml(
 
         .replace(
             />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-
-// ======================================================
-// START
-// ======================================================
-
-loadMureeds();
+ 
