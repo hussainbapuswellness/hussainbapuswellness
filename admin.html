@@ -4,20 +4,11 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<title>Admin Dashboard | Hussain Bapu's Wellness</title>
 
-<title>
-    Admin Dashboard | Hussain Bapu's Wellness
-</title>
-
-<link
-    rel="stylesheet"
-    href="style.css"
->
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -29,17 +20,12 @@
 
 <div class="container">
 
-<h1>
-    🌿 HUSSAIN BAPU'S WELLNESS
-</h1>
+<h1>🕌 HUSSAIN BAPU'S WELLNESS</h1>
 
-<h2>
-    Admin Dashboard
-</h2>
+<h2>Admin Dashboard</h2>
 
 <p>
-    HUSSAIN BAPU'S WELLNESS &amp;
-    BABA FARID JI (R.A.) HERITAGE
+HUSSAIN BAPU'S WELLNESS & BABA FARID JI (R.A) HERITAGE
 </p>
 
 </div>
@@ -60,18 +46,22 @@
 
 <div class="card">
 
-<h2>
-    📊 Mureed Dashboard
-</h2>
+<h2>📊 Mureed Dashboard</h2>
 
 <p>
-    Total Mureeds:
-    <strong id="totalMureeds">0</strong>
+Total Mureeds :
+<strong id="totalMureeds">0</strong>
 </p>
 
 <p>
-    🔔 Pending Appointments:
-    <strong id="pendingAppointments">0</strong>
+🔔 Pending Appointments :
+<strong id="pendingAppointments">0</strong>
+</p>
+
+<p
+id="adminLoadStatus"
+style="font-size:13px;">
+Loading dashboard...
 </p>
 
 </div>
@@ -84,16 +74,13 @@
 
 <div class="card">
 
-<h2>
-    🔍 Search Mureed
-</h2>
+<h2>🔍 Search Mureed</h2>
 
 <input
-    type="text"
-    id="searchBox"
-    placeholder="Search Name / Mobile / Appointment ID"
-    autocomplete="off"
->
+type="text"
+id="searchBox"
+placeholder="Search Name / Mobile / Appointment ID"
+autocomplete="off">
 
 </div>
 
@@ -105,42 +92,28 @@
 
 <div class="card">
 
-<h2>
-    📅 Mureed Appointment List
-</h2>
-
+<h2>📅 Mureed Appointment List</h2>
 
 <div style="overflow-x:auto;">
 
 <table
-    id="mureedsTable"
-    border="1"
-    width="100%"
->
+id="mureedsTable"
+border="1"
+width="100%">
 
 <thead>
 
 <tr>
 
-<th>
-    Appointment ID
-</th>
+<th>Appointment ID</th>
 
-<th>
-    Full Name
-</th>
+<th>Full Name</th>
 
-<th>
-    Mobile
-</th>
+<th>Mobile</th>
 
-<th>
-    Status
-</th>
+<th>Status</th>
 
-<th>
-    Action
-</th>
+<th>Action</th>
 
 </tr>
 
@@ -151,10 +124,7 @@
 
 <tr>
 
-<td
-    colspan="5"
-    style="text-align:center;"
->
+<td colspan="5">
 
 Loading appointments...
 
@@ -178,15 +148,12 @@ Loading appointments...
 
 <div class="card">
 
-<h2>
-    👤 Selected Mureed
-</h2>
-
+<h2>👤 Selected Mureed</h2>
 
 <div id="selectedMureedBox">
 
 <p>
-    Select a Mureed from the appointment list.
+Select a Mureed from the Appointment List.
 </p>
 
 </div>
@@ -200,95 +167,63 @@ Loading appointments...
 ================================================== -->
 
 <div
-    class="card"
-    id="confirmationCard"
-    style="display:none;"
->
+class="card"
+id="confirmationCard"
+style="display:none;">
 
-<h2>
-    ✅ Confirm Appointment
-</h2>
+<h2>✅ Confirm Appointment</h2>
 
 
 <p id="confirmationMureedName">
-    👤 Mureed:
+👤 Mureed:
 </p>
 
 
 <p id="confirmationMobile">
-    📱 WhatsApp:
+📱 WhatsApp:
 </p>
-
 
 
 <label for="appointmentDate">
-    📅 Appointment Date
+
+📅 Appointment Date
+
 </label>
 
 
-<br>
-
-
 <input
-    type="date"
-    id="appointmentDate"
->
+type="date"
+id="appointmentDate">
 
 
-
-<br><br>
-
+<br>
+<br>
 
 
 <label for="appointmentTime">
-    🕐 Appointment Time
+
+🕐 Appointment Time
+
 </label>
 
 
+<input
+type="time"
+id="appointmentTime">
+
+
+<br>
 <br>
 
 
-<input
-    type="time"
-    id="appointmentTime"
->
-
-
-
-<br><br>
-
-
-
 <button
-    id="confirmAppointmentBtn"
-    class="gold-btn"
-    type="button"
->
+id="confirmAppointmentBtn"
+class="gold-btn">
 
-📱 Confirm &amp; Open WhatsApp
+📲 Confirm & Open WhatsApp
 
 </button>
 
-
-<p
-    style="
-        margin-top:15px;
-        font-size:13px;
-    "
->
-
-<strong>
-    Important:
-</strong>
-
-For regular consultation, please use your
-scheduled appointment for online consultation
-or visit the physical Darbar.
-
-For emergencies, please call only when
-absolutely necessary.
-
-</p>
 
 </div>
 
@@ -300,30 +235,19 @@ absolutely necessary.
 
 <div class="card">
 
-<h2>
-    🩺 Mureed Treatment History
-</h2>
-
+<h2>🩺 Mureed Treatment History</h2>
 
 <p>
-    Select any Mureed from the Appointment List
-    to view or add:
+Select any Mureed from the Appointment List to view or add:
 </p>
-
 
 <ul>
 
-<li>
-    🧿 Taweez
-</li>
+<li>🧿 Taweez</li>
 
-<li>
-    🌿 Herbal Treatment
-</li>
+<li>🌿 Herbal Treatment</li>
 
-<li>
-    📿 Wazifa
-</li>
+<li>📿 Wazifa</li>
 
 </ul>
 
@@ -332,11 +256,9 @@ absolutely necessary.
 
 
 <button
-    id="openMureedBtn"
-    class="gold-btn"
-    type="button"
-    disabled
->
+id="openMureedBtn"
+class="gold-btn"
+disabled>
 
 📂 Open Selected Mureed
 
@@ -353,23 +275,14 @@ absolutely necessary.
 
 
 <!-- ==================================================
-     SUPABASE
+     SCRIPTS
 ================================================== -->
 
-<script
-    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script src="supabase.js"></script>
 
-<script
-    src="supabase.js"
-></script>
-
-
-<script
-    src="admin.js"
-></script>
-
+<script src="admin.js"></script>
 
 
 </body>
