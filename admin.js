@@ -1163,7 +1163,7 @@ async function confirmAppointment() {
 
 
     // --------------------------------------------------
-    // GET WHATSAPP NUMBER
+    // GET MUREED WHATSAPP NUMBER
     // --------------------------------------------------
 
     let whatsappNumber =
@@ -1245,7 +1245,7 @@ async function confirmAppointment() {
 
 
     // ==================================================
-    // SAVE APPOINTMENT IN SUPABASE
+    // PREPARE UPDATE
     // ==================================================
 
     const updateData = {
@@ -1265,21 +1265,28 @@ async function confirmAppointment() {
     };
 
 
+    // ==================================================
+    // DISABLE BUTTON WHILE SAVING
+    // ==================================================
+
+    if (confirmAppointmentButton) {
+
+        confirmAppointmentButton.disabled =
+            true;
+
+        confirmAppointmentButton.textContent =
+            "Saving Appointment...";
+
+    }
+
+
+    // ==================================================
+    // SAVE APPOINTMENT
+    // ==================================================
+
     try {
 
-        // ------------------------------------------------
-        // UPDATE CLIENT
-        // ------------------------------------------------
-        //
-        // IMPORTANT:
-        // .single() intentionally NOT used here.
-        //
-        // Supabase returns an array from .select().
-        // We safely handle that array below.
-        // ------------------------------------------------
-
         const {
-            data: updatedMureeds,
             error: updateError
         } = await supabaseClient
 
@@ -1292,9 +1299,7 @@ async function confirmAppointment() {
             .eq(
                 "Appointment_Id",
                 selectedMureed.Appointment_Id
-            )
-
-            .select();
+            );
 
 
         // ------------------------------------------------
@@ -1309,30 +1314,23 @@ async function confirmAppointment() {
             );
 
 
+            if (confirmAppointmentButton) {
+
+                confirmAppointmentButton.disabled =
+                    false;
+
+                confirmAppointmentButton.textContent =
+                    "📲 Confirm & Open WhatsApp";
+
+            }
+
+
             alert(
                 "Appointment could not be saved.\n\n" +
-                "Error Code: " +
-                (
-                    updateError.code ||
-                    ""
-                ) +
-                "\n\n" +
                 "Error: " +
                 (
                     updateError.message ||
-                    "Unknown error"
-                ) +
-                "\n\n" +
-                "Details: " +
-                (
-                    updateError.details ||
-                    ""
-                ) +
-                "\n\n" +
-                "Hint: " +
-                (
-                    updateError.hint ||
-                    ""
+                    "Unknown Supabase error"
                 )
             );
 
@@ -1342,54 +1340,36 @@ async function confirmAppointment() {
         }
 
 
-        // ------------------------------------------------
-        // CHECK UPDATED ROW
-        // ------------------------------------------------
-
-        if (
-            !Array.isArray(
-                updatedMureeds
-            ) ||
-            updatedMureeds.length === 0
-        ) {
-
-            console.error(
-                "NO CLIENT ROW RETURNED AFTER UPDATE:",
-                updatedMureeds
-            );
-
-
-            alert(
-                "Appointment could not be saved.\n\n" +
-                "No matching client record was returned by Supabase.\n\n" +
-                "Please check the Appointment ID and Supabase update policy."
-            );
-
-
-            return;
-
-        }
-
-
-        // ------------------------------------------------
-        // GET UPDATED MUREED
-        // ------------------------------------------------
-
-        const updatedMureed =
-            updatedMureeds[0];
-
-
-        // ------------------------------------------------
+        // ==================================================
         // UPDATE LOCAL SELECTED MUREED
-        // ------------------------------------------------
+        // ==================================================
 
         selectedMureed =
-            updatedMureed;
+            {
+                ...selectedMureed,
+
+                Appointment_Status:
+                    "Confirmed",
+
+                Appointment_Date:
+                    date,
+
+                Appointment_Time:
+                    time,
+
+                Updated_At:
+                    new Date().toISOString()
+
+            };
 
 
-        // ------------------------------------------------
+        // ==================================================
         // UPDATE LOCAL ARRAY
-        // ------------------------------------------------
+        // ==================================================
+
+        const selectedAppointmentId =
+            selectedMureed.Appointment_Id;
+
 
         const index =
             allMureeds.findIndex(
@@ -1397,7 +1377,7 @@ async function confirmAppointment() {
 
                     return (
                         item.Appointment_Id ===
-                        updatedMureed.Appointment_Id
+                        selectedAppointmentId
                     );
 
                 }
@@ -1407,9 +1387,223 @@ async function confirmAppointment() {
         if (index !== -1) {
 
             allMureeds[index] =
-                updatedMureed;
+                {
+                    ...allMureeds[index],
+
+                    ...updateData
+
+                };
 
         }
+
+
+        // ==================================================
+        // UPDATE PENDING COUNTER
+        // ==================================================
+
+        const pendingMureeds =
+            allMureeds.filter(
+                function (mureed) {
+
+                    return String(
+                        mureed.Appointment_Status || ""
+                    )
+                    .trim()
+                    .toLowerCase()
+                    === "pending";
+
+                }
+            );
+
+
+        const pendingElement =
+            getElement(
+                "pendingAppointments"
+            );
+
+
+        if (pendingElement) {
+
+            pendingElement.textContent =
+                pendingMureeds.length;
+
+        }
+
+
+        // ==================================================
+        // REFRESH SELECTED MUREED BOX
+        // ==================================================
+
+        const selectedBox =
+            getElement(
+                "selectedMureedBox"
+            );
+
+
+        if (selectedBox) {
+
+            selectedBox.innerHTML = `
+
+                <div
+                    style="
+                        padding:15px;
+                        border-radius:10px;
+                    "
+                >
+
+                    <p>
+                        👤
+                        <strong>Name:</strong>
+                        ${escapeHtml(
+                            mureedName
+                        )}
+                    </p>
+
+                    <p>
+                        📅
+                        <strong>Appointment ID:</strong>
+                        ${escapeHtml(
+                            safeText(
+                                selectedMureed.Appointment_Id
+                            )
+                        )}
+                    </p>
+
+                    <p>
+                        📱
+                        <strong>Mobile:</strong>
+                        ${escapeHtml(
+                            safeText(
+                                selectedMureed.Mobile
+                            )
+                        )}
+                    </p>
+
+                    <p>
+                        💬
+                        <strong>WhatsApp:</strong>
+                        ${escapeHtml(
+                            safeText(
+                                selectedMureed.Whatsapp ||
+                                selectedMureed.Mobile
+                            )
+                        )}
+                    </p>
+
+                    <p>
+                        📌
+                        <strong>Status:</strong>
+                        <strong>Confirmed</strong>
+                    </p>
+
+                    <p>
+                        📅
+                        <strong>Date:</strong>
+                        ${escapeHtml(
+                            formattedDate
+                        )}
+                    </p>
+
+                    <p>
+                        🕐
+                        <strong>Time:</strong>
+                        ${escapeHtml(
+                            formattedTime
+                        )}
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+
+        // ==================================================
+        // UPDATE CONFIRMATION CARD
+        // ==================================================
+
+        const confirmationName =
+            getElement(
+                "confirmationMureedName"
+            );
+
+
+        if (confirmationName) {
+
+            confirmationName.textContent =
+                "👤 Mureed: " +
+                mureedName;
+
+        }
+
+
+        const confirmationMobile =
+            getElement(
+                "confirmationMobile"
+            );
+
+
+        if (confirmationMobile) {
+
+            confirmationMobile.textContent =
+                "📱 WhatsApp: " +
+                safeText(
+                    selectedMureed.Whatsapp ||
+                    selectedMureed.Mobile
+                );
+
+        }
+
+
+        // ==================================================
+        // STORE CONFIRMATION DATA
+        // ==================================================
+
+        window.__lastAppointmentConfirmation = {
+
+            name:
+                mureedName,
+
+            appointmentId:
+                safeText(
+                    selectedMureed.Appointment_Id
+                ),
+
+            date:
+                formattedDate,
+
+            time:
+                formattedTime,
+
+            whatsapp:
+                whatsappNumber
+
+        };
+
+
+        // ==================================================
+        // SUCCESS MESSAGE
+        // ==================================================
+
+        if (confirmAppointmentButton) {
+
+            confirmAppointmentButton.textContent =
+                "Opening WhatsApp...";
+
+        }
+
+
+        // ==================================================
+        // OPEN WHATSAPP
+        // ==================================================
+
+        openAppointmentWhatsApp(
+            whatsappNumber,
+            mureedName,
+            formattedDate,
+            formattedTime
+        );
 
 
     }
@@ -1422,6 +1616,17 @@ async function confirmAppointment() {
         );
 
 
+        if (confirmAppointmentButton) {
+
+            confirmAppointmentButton.disabled =
+                false;
+
+            confirmAppointmentButton.textContent =
+                "📲 Confirm & Open WhatsApp";
+
+        }
+
+
         alert(
             "Something went wrong while saving appointment.\n\n" +
             "Error: " +
@@ -1431,224 +1636,10 @@ async function confirmAppointment() {
             )
         );
 
-
-        return;
-
     }
 
-
-    // ==================================================
-    // UPDATE DASHBOARD COUNTERS
-    // ==================================================
-
-    const pendingMureeds =
-        allMureeds.filter(
-            function (mureed) {
-
-                return String(
-                    mureed.Appointment_Status || ""
-                )
-                .trim()
-                .toLowerCase()
-                === "pending";
-
-            }
-        );
-
-
-    const pendingElement =
-        getElement(
-            "pendingAppointments"
-        );
-
-
-    if (pendingElement) {
-
-        pendingElement.textContent =
-            pendingMureeds.length;
-
-    }
-
-
-    // ==================================================
-    // REFRESH SELECTED MUREED DETAILS
-    // ==================================================
-
-    const selectedBox =
-        getElement(
-            "selectedMureedBox"
-        );
-
-
-    if (selectedBox) {
-
-        selectedBox.innerHTML = `
-
-            <div
-                style="
-                    padding:15px;
-                    border-radius:10px;
-                "
-            >
-
-                <p>
-                    👤
-                    <strong>Name:</strong>
-                    ${escapeHtml(
-                        mureedName
-                    )}
-                </p>
-
-                <p>
-                    📅
-                    <strong>Appointment ID:</strong>
-                    ${escapeHtml(
-                        safeText(
-                            selectedMureed.Appointment_Id
-                        )
-                    )}
-                </p>
-
-                <p>
-                    📱
-                    <strong>Mobile:</strong>
-                    ${escapeHtml(
-                        safeText(
-                            selectedMureed.Mobile
-                        )
-                    )}
-                </p>
-
-                <p>
-                    💬
-                    <strong>WhatsApp:</strong>
-                    ${escapeHtml(
-                        safeText(
-                            selectedMureed.Whatsapp ||
-                            selectedMureed.Mobile
-                        )
-                    )}
-                </p>
-
-                <p>
-                    📌
-                    <strong>Status:</strong>
-                    <strong>Confirmed</strong>
-                </p>
-
-                <p>
-                    📅
-                    <strong>Date:</strong>
-                    ${escapeHtml(
-                        formattedDate
-                    )}
-                </p>
-
-                <p>
-                    🕐
-                    <strong>Time:</strong>
-                    ${escapeHtml(
-                        formattedTime
-                    )}
-                </p>
-
-            </div>
-
-        `;
-
-    }
-
-
-    // ==================================================
-    // UPDATE CONFIRMATION CARD
-    // ==================================================
-
-    const confirmationName =
-        getElement(
-            "confirmationMureedName"
-        );
-
-
-    if (confirmationName) {
-
-        confirmationName.textContent =
-            "👤 Mureed: " +
-            mureedName;
-
-    }
-
-
-    const confirmationMobile =
-        getElement(
-            "confirmationMobile"
-        );
-
-
-    if (confirmationMobile) {
-
-        confirmationMobile.textContent =
-            "📱 WhatsApp: " +
-            safeText(
-                selectedMureed.Whatsapp ||
-                selectedMureed.Mobile
-            );
-
-    }
-
-
-    // ==================================================
-    // DISABLE BUTTON TEMPORARILY
-    // ==================================================
-
-    if (confirmAppointmentButton) {
-
-        confirmAppointmentButton.disabled =
-            true;
-
-        confirmAppointmentButton.textContent =
-            "Preparing WhatsApp...";
-
-    }
-
-
-    // ==================================================
-    // STORE CONFIRMATION DATA
-    // ==================================================
-
-    window.__lastAppointmentConfirmation = {
-
-        name:
-            mureedName,
-
-        appointmentId:
-            safeText(
-                selectedMureed.Appointment_Id
-            ),
-
-        date:
-            formattedDate,
-
-        time:
-            formattedTime,
-
-        whatsapp:
-            whatsappNumber
-
-    };
-
-
-    // ==================================================
-    // CONTINUE TO WHATSAPP
-    // ==================================================
-
-    openAppointmentWhatsApp(
-        whatsappNumber,
-        mureedName,
-        formattedDate,
-        formattedTime
-    );
-
-        }
+}
+                
         
 // ======================================================
 // PART 4 / 5
