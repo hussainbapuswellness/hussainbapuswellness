@@ -540,34 +540,36 @@ async function saveTreatment() {
 
             .insert([{
 
-                // Appointment ID is the main link
-                Appointment_Id:
-                    appointmentId,
+    // Permanent Mureed UUID
+    Mureed_Id:
+        currentMureed.id,
 
-                // Keep Mureed ID also
-                // for future use
-                Mureed_Id:
-                    currentMureed["I'd"],
+    // Appointment reference
+    Appointment_Id:
+        appointmentId,
 
-                Treatment_Type:
-                    treatmentType,
+    // Treatment information
+    Treatment_Type:
+        treatmentType,
 
-                Category:
-                    category,
+    Category:
+        category,
 
-                Item_Name:
-                    itemName,
+    Item_Name:
+        itemName,
 
-                Notes:
-                    notes,
+    Notes:
+        notes,
 
-                Image_Url:
-                    null,
+    // Image will be added in the next stage
+    Image_Url:
+        null,
 
-                Print_Crop:
-                    null
+    // Print crop will be added later
+    Print_Crop:
+        null
 
-            }])
+}])
 
             .select()
             .single();
