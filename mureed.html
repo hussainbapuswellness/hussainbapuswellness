@@ -9,98 +9,14 @@
     content="width=device-width, initial-scale=1.0"
 >
 
-<title>Mureed Details | Hussain Bapu's Wellness</title>
+<title>
+Mureed Details | Hussain Bapu's Wellness
+</title>
 
 <link
     rel="stylesheet"
     href="style.css"
 >
-
-<style>
-
-.taweez-library-box {
-    margin-top: 15px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-}
-
-.taweez-list {
-    display: grid;
-    grid-template-columns:
-        repeat(auto-fit, minmax(150px, 1fr));
-    gap: 12px;
-    margin-top: 15px;
-}
-
-.taweez-item {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 10px;
-    cursor: pointer;
-    background: #fff;
-}
-
-.taweez-item img {
-    width: 100%;
-    height: 150px;
-    object-fit: contain;
-    border-radius: 8px;
-}
-
-.taweez-item strong {
-    display: block;
-    margin-top: 8px;
-}
-
-.taweez-preview {
-    margin-top: 15px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-}
-
-.taweez-preview img {
-    max-width: 250px;
-    max-height: 300px;
-    object-fit: contain;
-    display: block;
-    margin: 10px auto;
-}
-
-.print-area {
-    display: none;
-}
-
-@media print {
-
-    body * {
-        visibility: hidden;
-    }
-
-    .print-area,
-    .print-area * {
-        visibility: visible;
-    }
-
-    .print-area {
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        text-align: center;
-    }
-
-    .print-area img {
-        max-width: 4in;
-        max-height: 4in;
-        object-fit: contain;
-    }
-
-}
-
-</style>
 
 </head>
 
@@ -124,9 +40,11 @@ Baba Farid Ji (R.A.) Heritage
 </header>
 
 
+
 <section>
 
 <div class="container">
+
 
 
 <!-- ==================================================
@@ -135,7 +53,10 @@ Baba Farid Ji (R.A.) Heritage
 
 <div class="card">
 
-<h2>Mureed Information</h2>
+<h2>
+Mureed Information
+</h2>
+
 
 <table id="mureedTable">
 
@@ -200,7 +121,7 @@ Baba Farid Ji (R.A.) Heritage
 </tr>
 
 <tr>
-<td><b>Problem (Short)</b></td>
+<td><b>Problem</b></td>
 <td id="Problem_Short_Description"></td>
 </tr>
 
@@ -214,7 +135,9 @@ Baba Farid Ji (R.A.) Heritage
 </div>
 
 
+
 <br>
+
 
 
 <!-- ==================================================
@@ -223,13 +146,19 @@ Baba Farid Ji (R.A.) Heritage
 
 <div class="card">
 
-<h2>🩺 Mureed Treatment History</h2>
+<h2>
+🩺 Mureed Treatment History
+</h2>
+
 
 <div id="treatmentHistory">
 
-<p>No Treatment Added Yet</p>
+<p>
+No Treatment Added Yet.
+</p>
 
 </div>
+
 
 <br>
 
@@ -245,8 +174,9 @@ Baba Farid Ji (R.A.) Heritage
 </button>
 
 
+
 <!-- ==================================================
-     TREATMENT FORM
+     ADD TREATMENT FORM
 ================================================== -->
 
 <div
@@ -257,145 +187,197 @@ Baba Farid Ji (R.A.) Heritage
     "
 >
 
-<h3>➕ Add New Treatment</h3>
 
+<h3>
+➕ Add New Treatment
+</h3>
 
-<label>Treatment Type</label>
-
-<select id="Treatment_Type">
-
-<option value="">
-Select Treatment Type
-</option>
-
-<option value="Taweez">
-🧿 Taweez
-</option>
-
-<option value="Herbal Treatment">
-🌿 Herbal Treatment
-</option>
-
-<option value="Wazifa">
-📿 Wazifa
-</option>
-
-</select>
-
-
-<br>
-<br>
-
-
-<label>Category</label>
-
-<input
-    type="text"
-    id="Category"
-    placeholder="Example: Bimari / Barkat / Sehat / Hifazat"
->
 
 
 <!-- ==================================================
-     SIMPLE TAWEZ LIBRARY
+     TAWEez
 ================================================== -->
 
 <div
-    id="taweezLibrary"
-    class="taweez-library-box"
-    style="display:none;"
+    class="treatment-section"
 >
 
-<h3>🧿 Select Taweez</h3>
-
-<select id="taweezCategory">
-
-<option value="">
-Select Category
-</option>
-
-<option value="Bimari">
-Bimari
-</option>
-
-<option value="Barkat">
-Barkat
-</option>
-
-<option value="Sehat">
-Sehat
-</option>
-
-<option value="Hifazat">
-Hifazat
-</option>
-
-</select>
+<h3>
+🧿 Taweez
+</h3>
 
 
-<div
-    id="taweezList"
-    class="taweez-list"
-></div>
-
-
-<div
-    id="taweezPreview"
-    class="taweez-preview"
-    style="display:none;"
->
-
-<strong id="selectedTaweezName"></strong>
-
-<img
-    id="selectedTaweezImage"
-    src=""
-    alt="Selected Taweez"
->
-
-
-<button
-    id="printTaweezBtn"
-    class="btn gold"
-    type="button"
->
-
-🖨️ Print Taweez
-
-</button>
-
-</div>
-
-</div>
-
-
-<br>
-
-
-<label>Item Name</label>
+<label>
+Taweez Name
+</label>
 
 <input
     type="text"
-    id="Item_Name"
-    placeholder="Enter Treatment / Taweez Name"
+    id="Taweez_Name"
+    placeholder="Enter Taweez Name"
 >
 
 
-<br>
+<br><br>
+
+
+<button
+    id="selectTaweezBtn"
+    class="btn"
+    type="button"
+>
+
+🧿 Select Taweez
+
+</button>
+
+
+<div
+    id="selectedTaweez"
+    style="
+        margin-top:10px;
+    "
+>
+</div>
+
+
 <br>
 
 
-<label>Instructions / Notes</label>
+<label>
+Taweez Notes / Instructions
+</label>
 
 <textarea
-    id="Notes"
-    placeholder="Taweez kaise use karna hai / treatment instructions"
+    id="Taweez_Notes"
+    placeholder="How to use / wear / keep the Taweez..."
 ></textarea>
 
+</div>
+
+
 
 <br>
+
+
+
+<!-- ==================================================
+     HERBAL REMEDY
+================================================== -->
+
+<div
+    class="treatment-section"
+>
+
+<h3>
+🌿 Herbal Remedy
+</h3>
+
+
+<label>
+Remedy Name / Details
+</label>
+
+<input
+    type="text"
+    id="Herbal_Remedy"
+    placeholder="Enter Herbal Remedy"
+>
+
+
+<br><br>
+
+
+<label>
+Herbal Remedy Notes / Instructions
+</label>
+
+<textarea
+    id="Herbal_Notes"
+    placeholder="How to use, quantity, duration, etc."
+></textarea>
+
+</div>
+
+
+
 <br>
 
+
+
+<!-- ==================================================
+     WAZIFA
+================================================== -->
+
+<div
+    class="treatment-section"
+>
+
+<h3>
+📿 Wazifa
+</h3>
+
+
+<label>
+Wazifa Name / Details
+</label>
+
+<input
+    type="text"
+    id="Wazifa"
+    placeholder="Enter Wazifa"
+>
+
+
+<br><br>
+
+
+<label>
+Wazifa Notes / Instructions
+</label>
+
+<textarea
+    id="Wazifa_Notes"
+    placeholder="How many times, when, duration, etc."
+></textarea>
+
+</div>
+
+
+
+<br>
+
+
+
+<!-- ==================================================
+     ADDITIONAL NOTES
+================================================== -->
+
+<div
+    class="treatment-section"
+>
+
+<h3>
+📝 Additional Notes
+</h3>
+
+
+<textarea
+    id="Additional_Notes"
+    placeholder="Any other solution, guidance, item given, or important details..."
+></textarea>
+
+</div>
+
+
+
+<br>
+
+
+
+<!-- ==================================================
+     SAVE / CANCEL
+================================================== -->
 
 <button
     id="saveTreatmentBtn"
@@ -427,25 +409,6 @@ Cancel
 
 </section>
 
-
-<!-- ==================================================
-     PRINT AREA
-================================================== -->
-
-<div
-    id="printArea"
-    class="print-area"
->
-
-<h2 id="printTaweezTitle"></h2>
-
-<img
-    id="printTaweezImage"
-    src=""
-    alt="Taweez"
->
-
-</div>
 
 
 <script
