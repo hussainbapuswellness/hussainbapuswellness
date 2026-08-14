@@ -1,65 +1,21 @@
 // ======================================================
 // HUSSAIN BAPU'S WELLNESS
-// MUREED DETAILS + TREATMENT HISTORY
-// FINAL FRESH VERSION
+// MUREED.JS - PART 1
 // ======================================================
 
-
-// ======================================================
-// URL / APPOINTMENT
-// ======================================================
-
-const params = new URLSearchParams(
-    window.location.search
-);
-
+const params = new URLSearchParams(window.location.search);
 const appointmentId = params.get("id");
 
 let currentMureed = null;
-
 let selectedTaweezImageUrl = null;
 
 
 // ======================================================
-// SAFE HTML
+// SAFE TEXT
 // ======================================================
 
-function escapeHtml(value) {
-
-    const div = document.createElement("div");
-
-    div.textContent = value ?? "";
-
-    return div.innerHTML;
-}
-
-
-// ======================================================
-// FORMAT DATE
-// ======================================================
-
-function formatDate(value) {
-
-    if (!value) {
-        return "-";
-    }
-
-    const date = new Date(value);
-
-    if (isNaN(date.getTime())) {
-        return value;
-    }
-
-    return date.toLocaleString("en-IN", {
-        timeZone: "Asia/Kolkata",
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false
-    });
+function safeText(value) {
+    return value ?? "-";
 }
 
 
@@ -70,731 +26,72 @@ function formatDate(value) {
 async function loadMureed() {
 
     if (!appointmentId) {
-
         alert("Appointment ID missing.");
-
         return;
     }
 
-
-    const {
-        data,
-        error
-    } = await supabaseClient
-
+    const result = await supabaseClient
         .from("clients")
-
         .select("*")
-
-        .eq(
-            "Appointment_Id",
-            appointmentId
-        )
-
+        .eq("Appointment_Id", appointmentId)
         .single();
 
-
-    if (error) {
+    if (result.error) {
 
         console.error(
-            "MUREED LOAD ERROR:",
-            error
+            "Mureed Load Error:",
+            result.error
         );
 
         alert(
             "Mureed Not Found\n\n" +
-            "Code: " +
-            (error.code || "") +
-            "\n\nMessage: " +
-            (error.message || "")
+            result.error.message
         );
 
         return;
     }
 
-
-    currentMureed = data;
-
-
-    // ==================================================
-    // DISPLAY MUREED
-    // ==================================================
+    currentMureed = result.data;
 
     const fields = {
-
-        Appointment_Id:
-            data.Appointment_Id,
-
-        Full_Name:
-            data.Full_Name,
-
-        Mobile:
-            data.Mobile,
-
-        Whatsapp:
-            data.Whatsapp,
-
-        Email:
-            data.Email,
-
-        Age:
-            data.Age,
-
-        Gender:
-            data.Gender,
-
-        Country:
-            data.Country,
-
-        State:
-            data.State,
-
-        City:
-            data.City,
-
+        Appointment_Id: currentMureed.Appointment_Id,
+        Full_Name: currentMureed.Full_Name,
+        Mobile: currentMureed.Mobile,
+        Whatsapp: currentMureed.Whatsapp,
+        Email: currentMureed.Email,
+        Age: currentMureed.Age,
+        Gender: currentMureed.Gender,
+        Country: currentMureed.Country,
+        State: currentMureed.State,
+        City: currentMureed.City,
         Consultation_Type:
-            data.Consultation_Type,
-
+            currentMureed.Consultation_Type,
         Problem_Category:
-            data.Problem_Category,
-
+            currentMureed.Problem_Category,
         Problem_Short_Description:
-            data.Problem_Short_Description,
-
+            currentMureed.Problem_Short_Description,
         Appointment_Status:
-            data.Appointment_Status
+            currentMureed.Appointment_Status
     };
 
+    Object.keys(fields).forEach(function(id) {
 
-    Object.keys(fields).forEach(
-        function (id) {
+        const element =
+            document.getElementById(id);
 
-            const element =
-                document.getElementById(id);
-
-            if (element) {
-
-                element.textContent =
-                    fields[id] ?? "-";
-            }
+        if (element) {
+            element.textContent =
+                safeText(fields[id]);
         }
-    );
 
-
-    // ==================================================
-    // LOAD TREATMENT HISTORY
-    // ==================================================
+    });
 
     await loadTreatmentHistory();
 }
 
 
-
 // ======================================================
-// LOAD TREATMENT HISTORY
-// ======================================================
-
-async function loadTreatmentHistory() {
-
-    const historyBox =
-        document.getElementById(
-            "treatmentHistory"
-        );
-
-
-    if (!historyBox) {
-        return;
-    }
-
-
-    historyBox.innerHTML =
-        "<p>Loading Treatment History...</p>";
-
-
-    const {
-        data,
-        error
-    } = await supabaseClient
-
-        .from(
-            "Mureed_Treatment_History"
-        )
-
-        .select("*")
-
-        .eq(
-            "Appointment_Id",
-            appointmentId
-        )
-
-        .order(
-            "Created_At",
-            {
-                ascending: false
-            }
-        );
-
-
-    if (error) {
-
-        console.error(
-            "TREATMENT HISTORY ERROR:",
-            error
-        );
-
-
-        historyBox.innerHTML = `
-
-            <p>
-                Unable to load Treatment History.
-            </p>
-
-            <small>
-                ${escapeHtml(
-                    error.message || ""
-                )}
-            </small>
-
-        `;
-
-        return;
-    }
-
-
-    if (
-        !data ||
-        data.length === 0
-    ) {
-
-        historyBox.innerHTML =
-            "<p>No Treatment Added Yet.</p>";
-
-        return;
-    }
-
-
-    historyBox.innerHTML = "";
-
-
-    // ==================================================
-    // DISPLAY ALL RECORDS
-    // ==================================================
-
-    data.forEach(
-        function (treatment) {
-
-            const card =
-                document.createElement(
-                    "div"
-                );
-
-
-            card.className =
-                "card treatment-record";
-
-
-            card.style.marginBottom =
-                "20px";
-
-
-            card.style.padding =
-                "18px";
-
-
-            // ==================================================
-            // DATE / TIME
-            // ==================================================
-
-            const dateTitle =
-                document.createElement(
-                    "h3"
-                );
-
-
-            dateTitle.textContent =
-                "📅 " +
-                formatDate(
-                    treatment.Created_At
-                );
-
-
-            card.appendChild(
-                dateTitle
-            );
-
-
-            // ==================================================
-            // OLD RECORD FORMAT
-            // ==================================================
-
-            const hasOldRecord =
-                treatment.Treatment_Type ||
-                treatment.Category ||
-                treatment.Item_Name ||
-                treatment.Notes ||
-                treatment.Image_Url;
-
-
-            if (hasOldRecord) {
-
-                const oldTitle =
-                    document.createElement(
-                        "h4"
-                    );
-
-
-                oldTitle.textContent =
-                    treatment.Treatment_Type
-                        ? "🩺 " +
-                          treatment.Treatment_Type
-                        : "🩺 Treatment";
-
-
-                card.appendChild(
-                    oldTitle
-                );
-
-
-                if (
-                    treatment.Category
-                ) {
-
-                    const p =
-                        document.createElement(
-                            "p"
-                        );
-
-
-                    p.innerHTML =
-                        "<b>Category:</b> " +
-                        escapeHtml(
-                            treatment.Category
-                        );
-
-
-                    card.appendChild(p);
-                }
-
-
-                if (
-                    treatment.Item_Name
-                ) {
-
-                    const p =
-                        document.createElement(
-                            "p"
-                        );
-
-
-                    p.innerHTML =
-                        "<b>Name:</b> " +
-                        escapeHtml(
-                            treatment.Item_Name
-                        );
-
-
-                    card.appendChild(p);
-                }
-
-
-                if (
-                    treatment.Notes
-                ) {
-
-                    const p =
-                        document.createElement(
-                            "p"
-                        );
-
-
-                    p.innerHTML =
-                        "<b>Notes:</b> " +
-                        escapeHtml(
-                            treatment.Notes
-                        ).replace(
-                            /\n/g,
-                            "<br>"
-                        );
-
-
-                    card.appendChild(p);
-                }
-
-
-                if (
-                    treatment.Image_Url
-                ) {
-
-                    const image =
-                        document.createElement(
-                            "img"
-                        );
-
-
-                    image.src =
-                        treatment.Image_Url;
-
-
-                    image.alt =
-                        "Treatment Image";
-
-
-                    image.style.width =
-                        "180px";
-
-
-                    image.style.maxWidth =
-                        "100%";
-
-
-                    image.style.display =
-                        "block";
-
-
-                    image.style.marginTop =
-                        "10px";
-
-
-                    image.style.borderRadius =
-                        "10px";
-
-
-                    image.style.cursor =
-                        "pointer";
-
-
-                    card.appendChild(
-                        image
-                    );
-                }
-
-            }
-
-
-
-            // ==================================================
-            // NEW TAWEEZ
-            // ==================================================
-
-            if (
-                treatment.Taweez_Name ||
-                treatment.Taweez_Notes ||
-                treatment.Taweez_Image_Url
-            ) {
-
-                const title =
-                    document.createElement(
-                        "h4"
-                    );
-
-
-                title.textContent =
-                    "🧿 Taweez";
-
-
-                card.appendChild(
-                    title
-                );
-
-
-                if (
-                    treatment.Taweez_Name
-                ) {
-
-                    const p =
-                        document.createElement(
-                            "p"
-                        );
-
-
-                    p.innerHTML =
-                        "<b>Taweez Name:</b> " +
-                        escapeHtml(
-                            treatment.Taweez_Name
-                        );
-
-
-                    card.appendChild(p);
-                }
-
-
-                if (
-                    treatment.Taweez_Notes
-                ) {
-
-                    const p =
-                        document.createElement(
-                            "p"
-                        );
-
-
-                    p.innerHTML =
-                        "<b>Notes / Instructions:</b><br>" +
-                        escapeHtml(
-                            treatment.Taweez_Notes
-                        ).replace(
-                            /\n/g,
-                            "<br>"
-                        );
-
-
-                    card.appendChild(p);
-                }
-
-
-                if (
-                    treatment.Taweez_Image_Url
-                ) {
-
-                    const image =
-                        document.createElement(
-                            "img"
-                        );
-
-
-                    image.src =
-                        treatment.Taweez_Image_Url;
-
-
-                    image.alt =
-                        "Taweez";
-
-
-                    image.style.width =
-                        "180px";
-
-
-                    image.style.maxWidth =
-                        "100%";
-
-
-                    image.style.display =
-                        "block";
-
-
-                    image.style.marginTop =
-                        "10px";
-
-
-                    image.style.borderRadius =
-                        "10px";
-
-
-                    image.style.cursor =
-                        "pointer";
-
-
-                    card.appendChild(
-                        image
-                    );
-                }
-            }
-
-
-
-            // ==================================================
-            // HERBAL REMEDY
-            // ==================================================
-
-            if (
-                treatment.Herbal_Remedy ||
-                treatment.Herbal_Notes
-            ) {
-
-                const title =
-                    document.createElement(
-                        "h4"
-                    );
-
-
-                title.textContent =
-                    "🌿 Herbal Remedy";
-
-
-                card.appendChild(
-                    title
-                );
-
-
-                if (
-                    treatment.Herbal_Remedy
-                ) {
-
-                    const p =
-                        document.createElement(
-                            "p"
-                        );
-
-
-                    p.innerHTML =
-                        "<b>Remedy:</b> " +
-                        escapeHtml(
-                            treatment.Herbal_Remedy
-                        );
-
-
-                    card.appendChild(p);
-                }
-
-
-                if (
-                    treatment.Herbal_Notes
-                ) {
-
-                    const p =
-                        document.createElement(
-                            "p"
-                        );
-
-
-                    p.innerHTML =
-                        "<b>Notes / Instructions:</b><br>" +
-                        escapeHtml(
-                            treatment.Herbal_Notes
-                        ).replace(
-                            /\n/g,
-                            "<br>"
-                        );
-
-
-                    card.appendChild(p);
-                }
-            }
-
-
-
-            // ==================================================
-            // WAZIFA
-            // ==================================================
-
-            if (
-                treatment.Wazifa ||
-                treatment.Wazifa_Notes
-            ) {
-
-                const title =
-                    document.createElement(
-                        "h4"
-                    );
-
-
-                title.textContent =
-                    "📿 Wazifa";
-
-
-                card.appendChild(
-                    title
-                );
-
-
-                if (
-                    treatment.Wazifa
-                ) {
-
-                    const p =
-                        document.createElement(
-                            "p"
-                        );
-
-
-                    p.innerHTML =
-                        "<b>Wazifa:</b> " +
-                        escapeHtml(
-                            treatment.Wazifa
-                        );
-
-
-                    card.appendChild(p);
-                }
-
-
-                if (
-                    treatment.Wazifa_Notes
-                ) {
-
-                    const p =
-                        document.createElement(
-                            "p"
-                        );
-
-
-                    p.innerHTML =
-                        "<b>Notes / Instructions:</b><br>" +
-                        escapeHtml(
-                            treatment.Wazifa_Notes
-                        ).replace(
-                            /\n/g,
-                            "<br>"
-                        );
-
-
-                    card.appendChild(p);
-                }
-            }
-
-
-
-            // ==================================================
-            // ADDITIONAL NOTES
-            // ==================================================
-
-            if (
-                treatment.Additional_Notes
-            ) {
-
-                const title =
-                    document.createElement(
-                        "h4"
-                    );
-
-
-                title.textContent =
-                    "📝 Additional Notes";
-
-
-                card.appendChild(
-                    title
-                );
-
-
-                const p =
-                    document.createElement(
-                        "p"
-                    );
-
-
-                p.innerHTML =
-                    escapeHtml(
-                        treatment.Additional_Notes
-                    ).replace(
-                        /\n/g,
-                        "<br>"
-                    );
-
-
-                card.appendChild(
-                    p
-                );
-            }
-
-
-
-            // ==================================================
-            // ADD RECORD TO PAGE
-            // ==================================================
-
-            historyBox.appendChild(
-                card
-            );
-
-        }
-    );
-}
-
-
-
-// ======================================================
-// OPEN FORM
+// OPEN / CLOSE TREATMENT FORM
 // ======================================================
 
 function openTreatmentForm() {
@@ -804,27 +101,11 @@ function openTreatmentForm() {
             "treatmentForm"
         );
 
-
-    if (!form) {
-        return;
+    if (form) {
+        form.style.display = "block";
     }
-
-
-    form.style.display =
-        "block";
-
-
-    form.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
 }
 
-
-
-// ======================================================
-// CLOSE FORM
-// ======================================================
 
 function closeTreatmentForm() {
 
@@ -833,135 +114,380 @@ function closeTreatmentForm() {
             "treatmentForm"
         );
 
+    if (form) {
+        form.style.display = "none";
+    }
+}
 
-    if (!form) {
+
+// ======================================================
+// START BUTTONS
+// ======================================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const addButton =
+            document.getElementById(
+                "addTreatmentBtn"
+            );
+
+        const cancelButton =
+            document.getElementById(
+                "cancelTreatmentBtn"
+            );
+
+        const saveButton =
+            document.getElementById(
+                "saveTreatmentBtn"
+            );
+
+        if (addButton) {
+            addButton.addEventListener(
+                "click",
+                openTreatmentForm
+            );
+        }
+
+        if (cancelButton) {
+            cancelButton.addEventListener(
+                "click",
+                closeTreatmentForm
+            );
+        }
+
+        if (saveButton) {
+            saveButton.addEventListener(
+                "click",
+                saveTreatment
+            );
+        }
+
+        loadMureed();
+
+    }
+);
+// ======================================================
+// TREATMENT HISTORY
+// PART 2
+// ======================================================
+
+async function loadTreatmentHistory() {
+
+    const box =
+        document.getElementById(
+            "treatmentHistory"
+        );
+
+    if (!box) {
+        return;
+    }
+
+    box.innerHTML =
+        "<p>Loading Treatment History...</p>";
+
+
+    const result =
+        await supabaseClient
+
+            .from(
+                "Mureed_Treatment_History"
+            )
+
+            .select("*")
+
+            .eq(
+                "Appointment_Id",
+                appointmentId
+            )
+
+            .order(
+                "Created_At",
+                {
+                    ascending: false
+                }
+            );
+
+
+    if (result.error) {
+
+        console.error(
+            "Treatment History Error:",
+            result.error
+        );
+
+        box.innerHTML =
+            "<p>Unable to load Treatment History.</p>";
+
         return;
     }
 
 
-    form.style.display =
-        "none";
-}
+    const records =
+        result.data || [];
 
 
+    if (records.length === 0) {
 
-// ======================================================
-// CLEAR FORM
-// ======================================================
+        box.innerHTML =
+            "<p>No Treatment Added Yet.</p>";
 
-function clearTreatmentForm() {
-
-    const ids = [
-
-        "Taweez_Name",
-        "Taweez_Notes",
-        "Herbal_Remedy",
-        "Herbal_Notes",
-        "Wazifa",
-        "Wazifa_Notes",
-        "Additional_Notes"
-
-    ];
+        return;
+    }
 
 
-    ids.forEach(
-        function (id) {
+    box.innerHTML = "";
 
-            const element =
-                document.getElementById(id);
 
-            if (element) {
-                element.value = "";
+    records.forEach(function(record) {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "card treatment-record";
+
+        card.style.marginBottom =
+            "15px";
+
+
+        // DATE
+        const date =
+            document.createElement("h3");
+
+        date.textContent =
+            "📅 " +
+            new Date(
+                record.Created_At
+            ).toLocaleString("en-IN");
+
+        card.appendChild(date);
+
+
+        // OLD RECORD
+        if (
+            record.Treatment_Type ||
+            record.Item_Name ||
+            record.Category ||
+            record.Notes
+        ) {
+
+            const old =
+                document.createElement("p");
+
+            old.innerHTML =
+                "<b>🩺 Treatment:</b> " +
+                safeText(
+                    record.Item_Name ||
+                    record.Treatment_Type
+                );
+
+            card.appendChild(old);
+
+
+            if (record.Category) {
+
+                const p =
+                    document.createElement("p");
+
+                p.innerHTML =
+                    "<b>Category:</b> " +
+                    record.Category;
+
+                card.appendChild(p);
+            }
+
+
+            if (record.Notes) {
+
+                const p =
+                    document.createElement("p");
+
+                p.innerHTML =
+                    "<b>Notes:</b><br>" +
+                    record.Notes
+                        .replace(/\n/g, "<br>");
+
+                card.appendChild(p);
             }
         }
-    );
 
 
-    selectedTaweezImageUrl =
-        null;
+        // TAWEEZ
+        if (record.Taweez_Name) {
+
+            const title =
+                document.createElement("h4");
+
+            title.textContent =
+                "🧿 Taweez";
+
+            card.appendChild(title);
 
 
-    const selected =
-        document.getElementById(
-            "selectedTaweez"
-        );
+            const name =
+                document.createElement("p");
+
+            name.innerHTML =
+                "<b>Name:</b> " +
+                record.Taweez_Name;
+
+            card.appendChild(name);
 
 
-    if (selected) {
+            if (record.Taweez_Notes) {
 
-        selected.innerHTML =
-            "";
-    }
-}
+                const notes =
+                    document.createElement("p");
+
+                notes.innerHTML =
+                    "<b>Notes:</b><br>" +
+                    record.Taweez_Notes
+                        .replace(/\n/g, "<br>");
+
+                card.appendChild(notes);
+            }
 
 
+            if (record.Taweez_Image_Url) {
 
-// ======================================================
+                const image =
+                    document.createElement("img");
+
+                image.src =
+                    record.Taweez_Image_Url;
+
+                image.style.width =
+                    "180px";
+
+                image.style.maxWidth =
+                    "100%";
+
+                image.style.display =
+                    "block";
+
+                image.style.marginTop =
+                    "8px";
+
+                card.appendChild(image);
+            }
+        }
+
+
+        // HERBAL
+        if (record.Herbal_Remedy) {
+
+            const title =
+                document.createElement("h4");
+
+            title.textContent =
+                "🌿 Herbal Remedy";
+
+            card.appendChild(title);
+
+
+            const name =
+                document.createElement("p");
+
+            name.innerHTML =
+                "<b>Remedy:</b> " +
+                record.Herbal_Remedy;
+
+            card.appendChild(name);
+
+
+            if (record.Herbal_Notes) {
+
+                const notes =
+                    document.createElement("p");
+
+                notes.innerHTML =
+                    "<b>Notes:</b><br>" +
+                    record.Herbal_Notes
+                        .replace(/\n/g, "<br>");
+
+                card.appendChild(notes);
+            }
+        }
+
+
+        // WAZIFA
+        if (record.Wazifa) {
+
+            const title =
+                document.createElement("h4");
+
+            title.textContent =
+                "📿 Wazifa";
+
+            card.appendChild(title);
+
+
+            const name =
+                document.createElement("p");
+
+            name.innerHTML =
+                "<b>Wazifa:</b> " +
+                record.Wazifa;
+
+            card.appendChild(name);
+
+
+            if (record.Wazifa_Notes) {
+
+                const notes =
+                    document.createElement("p");
+
+                notes.innerHTML =
+                    "<b>
+                    // ======================================================
 // SAVE TREATMENT
+// PART 3
 // ======================================================
 
 async function saveTreatment() {
 
     if (!currentMureed) {
-
-        alert(
-            "Mureed information not loaded."
-        );
-
+        alert("Mureed information not loaded.");
         return;
     }
 
 
-    // ==================================================
-    // GET VALUES
-    // ==================================================
-
     const taweezName =
-        document.getElementById(
-            "Taweez_Name"
-        )?.value.trim() || "";
+        document.getElementById("Taweez_Name")
+            ?.value.trim() || "";
 
 
     const taweezNotes =
-        document.getElementById(
-            "Taweez_Notes"
-        )?.value.trim() || "";
+        document.getElementById("Taweez_Notes")
+            ?.value.trim() || "";
 
 
     const herbalRemedy =
-        document.getElementById(
-            "Herbal_Remedy"
-        )?.value.trim() || "";
+        document.getElementById("Herbal_Remedy")
+            ?.value.trim() || "";
 
 
     const herbalNotes =
-        document.getElementById(
-            "Herbal_Notes"
-        )?.value.trim() || "";
+        document.getElementById("Herbal_Notes")
+            ?.value.trim() || "";
 
 
     const wazifa =
-        document.getElementById(
-            "Wazifa"
-        )?.value.trim() || "";
+        document.getElementById("Wazifa")
+            ?.value.trim() || "";
 
 
     const wazifaNotes =
-        document.getElementById(
-            "Wazifa_Notes"
-        )?.value.trim() || "";
+        document.getElementById("Wazifa_Notes")
+            ?.value.trim() || "";
 
 
     const additionalNotes =
-        document.getElementById(
-            "Additional_Notes"
-        )?.value.trim() || "";
+        document.getElementById("Additional_Notes")
+            ?.value.trim() || "";
 
-
-
-    // ==================================================
-    // VALIDATION
-    // ==================================================
 
     if (
         !taweezName &&
@@ -978,27 +504,273 @@ async function saveTreatment() {
     }
 
 
+    const result =
+        await supabaseClient
 
-    // ==================================================
-    // SAVE TO SUPABASE
-    // ==================================================
+            .from(
+                "Mureed_Treatment_History"
+            )
 
-    const {
-        data,
-        error
-    } = await supabaseClient
+            .insert([{
 
-        .from(
-            "Mureed_Treatment_History"
-        )
+                Mureed_Id:
+                    currentMureed.id,
 
-        .insert([{
+                Appointment_Id:
+                    appointmentId,
 
-            Mureed_Id:
-                currentMureed.id,
+                Taweez_Name:
+                    taweezName || null,
 
-            Appointment_Id:
-                appointmentId,
+                Taweez_Notes:
+                    taweezNotes || null,
 
-            Taweez_Name:
-            
+                Taweez_Image_Url:
+                    selectedTaweezImageUrl,
+
+                Herbal_Remedy:
+                    herbalRemedy || null,
+
+                Herbal_Notes:
+                    herbalNotes || null,
+
+                Wazifa:
+                    wazifa || null,
+
+                Wazifa_Notes:
+                    wazifaNotes || null,
+
+                Additional_Notes:
+                    additionalNotes || null
+
+            }])
+
+            .select()
+            .single();
+
+
+    if (result.error) {
+
+        console.error(
+            "SAVE TREATMENT ERROR:",
+            result.error
+        );
+
+        alert(
+            "SAVE ERROR\n\n" +
+            result.error.message
+        );
+
+        return;
+    }
+
+
+    alert(
+        "✅ Treatment Saved Successfully"
+    );
+
+
+    // CLEAR FORM
+
+    [
+        "Taweez_Name",
+        "Taweez_Notes",
+        "Herbal_Remedy",
+        "Herbal_Notes",
+        "Wazifa",
+        "Wazifa_Notes",
+        "Additional_Notes"
+    ].forEach(function(id) {
+
+        const element =
+            document.getElementById(id);
+
+        if (element) {
+            element.value = "";
+        }
+
+    });
+
+
+    selectedTaweezImageUrl =
+        null;
+
+
+    const selected =
+        document.getElementById(
+            "selectedTaweez"
+        );
+
+    if (selected) {
+        selected.innerHTML = "";
+    }
+
+
+    closeTreatmentForm();
+
+
+    await loadTreatmentHistory();
+        }
+// ======================================================
+// TAWEEZ SELECT + FINAL START
+// PART 4
+// ======================================================
+
+async function selectTaweez() {
+
+    const category =
+        prompt(
+            "Taweez Category likho:\n\n" +
+            "Bimari\n" +
+            "Barkat\n" +
+            "Sehat\n" +
+            "Hifazat"
+        );
+
+    if (!category) {
+        return;
+    }
+
+
+    const result =
+        await supabaseClient
+
+            .from("Taweez_Library")
+
+            .select("*")
+
+            .eq("Category", category)
+            .eq("Is_Active", true)
+            .order("Taweez_Name");
+
+
+    if (result.error) {
+
+        console.error(
+            "TAWEEZ LIBRARY ERROR:",
+            result.error
+        );
+
+        alert(
+            "Taweez Library Error\n\n" +
+            result.error.message
+        );
+
+        return;
+    }
+
+
+    const list =
+        result.data || [];
+
+
+    if (list.length === 0) {
+
+        alert(
+            "Is category me koi Taweez nahi mila."
+        );
+
+        return;
+    }
+
+
+    let message =
+        "Available Taweez:\n\n";
+
+
+    list.forEach(
+        function(item, index) {
+
+            message +=
+                (index + 1) +
+                ". " +
+                item.Taweez_Name +
+                "\n";
+
+        }
+    );
+
+
+    const choice =
+        prompt(message + "\nNumber enter karo:");
+
+
+    const number =
+        parseInt(choice);
+
+
+    if (
+        !number ||
+        number < 1 ||
+        number > list.length
+    ) {
+
+        return;
+    }
+
+
+    const selected =
+        list[number - 1];
+
+
+    const nameInput =
+        document.getElementById(
+            "Taweez_Name"
+        );
+
+
+    if (nameInput) {
+
+        nameInput.value =
+            selected.Taweez_Name;
+
+    }
+
+
+    selectedTaweezImageUrl =
+        selected.File_Url || null;
+
+
+    const selectedBox =
+        document.getElementById(
+            "selectedTaweez"
+        );
+
+
+    if (selectedBox) {
+
+        selectedBox.innerHTML =
+            "<p><b>Selected:</b> " +
+            selected.Taweez_Name +
+            "</p>";
+
+    }
+
+}
+
+
+
+// ======================================================
+// SELECT TAWEEZ BUTTON
+// ======================================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const button =
+            document.getElementById(
+                "selectTaweezBtn"
+            );
+
+        if (button) {
+
+            button.addEventListener(
+                "click",
+                selectTaweez
+            );
+
+        }
+
+    }
+);
