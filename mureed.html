@@ -4,15 +4,109 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>Mureed Details | Hussain Bapu's Wellness</title>
 
-<link rel="stylesheet" href="style.css">
+<link
+    rel="stylesheet"
+    href="style.css"
+>
+
+<style>
+
+.taweez-library-box {
+    margin-top: 15px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.taweez-list {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.taweez-item {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    background: #fff;
+}
+
+.taweez-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.taweez-item strong {
+    display: block;
+    margin-top: 8px;
+}
+
+.taweez-preview {
+    margin-top: 15px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.taweez-preview img {
+    max-width: 250px;
+    max-height: 300px;
+    object-fit: contain;
+    display: block;
+    margin: 10px auto;
+}
+
+.print-area {
+    display: none;
+}
+
+@media print {
+
+    body * {
+        visibility: hidden;
+    }
+
+    .print-area,
+    .print-area * {
+        visibility: visible;
+    }
+
+    .print-area {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .print-area img {
+        max-width: 4in;
+        max-height: 4in;
+        object-fit: contain;
+    }
+
+}
+
+</style>
 
 </head>
 
+
 <body>
+
 
 <header>
 
@@ -20,15 +114,24 @@
 
 <h1>👤 Mureed Details</h1>
 
-<p>Hussain Bapu's Wellness & Baba Farid Ji (R.A.) Heritage</p>
+<p>
+Hussain Bapu's Wellness &
+Baba Farid Ji (R.A.) Heritage
+</p>
 
 </div>
 
 </header>
 
+
 <section>
 
 <div class="container">
+
+
+<!-- ==================================================
+     MUREED INFORMATION
+================================================== -->
 
 <div class="card">
 
@@ -36,39 +139,87 @@
 
 <table id="mureedTable">
 
-<tr><td><b>Appointment ID</b></td><td id="Appointment_Id"></td></tr>
+<tr>
+<td><b>Appointment ID</b></td>
+<td id="Appointment_Id"></td>
+</tr>
 
-<tr><td><b>Full Name</b></td><td id="Full_Name"></td></tr>
+<tr>
+<td><b>Full Name</b></td>
+<td id="Full_Name"></td>
+</tr>
 
-<tr><td><b>Mobile</b></td><td id="Mobile"></td></tr>
+<tr>
+<td><b>Mobile</b></td>
+<td id="Mobile"></td>
+</tr>
 
-<tr><td><b>Whatsapp</b></td><td id="Whatsapp"></td></tr>
+<tr>
+<td><b>Whatsapp</b></td>
+<td id="Whatsapp"></td>
+</tr>
 
-<tr><td><b>Email</b></td><td id="Email"></td></tr>
+<tr>
+<td><b>Email</b></td>
+<td id="Email"></td>
+</tr>
 
-<tr><td><b>Age</b></td><td id="Age"></td></tr>
+<tr>
+<td><b>Age</b></td>
+<td id="Age"></td>
+</tr>
 
-<tr><td><b>Gender</b></td><td id="Gender"></td></tr>
+<tr>
+<td><b>Gender</b></td>
+<td id="Gender"></td>
+</tr>
 
-<tr><td><b>Country</b></td><td id="Country"></td></tr>
+<tr>
+<td><b>Country</b></td>
+<td id="Country"></td>
+</tr>
 
-<tr><td><b>State</b></td><td id="State"></td></tr>
+<tr>
+<td><b>State</b></td>
+<td id="State"></td>
+</tr>
 
-<tr><td><b>City</b></td><td id="City"></td></tr>
+<tr>
+<td><b>City</b></td>
+<td id="City"></td>
+</tr>
 
-<tr><td><b>Consultation Type</b></td><td id="Consultation_Type"></td></tr>
+<tr>
+<td><b>Consultation Type</b></td>
+<td id="Consultation_Type"></td>
+</tr>
 
-<tr><td><b>Problem Category</b></td><td id="Problem_Category"></td></tr>
+<tr>
+<td><b>Problem Category</b></td>
+<td id="Problem_Category"></td>
+</tr>
 
-<tr><td><b>Problem (Short)</b></td><td id="Problem_Short_Description"></td></tr>
+<tr>
+<td><b>Problem (Short)</b></td>
+<td id="Problem_Short_Description"></td>
+</tr>
 
-<tr><td><b>Status</b></td><td id="Appointment_Status"></td></tr>
+<tr>
+<td><b>Status</b></td>
+<td id="Appointment_Status"></td>
+</tr>
 
 </table>
 
 </div>
 
+
 <br>
+
+
+<!-- ==================================================
+     TREATMENT HISTORY
+================================================== -->
 
 <div class="card">
 
@@ -82,77 +233,191 @@
 
 <br>
 
+
 <button
-id="addTreatmentBtn"
-class="btn gold">
+    id="addTreatmentBtn"
+    class="btn gold"
+    type="button"
+>
 
 ➕ Add Treatment
 
 </button>
 
+
+<!-- ==================================================
+     TREATMENT FORM
+================================================== -->
+
 <div
-id="treatmentForm"
-style="display:none; margin-top:20px;">
+    id="treatmentForm"
+    style="
+        display:none;
+        margin-top:20px;
+    "
+>
 
 <h3>➕ Add New Treatment</h3>
+
 
 <label>Treatment Type</label>
 
 <select id="Treatment_Type">
 
-<option value="">Select Treatment Type</option>
+<option value="">
+Select Treatment Type
+</option>
 
-<option value="Taweez">🧿 Taweez</option>
+<option value="Taweez">
+🧿 Taweez
+</option>
 
-<option value="Herbal Treatment">🌿 Herbal Treatment</option>
+<option value="Herbal Treatment">
+🌿 Herbal Treatment
+</option>
 
-<option value="Wazifa">📿 Wazifa</option>
+<option value="Wazifa">
+📿 Wazifa
+</option>
 
 </select>
 
-<br><br>
+
+<br>
+<br>
+
 
 <label>Category</label>
 
 <input
-type="text"
-id="Category"
-placeholder="Example: Bimari / Nazar / Jinn">
+    type="text"
+    id="Category"
+    placeholder="Example: Bimari / Barkat / Sehat / Hifazat"
+>
 
-<br><br>
+
+<!-- ==================================================
+     SIMPLE TAWEZ LIBRARY
+================================================== -->
+
+<div
+    id="taweezLibrary"
+    class="taweez-library-box"
+    style="display:none;"
+>
+
+<h3>🧿 Select Taweez</h3>
+
+<select id="taweezCategory">
+
+<option value="">
+Select Category
+</option>
+
+<option value="Bimari">
+Bimari
+</option>
+
+<option value="Barkat">
+Barkat
+</option>
+
+<option value="Sehat">
+Sehat
+</option>
+
+<option value="Hifazat">
+Hifazat
+</option>
+
+</select>
+
+
+<div
+    id="taweezList"
+    class="taweez-list"
+></div>
+
+
+<div
+    id="taweezPreview"
+    class="taweez-preview"
+    style="display:none;"
+>
+
+<strong id="selectedTaweezName"></strong>
+
+<img
+    id="selectedTaweezImage"
+    src=""
+    alt="Selected Taweez"
+>
+
+
+<button
+    id="printTaweezBtn"
+    class="btn gold"
+    type="button"
+>
+
+🖨️ Print Taweez
+
+</button>
+
+</div>
+
+</div>
+
+
+<br>
+
 
 <label>Item Name</label>
 
 <input
-type="text"
-id="Item_Name"
-placeholder="Enter Treatment / Taweez Name">
+    type="text"
+    id="Item_Name"
+    placeholder="Enter Treatment / Taweez Name"
+>
 
-<br><br>
 
-<label>Notes</label>
+<br>
+<br>
+
+
+<label>Instructions / Notes</label>
 
 <textarea
-id="Notes"
-placeholder="Treatment details / instructions"></textarea>
+    id="Notes"
+    placeholder="Taweez kaise use karna hai / treatment instructions"
+></textarea>
 
-<br><br>
+
+<br>
+<br>
+
 
 <button
-id="saveTreatmentBtn"
-class="btn gold">
+    id="saveTreatmentBtn"
+    class="btn gold"
+    type="button"
+>
 
 💾 Save Treatment
 
 </button>
 
+
 <button
-id="cancelTreatmentBtn"
-class="btn">
+    id="cancelTreatmentBtn"
+    class="btn"
+    type="button"
+>
 
 Cancel
 
 </button>
+
 
 </div>
 
@@ -162,11 +427,35 @@ Cancel
 
 </section>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- ==================================================
+     PRINT AREA
+================================================== -->
+
+<div
+    id="printArea"
+    class="print-area"
+>
+
+<h2 id="printTaweezTitle"></h2>
+
+<img
+    id="printTaweezImage"
+    src=""
+    alt="Taweez"
+>
+
+</div>
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
 
 <script src="supabase.js"></script>
 
 <script src="mureed.js"></script>
+
 
 </body>
 
