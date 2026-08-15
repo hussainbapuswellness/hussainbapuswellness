@@ -862,23 +862,14 @@ async function selectTaweez() {
 
 
     const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .from("Taweez_Library")
-            .select("*")
-            .eq(
-                "Category",
-                cleanCategory
-            )
-            .eq(
-                "Is_Active",
-                true
-            )
-            .order(
-                "Taweez_Name"
-            );
+    data,
+    error
+} =
+    await supabaseClient
+        .from("Taweez_Library")
+        .select("*")
+        .eq("Category", cleanCategory)
+        .order("Taweez_Name");
 
 
     if (error) {
