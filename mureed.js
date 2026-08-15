@@ -843,54 +843,177 @@ function openFullImage(imageUrl) {
 async function selectTaweez() {
 
     const {
-    data,
-    error
+    data: folders,
+    error: folderError
 } =
     await supabaseClient
+        .storage
+        .from("taweez-library")
+        .list("", {
+            limit: 1000,
+            sortBy: {
+                column: "name",
+                order: "asc"
+            }
+        });
 
-        .from(
-            "Taweez_Library"
-        )
 
-        .select("*")
-
-        .order(
-            "Taweez_Name"
-        );
-
-
-if (error) {
+if (folderError) {
 
     console.error(
-        "Taweez Library Error:",
-        error
+        "Taweez Storage Error:",
+        folderError
     );
 
     alert(
-        "Taweez Library Error\n\n" +
-        error.message
+        "Taweez Storage Error\n\n" +
+        folderError.message
     );
 
     return;
 }
 
 
-const allTaweez =
-    data || [];
+const allTaweez = [];
+
+
+const folderList =
+    (folders || []).filter(
+        function(item) {
+
+            return !item.id;
+        }
+    );
+
+
+for (
+    const folder
+    of folderList
+) {
+
+    const folderName =
+        folder.name;
+
+
+    const {
+        data: files,
+        error: fileError
+    } =
+        await supabaseClient
+            .storage
+            .from("taweez-library")
+            .list(
+                folderName,
+                {
+                    limit: 1000,
+                    sortBy: {
+                        column: "name",
+                        order: "asc"
+                    }
+                }
+            );
+
+
+    if (fileError) {
+
+        console.error(
+            "Folder Load Error:",
+            folderName,
+            fileError
+        );
+
+        continue;
+    }
+
+
+    (files || []).forEach(
+        function(file) {
+
+            if (!file.id) {
+                return;
+            }
+
+
+            const fileName =
+                file.name || "";
+
+
+            const lowerName =
+                fileName.toLowerCase();
+
+
+            if (
+                !lowerName.endsWith(".jpg") &&
+                !lowerName.endsWith(".jpeg") &&
+                !lowerName.endsWith(".png") &&
+                !lowerName.endsWith(".webp") &&
+                !lowerName.endsWith(".gif")
+            ) {
+                return;
+            }
+
+
+            const storagePath =
+                folderName +
+                "/" +
+                fileName;
+
+
+            const publicUrl =
+                supabaseClient
+                    .storage
+                    .from("taweez-library")
+                    .getPublicUrl(
+                        storagePath
+                    )
+                    .data
+                    .publicUrl;
+
+
+            const taweezName =
+                fileName
+                    .replace(
+                        /\.[^/.]+$/,
+                        ""
+                    )
+                    .replace(
+                        /[_-]+/g,
+                        " "
+                    )
+                    .trim();
+
+
+            allTaweez.push({
+
+                Taweez_Name:
+                    taweezName,
+
+                Category:
+                    folderName,
+
+                File_Url:
+                    publicUrl
+
+            });
+
+        }
+    );
+
+}
 
 
 const list =
     allTaweez;
 
+
 if (list.length === 0) {
 
     alert(
-        "Taweez_Library se koi record nahi aa raha."
+        "Taweez Library me koi image nahi mili."
     );
 
     return;
 }
-
 
     // ==================================================
     // GALLERY OVERLAY
