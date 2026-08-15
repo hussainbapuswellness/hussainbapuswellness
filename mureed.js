@@ -1381,7 +1381,7 @@ async function selectTaweez() {
     document.body.appendChild(
         overlay
     );
-}
+            }
 
 // ======================================================
 // HUSSAIN BAPU'S WELLNESS
