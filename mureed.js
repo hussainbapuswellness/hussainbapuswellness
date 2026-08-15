@@ -868,7 +868,10 @@ async function selectTaweez() {
     await supabaseClient
         .from("Taweez_Library")
         .select("*")
-        .eq("Category", cleanCategory)
+        .ilike(
+    "Category",
+    cleanCategory
+)
         .order("Taweez_Name");
 
 
