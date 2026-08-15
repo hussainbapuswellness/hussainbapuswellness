@@ -1,6 +1,6 @@
 // ======================================================
 // HUSSAIN BAPU'S WELLNESS
-// MUREED.JS - FINAL COMPLETE VERSION
+// MUREED.JS - FINAL CLEAN VERSION
 // PART 1 / 4
 // ======================================================
 
@@ -43,9 +43,7 @@ async function loadMureed() {
 
     if (!appointmentId) {
 
-        alert(
-            "Appointment ID missing."
-        );
+        alert("Appointment ID missing.");
 
         return;
     }
@@ -56,16 +54,12 @@ async function loadMureed() {
         error
     } =
         await supabaseClient
-
             .from("clients")
-
             .select("*")
-
             .eq(
                 "Appointment_Id",
                 appointmentId
             )
-
             .single();
 
 
@@ -85,8 +79,7 @@ async function loadMureed() {
     }
 
 
-    currentMureed =
-        data;
+    currentMureed = data;
 
 
     const fields = {
@@ -197,11 +190,11 @@ function closeTreatmentForm() {
 
     }
 }
+// ======================================================
+// MUREED.JS - PART 2 / 4
+// TREATMENT HISTORY
+// ======================================================
 
-// ======================================================
-// MUREED.JS - PART 2
-// TREATMENT HISTORY CONTINUATION
-// ======================================================
 
 // ======================================================
 // OLD TREATMENT RECORD
@@ -217,6 +210,7 @@ function addOldTreatmentRecord(card, record) {
     ) {
         return;
     }
+
 
     const title =
         document.createElement("h4");
@@ -279,18 +273,31 @@ function addOldTreatmentRecord(card, record) {
         image.src =
             record.Image_Url;
 
-        image.style.width = "180px";
-        image.style.maxWidth = "100%";
-        image.style.display = "block";
-        image.style.marginTop = "8px";
-        image.style.borderRadius = "8px";
-        image.style.cursor = "pointer";
+        image.style.width =
+            "180px";
+
+        image.style.maxWidth =
+            "100%";
+
+        image.style.display =
+            "block";
+
+        image.style.marginTop =
+            "8px";
+
+        image.style.borderRadius =
+            "8px";
+
+        image.style.cursor =
+            "pointer";
 
         image.onclick =
             function() {
+
                 openFullImage(
                     record.Image_Url
                 );
+
             };
 
         card.appendChild(image);
@@ -308,6 +315,7 @@ function addTaweezRecord(card, record) {
         return;
     }
 
+
     const title =
         document.createElement("h4");
 
@@ -322,7 +330,9 @@ function addTaweezRecord(card, record) {
 
     name.innerHTML =
         "<b>Name:</b> " +
-        escapeHtml(record.Taweez_Name);
+        escapeHtml(
+            record.Taweez_Name
+        );
 
     card.appendChild(name);
 
@@ -336,7 +346,10 @@ function addTaweezRecord(card, record) {
             "<b>Notes:</b><br>" +
             escapeHtml(
                 record.Taweez_Notes
-            ).replace(/\n/g, "<br>");
+            ).replace(
+                /\n/g,
+                "<br>"
+            );
 
         card.appendChild(notes);
     }
@@ -350,12 +363,23 @@ function addTaweezRecord(card, record) {
         image.src =
             record.Taweez_Image_Url;
 
-        image.style.width = "180px";
-        image.style.maxWidth = "100%";
-        image.style.display = "block";
-        image.style.marginTop = "8px";
-        image.style.borderRadius = "8px";
-        image.style.cursor = "pointer";
+        image.style.width =
+            "180px";
+
+        image.style.maxWidth =
+            "100%";
+
+        image.style.display =
+            "block";
+
+        image.style.marginTop =
+            "8px";
+
+        image.style.borderRadius =
+            "8px";
+
+        image.style.cursor =
+            "pointer";
 
         image.onclick =
             function() {
@@ -380,6 +404,7 @@ function addHerbalRecord(card, record) {
     if (!record.Herbal_Remedy) {
         return;
     }
+
 
     const title =
         document.createElement("h4");
@@ -411,7 +436,10 @@ function addHerbalRecord(card, record) {
             "<b>Notes:</b><br>" +
             escapeHtml(
                 record.Herbal_Notes
-            ).replace(/\n/g, "<br>");
+            ).replace(
+                /\n/g,
+                "<br>"
+            );
 
         card.appendChild(notes);
     }
@@ -428,6 +456,7 @@ function addWazifaRecord(card, record) {
         return;
     }
 
+
     const title =
         document.createElement("h4");
 
@@ -442,7 +471,9 @@ function addWazifaRecord(card, record) {
 
     name.innerHTML =
         "<b>Wazifa:</b> " +
-        escapeHtml(record.Wazifa);
+        escapeHtml(
+            record.Wazifa
+        );
 
     card.appendChild(name);
 
@@ -456,7 +487,10 @@ function addWazifaRecord(card, record) {
             "<b>Notes:</b><br>" +
             escapeHtml(
                 record.Wazifa_Notes
-            ).replace(/\n/g, "<br>");
+            ).replace(
+                /\n/g,
+                "<br>"
+            );
 
         card.appendChild(notes);
     }
@@ -473,6 +507,7 @@ function addAdditionalNotes(card, record) {
         return;
     }
 
+
     const title =
         document.createElement("h4");
 
@@ -488,18 +523,16 @@ function addAdditionalNotes(card, record) {
     notes.innerHTML =
         escapeHtml(
             record.Additional_Notes
-        ).replace(/\n/g, "<br>");
+        ).replace(
+            /\n/g,
+            "<br>"
+        );
 
     card.appendChild(notes);
-        }
-
+}
 // ======================================================
-// MUREED.JS - PART 3
+// MUREED.JS - PART 3 / 4
 // LOAD TREATMENT HISTORY + FULL IMAGE PREVIEW
-// ======================================================
-
-// ======================================================
-// LOAD TREATMENT HISTORY
 // ======================================================
 
 async function loadTreatmentHistory() {
@@ -522,18 +555,12 @@ async function loadTreatmentHistory() {
         error
     } =
         await supabaseClient
-
-            .from(
-                "Mureed_Treatment_History"
-            )
-
+            .from("Mureed_Treatment_History")
             .select("*")
-
             .eq(
                 "Appointment_Id",
                 appointmentId
             )
-
             .order(
                 "Created_At",
                 {
@@ -552,9 +579,7 @@ async function loadTreatmentHistory() {
         box.innerHTML =
             "<p>Unable to load Treatment History.</p>" +
             "<small>" +
-            escapeHtml(
-                error.message
-            ) +
+            escapeHtml(error.message) +
             "</small>";
 
         return;
@@ -581,14 +606,10 @@ async function loadTreatmentHistory() {
         function(record) {
 
             const card =
-                document.createElement(
-                    "div"
-                );
-
+                document.createElement("div");
 
             card.className =
                 "card treatment-record";
-
 
             card.style.marginBottom =
                 "15px";
@@ -596,10 +617,7 @@ async function loadTreatmentHistory() {
 
             // DATE
             const date =
-                document.createElement(
-                    "h3"
-                );
-
+                document.createElement("h3");
 
             date.textContent =
                 "📅 " +
@@ -613,11 +631,10 @@ async function loadTreatmentHistory() {
                         : "-"
                 );
 
-
             card.appendChild(date);
 
 
-            // OLD RECORD
+            // OLD TREATMENT
             addOldTreatmentRecord(
                 card,
                 record
@@ -675,173 +692,129 @@ function openFullImage(imageUrl) {
             "taweezImagePreview"
         );
 
-
     if (oldOverlay) {
         oldOverlay.remove();
     }
 
 
     const overlay =
-        document.createElement(
-            "div"
-        );
-
+        document.createElement("div");
 
     overlay.id =
         "taweezImagePreview";
 
-
     overlay.style.position =
         "fixed";
-
 
     overlay.style.inset =
         "0";
 
-
     overlay.style.zIndex =
         "999999";
-
 
     overlay.style.background =
         "rgba(0,0,0,0.95)";
 
-
     overlay.style.display =
         "flex";
-
 
     overlay.style.flexDirection =
         "column";
 
-
     overlay.style.alignItems =
         "center";
-
 
     overlay.style.justifyContent =
         "center";
 
-
     overlay.style.padding =
         "15px";
-
 
     overlay.style.boxSizing =
         "border-box";
 
 
-    // CLOSE
+    // CLOSE BUTTON
     const close =
-        document.createElement(
-            "button"
-        );
-
+        document.createElement("button");
 
     close.type =
         "button";
 
-
     close.textContent =
         "✕ Close";
-
 
     close.style.position =
         "absolute";
 
-
     close.style.top =
         "20px";
-
 
     close.style.right =
         "20px";
 
-
     close.style.padding =
         "10px 18px";
-
 
     close.style.border =
         "none";
 
-
     close.style.borderRadius =
         "8px";
-
 
     close.style.background =
         "#ffffff";
 
-
     close.style.color =
         "#111111";
-
 
     close.style.fontSize =
         "16px";
 
-
     close.style.fontWeight =
         "bold";
-
 
     close.style.cursor =
         "pointer";
 
-
     close.onclick =
         function() {
-
             overlay.remove();
-
         };
 
 
-    // IMAGE
+    // FULL IMAGE
     const image =
-        document.createElement(
-            "img"
-        );
-
+        document.createElement("img");
 
     image.src =
         imageUrl;
 
-
     image.style.maxWidth =
         "96vw";
-
 
     image.style.maxHeight =
         "82vh";
 
-
     image.style.width =
         "auto";
-
 
     image.style.height =
         "auto";
 
-
     image.style.objectFit =
         "contain";
-
 
     image.style.background =
         "#ffffff";
 
-
     image.style.padding =
         "5px";
-
 
     image.style.borderRadius =
         "8px";
 
 
-    // CLOSE BY IMAGE BACKGROUND
     overlay.onclick =
         function(event) {
 
@@ -849,27 +822,17 @@ function openFullImage(imageUrl) {
                 event.target ===
                 overlay
             ) {
-
                 overlay.remove();
-
             }
 
         };
 
 
-    overlay.appendChild(
-        close
-    );
+    overlay.appendChild(close);
 
+    overlay.appendChild(image);
 
-    overlay.appendChild(
-        image
-    );
-
-
-    document.body.appendChild(
-        overlay
-    );
+    document.body.appendChild(overlay);
 }
 
 
@@ -903,18 +866,16 @@ async function selectTaweez() {
         error
     } =
         await supabaseClient
-
-            .from(
-                "Taweez_Library"
-            )
-
+            .from("Taweez_Library")
             .select("*")
-
             .eq(
                 "Category",
                 cleanCategory
             )
-
+            .eq(
+                "Is_Active",
+                true
+            )
             .order(
                 "Taweez_Name"
             );
@@ -927,12 +888,10 @@ async function selectTaweez() {
             error
         );
 
-
         alert(
             "Taweez Library Error\n\n" +
             error.message
         );
-
 
         return;
     }
@@ -957,171 +916,117 @@ async function selectTaweez() {
     // ==================================================
 
     const overlay =
-        document.createElement(
-            "div"
-        );
-
+        document.createElement("div");
 
     overlay.id =
         "taweezGalleryOverlay";
 
-
     overlay.style.position =
         "fixed";
-
 
     overlay.style.inset =
         "0";
 
-
     overlay.style.zIndex =
         "99999";
-
 
     overlay.style.background =
         "rgba(0,0,0,0.95)";
 
-
     overlay.style.overflowY =
         "auto";
 
-
     overlay.style.padding =
         "20px";
-
 
     overlay.style.boxSizing =
         "border-box";
 
 
-    // ==================================================
     // HEADER
-    // ==================================================
-
     const header =
-        document.createElement(
-            "div"
-        );
-
+        document.createElement("div");
 
     header.style.display =
         "flex";
 
-
     header.style.justifyContent =
         "space-between";
 
-
     header.style.alignItems =
         "center";
-
 
     header.style.marginBottom =
         "20px";
 
 
     const heading =
-        document.createElement(
-            "h2"
-        );
-
+        document.createElement("h2");
 
     heading.textContent =
         "🧿 " +
         cleanCategory +
         " Taweez";
 
-
     heading.style.color =
         "#ffffff";
-
 
     heading.style.margin =
         "0";
 
 
     const closeButton =
-        document.createElement(
-            "button"
-        );
-
+        document.createElement("button");
 
     closeButton.type =
         "button";
 
-
     closeButton.textContent =
         "✕ Close";
-
 
     closeButton.style.padding =
         "10px 16px";
 
-
     closeButton.style.border =
         "none";
-
 
     closeButton.style.borderRadius =
         "8px";
 
-
     closeButton.style.background =
         "#ffffff";
-
 
     closeButton.style.color =
         "#111111";
 
-
     closeButton.style.fontWeight =
         "bold";
-
 
     closeButton.style.cursor =
         "pointer";
 
-
     closeButton.onclick =
         function() {
-
             overlay.remove();
-
         };
 
 
-    header.appendChild(
-        heading
-    );
+    header.appendChild(heading);
+
+    header.appendChild(closeButton);
+
+    overlay.appendChild(header);
 
 
-    header.appendChild(
-        closeButton
-    );
-
-
-    overlay.appendChild(
-        header
-    );
-
-
-    // ==================================================
     // GALLERY GRID
-    // ==================================================
-
     const gallery =
-        document.createElement(
-            "div"
-        );
-
+        document.createElement("div");
 
     gallery.style.display =
         "grid";
 
-
     gallery.style.gridTemplateColumns =
         "repeat(auto-fit, minmax(160px, 1fr))";
-
 
     gallery.style.gap =
         "15px";
@@ -1131,58 +1036,42 @@ async function selectTaweez() {
         function(item) {
 
             const card =
-                document.createElement(
-                    "div"
-                );
-
+                document.createElement("div");
 
             card.style.background =
                 "#ffffff";
 
-
             card.style.borderRadius =
                 "12px";
-
 
             card.style.padding =
                 "10px";
 
-
             card.style.textAlign =
                 "center";
-
 
             card.style.boxSizing =
                 "border-box";
 
 
             const name =
-                document.createElement(
-                    "div"
-                );
-
+                document.createElement("div");
 
             name.textContent =
                 safeText(
                     item.Taweez_Name
                 );
 
-
             name.style.fontWeight =
                 "bold";
-
 
             name.style.marginBottom =
                 "8px";
 
-
             name.style.color =
                 "#111111";
 
-
-            card.appendChild(
-                name
-            );
+            card.appendChild(name);
 
 
             const fileUrl =
@@ -1192,34 +1081,25 @@ async function selectTaweez() {
             if (fileUrl) {
 
                 const image =
-                    document.createElement(
-                        "img"
-                    );
-
+                    document.createElement("img");
 
                 image.src =
                     fileUrl;
 
-
                 image.style.width =
                     "100%";
-
 
                 image.style.height =
                     "180px";
 
-
                 image.style.objectFit =
                     "contain";
-
 
                 image.style.background =
                     "#f5f5f5";
 
-
                 image.style.borderRadius =
                     "8px";
-
 
                 image.style.cursor =
                     "pointer";
@@ -1227,87 +1107,59 @@ async function selectTaweez() {
 
                 image.onclick =
                     function() {
-
-                        openFullImage(
-                            fileUrl
-                        );
-
+                        openFullImage(fileUrl);
                     };
 
 
-                card.appendChild(
-                    image
-                );
+                card.appendChild(image);
 
             } else {
 
                 const noImage =
-                    document.createElement(
-                        "p"
-                    );
-
-
-                noImage.textContent =
+                    document.createElement("p");
+                    noImage.textContent =
                     "Image Available Nahi Hai";
-
 
                 noImage.style.color =
                     "#777777";
 
-
-                card.appendChild(
-                    noImage
-                );
-
+                card.appendChild(noImage);
             }
 
 
-            // SELECT
+            // SELECT BUTTON
             const selectButton =
-                document.createElement(
-                    "button"
-                );
-
+                document.createElement("button");
 
             selectButton.type =
                 "button";
 
-
             selectButton.textContent =
                 "✅ Select This Taweez";
-
 
             selectButton.style.marginTop =
                 "10px";
 
-
             selectButton.style.width =
                 "100%";
-
 
             selectButton.style.padding =
                 "11px";
 
-
             selectButton.style.border =
                 "none";
-
 
             selectButton.style.borderRadius =
                 "8px";
 
-
             selectButton.style.background =
                 "#e5b935";
-
 
             selectButton.style.color =
                 "#111111";
 
-
             selectButton.style.fontWeight =
                 "bold";
-
 
             selectButton.style.cursor =
                 "pointer";
@@ -1328,7 +1180,6 @@ async function selectTaweez() {
                             safeText(
                                 item.Taweez_Name
                             );
-
                     }
 
 
@@ -1351,12 +1202,10 @@ async function selectTaweez() {
                                 item.Taweez_Name
                             ) +
                             "</p>";
-
                     }
 
 
                     overlay.remove();
-
                 };
 
 
@@ -1365,385 +1214,92 @@ async function selectTaweez() {
             );
 
 
-            gallery.appendChild(
-                card
-            );
+            gallery.appendChild(card);
 
         }
     );
 
 
-    overlay.appendChild(
-        gallery
-    );
+    overlay.appendChild(gallery);
 
-
-    document.body.appendChild(
-        overlay
-    );
-            }
-
-// ======================================================
-// HUSSAIN BAPU'S WELLNESS
-// MUREED.JS - PART 4
-// TAWEEZ GALLERY + FULL IMAGE PREVIEW + FINAL BUTTONS
-// ======================================================
-
-
-// ======================================================
-// FULL IMAGE PREVIEW
-// ======================================================
-
-function openFullImage(imageUrl, taweezName) {
-
-    if (!imageUrl) {
-        alert("Taweez image available nahi hai.");
-        return;
-    }
-
-
-    const oldOverlay =
-        document.getElementById(
-            "taweezImagePreview"
-        );
-
-
-    if (oldOverlay) {
-        oldOverlay.remove();
-    }
-
-
-    const overlay =
-        document.createElement("div");
-
-
-    overlay.id =
-        "taweezImagePreview";
-
-
-    overlay.style.position =
-        "fixed";
-
-    overlay.style.inset =
-        "0";
-
-    overlay.style.zIndex =
-        "999999";
-
-    overlay.style.background =
-        "rgba(0,0,0,0.94)";
-
-    overlay.style.display =
-        "flex";
-
-    overlay.style.flexDirection =
-        "column";
-
-    overlay.style.alignItems =
-        "center";
-
-    overlay.style.justifyContent =
-        "center";
-
-    overlay.style.padding =
-        "15px";
-
-    overlay.style.boxSizing =
-        "border-box";
-
-
-    // CLOSE BUTTON
-
-    const closeButton =
-        document.createElement("button");
-
-
-    closeButton.type =
-        "button";
-
-
-    closeButton.textContent =
-        "✕ Close";
-
-
-    closeButton.style.position =
-        "absolute";
-
-    closeButton.style.top =
-        "15px";
-
-    closeButton.style.right =
-        "15px";
-
-    closeButton.style.padding =
-        "10px 18px";
-
-    closeButton.style.border =
-        "none";
-
-    closeButton.style.borderRadius =
-        "8px";
-
-    closeButton.style.background =
-        "#ffffff";
-
-    closeButton.style.color =
-        "#111111";
-
-    closeButton.style.fontSize =
-        "15px";
-
-    closeButton.style.fontWeight =
-        "bold";
-
-
-    // IMAGE
-
-    const image =
-        document.createElement("img");
-
-
-    image.src =
-        imageUrl;
-
-
-    image.alt =
-        taweezName || "Taweez";
-
-
-    image.style.maxWidth =
-        "95vw";
-
-    image.style.maxHeight =
-        "75vh";
-
-    image.style.objectFit =
-        "contain";
-
-    image.style.background =
-        "#ffffff";
-
-    image.style.padding =
-        "5px";
-
-    image.style.borderRadius =
-        "8px";
-
-
-    // NAME
-
-    const name =
-        document.createElement("p");
-
-
-    name.textContent =
-        taweezName || "Taweez";
-
-
-    name.style.color =
-        "#ffffff";
-
-    name.style.fontSize =
-        "18px";
-
-    name.style.fontWeight =
-        "bold";
-
-    name.style.margin =
-        "12px 0 0";
-
-
-    // SELECT BUTTON
-
-    const selectButton =
-        document.createElement("button");
-
-
-    selectButton.type =
-        "button";
-
-
-    selectButton.textContent =
-        "✅ Select This Taweez";
-
-
-    selectButton.style.marginTop =
-        "15px";
-
-    selectButton.style.padding =
-        "13px 24px";
-
-    selectButton.style.border =
-        "none";
-
-    selectButton.style.borderRadius =
-        "10px";
-
-    selectButton.style.background =
-        "#e5b935";
-
-    selectButton.style.color =
-        "#111111";
-
-    selectButton.style.fontSize =
-        "16px";
-
-    selectButton.style.fontWeight =
-        "bold";
-
-
-    selectButton.onclick =
-        function() {
-
-            const nameInput =
-                document.getElementById(
-                    "Taweez_Name"
-                );
-
-
-            if (nameInput) {
-
-                nameInput.value =
-                    taweezName || "";
-
-            }
-
-
-            selectedTaweezImageUrl =
-                imageUrl;
-
-
-            const selectedBox =
-                document.getElementById(
-                    "selectedTaweez"
-                );
-
-
-            if (selectedBox) {
-
-                selectedBox.innerHTML =
-                    "<p>" +
-                    "✅ <b>Taweez Selected:</b> " +
-                    escapeHtml(
-                        taweezName || ""
-                    ) +
-                    "</p>" +
-
-                    "<img src=\"" +
-                    imageUrl +
-                    "\" " +
-                    "style=\"" +
-                    "width:100px;" +
-                    "max-width:100%;" +
-                    "border-radius:8px;" +
-                    "cursor:pointer;" +
-                    "\"" +
-                    ">";
-
-                const previewImage =
-                    selectedBox.querySelector(
-                        "img"
-                    );
-
-
-                if (previewImage) {
-
-                    previewImage.onclick =
-                        function() {
-
-                            openFullImage(
-                                imageUrl,
-                                taweezName
-                            );
-
-                        };
-
-                }
-
-            }
-
-
-            overlay.remove();
-
-        };
-
-
-    // CLOSE
-
-    closeButton.onclick =
-        function() {
-
-            overlay.remove();
-
-        };
-
-
-    // BACKGROUND CLICK
-
-    overlay.onclick =
-        function(event) {
-
-            if (
-                event.target ===
-                overlay
-            ) {
-
-                overlay.remove();
-
-            }
-
-        };
-
-
-    overlay.appendChild(
-        closeButton
-    );
-
-
-    overlay.appendChild(
-        image
-    );
-
-
-    overlay.appendChild(
-        name
-    );
-
-
-    overlay.appendChild(
-        selectButton
-    );
-
-
-    document.body.appendChild(
-        overlay
-    );
+    document.body.appendChild(overlay);
 }
-
+// ======================================================
+// MUREED.JS - PART 4 / 4
+// SAVE TREATMENT + BUTTON INITIALIZATION
+// ======================================================
 
 // ======================================================
-// TAWEEZ GALLERY
+// SAVE TREATMENT
 // ======================================================
 
-async function selectTaweez() {
+async function saveTreatment() {
 
-    const category =
-        prompt(
-            "Taweez Category:\n\n" +
-            "Bimari\n" +
-            "Barkat\n" +
-            "Sehat\n" +
-            "Hifazat"
+    if (!currentMureed) {
+
+        alert(
+            "Mureed information not loaded."
         );
 
-
-    if (!category) {
         return;
     }
 
 
-    const cleanCategory =
-        category.trim();
+    const taweezName =
+        document.getElementById(
+            "Taweez_Name"
+        )?.value.trim() || "";
+
+
+    const taweezNotes =
+        document.getElementById(
+            "Taweez_Notes"
+        )?.value.trim() || "";
+
+
+    const herbalRemedy =
+        document.getElementById(
+            "Herbal_Remedy"
+        )?.value.trim() || "";
+
+
+    const herbalNotes =
+        document.getElementById(
+            "Herbal_Notes"
+        )?.value.trim() || "";
+
+
+    const wazifa =
+        document.getElementById(
+            "Wazifa"
+        )?.value.trim() || "";
+
+
+    const wazifaNotes =
+        document.getElementById(
+            "Wazifa_Notes"
+        )?.value.trim() || "";
+
+
+    const additionalNotes =
+        document.getElementById(
+            "Additional_Notes"
+        )?.value.trim() || "";
+
+
+    if (
+        !taweezName &&
+        !herbalRemedy &&
+        !wazifa &&
+        !additionalNotes
+    ) {
+
+        alert(
+            "Please add at least one treatment or note."
+        );
+
+        return;
+    }
 
 
     const {
@@ -1753,31 +1309,57 @@ async function selectTaweez() {
         await supabaseClient
 
             .from(
-                "Taweez_Library"
+                "Mureed_Treatment_History"
             )
 
-            .select("*")
+            .insert([{
 
-            .eq(
-                "Category",
-                cleanCategory
-            )
+                Mureed_Id:
+                    currentMureed.id,
 
-            .order(
-                "Taweez_Name"
-            );
+                Appointment_Id:
+                    appointmentId,
+
+                Taweez_Name:
+                    taweezName || null,
+
+                Taweez_Notes:
+                    taweezNotes || null,
+
+                Taweez_Image_Url:
+                    selectedTaweezImageUrl,
+
+                Herbal_Remedy:
+                    herbalRemedy || null,
+
+                Herbal_Notes:
+                    herbalNotes || null,
+
+                Wazifa:
+                    wazifa || null,
+
+                Wazifa_Notes:
+                    wazifaNotes || null,
+
+                Additional_Notes:
+                    additionalNotes || null
+
+            }])
+
+            .select()
+
+            .single();
 
 
     if (error) {
 
         console.error(
-            "Taweez Library Error:",
+            "Save Treatment Error:",
             error
         );
 
-
         alert(
-            "Taweez Library Error\n\n" +
+            "SAVE ERROR\n\n" +
             error.message
         );
 
@@ -1785,318 +1367,63 @@ async function selectTaweez() {
     }
 
 
-    const list =
-        data || [];
-
-
-    if (list.length === 0) {
-
-        alert(
-            "Is category me koi Taweez nahi mila."
-        );
-
-        return;
-    }
-
-
-    // ==================================================
-    // GALLERY OVERLAY
-    // ==================================================
-
-    const gallery =
-        document.createElement("div");
-
-
-    gallery.id =
-        "taweezGallery";
-
-
-    gallery.style.position =
-        "fixed";
-
-    gallery.style.inset =
-        "0";
-
-    gallery.style.zIndex =
-        "99998";
-
-    gallery.style.background =
-        "rgba(0,0,0,0.96)";
-
-    gallery.style.overflowY =
-        "auto";
-
-    gallery.style.padding =
-        "20px";
-
-    gallery.style.boxSizing =
-        "border-box";
-
-
-    // TITLE
-
-    const heading =
-        document.createElement("h2");
-
-
-    heading.textContent =
-        "🧿 " +
-        cleanCategory +
-        " - Taweez Library";
-
-
-    heading.style.color =
-        "#ffffff";
-
-    heading.style.textAlign =
-        "center";
-
-
-    gallery.appendChild(
-        heading
+    console.log(
+        "Treatment Saved:",
+        data
     );
 
 
-    // CLOSE GALLERY
-
-    const closeGallery =
-        document.createElement("button");
-
-
-    closeGallery.type =
-        "button";
-
-
-    closeGallery.textContent =
-        "✕ Close Gallery";
-
-
-    closeGallery.style.display =
-        "block";
-
-    closeGallery.style.margin =
-        "0 auto 20px";
-
-    closeGallery.style.padding =
-        "10px 20px";
-
-    closeGallery.style.border =
-        "none";
-
-    closeGallery.style.borderRadius =
-        "8px";
-
-    closeGallery.style.background =
-        "#ffffff";
-
-    closeGallery.style.color =
-        "#111111";
-
-    closeGallery.style.fontWeight =
-        "bold";
-
-
-    closeGallery.onclick =
-        function() {
-
-            gallery.remove();
-
-        };
-
-
-    gallery.appendChild(
-        closeGallery
+    alert(
+        "✅ Treatment Saved Successfully"
     );
 
 
-    // GRID
-
-    const grid =
-        document.createElement("div");
-
-
-    grid.style.display =
-        "grid";
-
-    grid.style.gridTemplateColumns =
-        "repeat(auto-fit, minmax(180px, 1fr))";
-
-    grid.style.gap =
-        "15px";
-
-    grid.style.maxWidth =
-        "1100px";
-
-    grid.style.margin =
-        "0 auto";
-
-
-    list.forEach(
-        function(item) {
-
-            const card =
-                document.createElement("div");
-
-
-            card.style.background =
-                "#ffffff";
-
-            card.style.borderRadius =
-                "10px";
-
-            card.style.padding =
-                "10px";
-
-            card.style.textAlign =
-                "center";
-
-            card.style.boxSizing =
-                "border-box";
-
-
-            // IMAGE
-
-            const image =
-                document.createElement("img");
-
-
-            image.src =
-                item.File_Url || "";
-
-
-            image.alt =
-                item.Taweez_Name || "Taweez";
-
-
-            image.style.width =
-                "100%";
-
-            image.style.height =
-                "220px";
-
-            image.style.objectFit =
-                "contain";
-
-            image.style.background =
-                "#f5f5f5";
-
-            image.style.borderRadius =
-                "8px";
-
-            image.style.cursor =
-                "pointer";
-
-
-            // IMPORTANT:
-            // IMAGE CLICK = FULL IMAGE
-
-            image.onclick =
-                function() {
-
-                    openFullImage(
-                        item.File_Url,
-                        item.Taweez_Name
-                    );
-
-                };
-
-
-            card.appendChild(
-                image
-            );
-
-
-            // NAME
-
-            const name =
-                document.createElement("p");
-
-
-            name.textContent =
-                item.Taweez_Name || "-";
-
-
-            name.style.fontWeight =
-                "bold";
-
-
-            name.style.margin =
-                "10px 0";
-
-
-            card.appendChild(
-                name
-            );
-
-
-            // OPEN BUTTON
-
-            const openButton =
-                document.createElement("button");
-
-
-            openButton.type =
-                "button";
-
-
-            openButton.textContent =
-                "🔍 Open Full Image";
-
-
-            openButton.style.padding =
-                "9px 14px";
-
-            openButton.style.border =
-                "none";
-
-            openButton.style.borderRadius =
-                "7px";
-
-            openButton.style.background =
-                "#e5b935";
-
-            openButton.style.color =
-                "#111111";
-
-            openButton.style.fontWeight =
-                "bold";
-
-            openButton.style.cursor =
-                "pointer";
-
-
-            openButton.onclick =
-                function() {
-
-                    openFullImage(
-                        item.File_Url,
-                        item.Taweez_Name
-                    );
-
-                };
-
-
-            card.appendChild(
-                openButton
-            );
-
-
-            grid.appendChild(
-                card
-            );
+    // CLEAR FORM
+    [
+        "Taweez_Name",
+        "Taweez_Notes",
+        "Herbal_Remedy",
+        "Herbal_Notes",
+        "Wazifa",
+        "Wazifa_Notes",
+        "Additional_Notes"
+    ].forEach(
+        function(id) {
+
+            const element =
+                document.getElementById(id);
+
+            if (element) {
+
+                element.value = "";
+
+            }
 
         }
     );
 
 
-    gallery.appendChild(
-        grid
-    );
+    selectedTaweezImageUrl =
+        null;
 
 
-    document.body.appendChild(
-        gallery
-    );
+    const selectedBox =
+        document.getElementById(
+            "selectedTaweez"
+        );
+
+
+    if (selectedBox) {
+
+        selectedBox.innerHTML = "";
+
+    }
+
+
+    closeTreatmentForm();
+
+
+    await loadTreatmentHistory();
 }
 
 
@@ -2134,34 +1461,45 @@ document.addEventListener(
 
         if (addButton) {
 
-            addButton.onclick =
-                openTreatmentForm;
+            addButton.addEventListener(
+                "click",
+                openTreatmentForm
+            );
 
         }
 
 
         if (cancelButton) {
 
-            cancelButton.onclick =
-                closeTreatmentForm;
+            cancelButton.addEventListener(
+                "click",
+                closeTreatmentForm
+            );
 
         }
 
 
         if (saveButton) {
 
-            saveButton.onclick =
-                saveTreatment;
+            saveButton.addEventListener(
+                "click",
+                saveTreatment
+            );
 
         }
 
 
         if (selectButton) {
 
-            selectButton.onclick =
-                selectTaweez;
+            selectButton.addEventListener(
+                "click",
+                selectTaweez
+            );
 
         }
+
+
+        loadMureed();
 
     }
 );
