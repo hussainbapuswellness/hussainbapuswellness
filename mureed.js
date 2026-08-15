@@ -842,25 +842,6 @@ function openFullImage(imageUrl) {
 
 async function selectTaweez() {
 
-    const category =
-        prompt(
-            "Taweez Category:\n\n" +
-            "Bimari\n" +
-            "Barkat\n" +
-            "Sehat\n" +
-            "Hifazat"
-        );
-
-
-    if (!category) {
-        return;
-    }
-
-
-    const cleanCategory =
-        category.trim();
-
-
     const {
     data,
     error
@@ -900,14 +881,6 @@ const allTaweez =
 
 const list =
     allTaweez;
-
-
-alert(
-    "TAWEEZ DEBUG\n\n" +
-    "Total Library Records: " +
-    list.length
-);
-
 
 if (list.length === 0) {
 
@@ -972,9 +945,7 @@ if (list.length === 0) {
         document.createElement("h2");
 
     heading.textContent =
-        "🧿 " +
-        cleanCategory +
-        " Taweez";
+    "🧿 Taweez Library";
 
     heading.style.color =
         "#ffffff";
