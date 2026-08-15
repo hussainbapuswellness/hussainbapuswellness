@@ -901,14 +901,22 @@ const allTaweez =
 const list =
     allTaweez;
 
-    if (list.length === 0) {
 
-        alert(
-            "Is category me koi Taweez nahi mila."
-        );
+alert(
+    "TAWEEZ DEBUG\n\n" +
+    "Total Library Records: " +
+    list.length
+);
 
-        return;
-    }
+
+if (list.length === 0) {
+
+    alert(
+        "Taweez_Library se koi record nahi aa raha."
+    );
+
+    return;
+}
 
 
     // ==================================================
