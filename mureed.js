@@ -866,34 +866,56 @@ async function selectTaweez() {
     error
 } =
     await supabaseClient
-        .from("Taweez_Library")
+
+        .from(
+            "Taweez_Library"
+        )
+
         .select("*")
-        .ilike(
-    "Category",
-    cleanCategory
-)
-        .order("Taweez_Name");
 
-
-    if (error) {
-
-        console.error(
-            "Taweez Library Error:",
-            error
+        .order(
+            "Taweez_Name"
         );
 
-        alert(
-            "Taweez Library Error\n\n" +
-            error.message
-        );
 
-        return;
-    }
+if (error) {
+
+    console.error(
+        "Taweez Library Error:",
+        error
+    );
+
+    alert(
+        "Taweez Library Error\n\n" +
+        error.message
+    );
+
+    return;
+}
 
 
-    const list =
-        data || [];
+const allTaweez =
+    data || [];
 
+
+const list =
+    allTaweez.filter(
+        function(item) {
+
+            return (
+                String(
+                    item.Category || ""
+                )
+                .trim()
+                .toLowerCase()
+            ===
+                cleanCategory
+                    .trim()
+                    .toLowerCase()
+            );
+
+        }
+    );
 
     if (list.length === 0) {
 
