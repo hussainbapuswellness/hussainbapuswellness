@@ -899,23 +899,7 @@ const allTaweez =
 
 
 const list =
-    allTaweez.filter(
-        function(item) {
-
-            return (
-                String(
-                    item.Category || ""
-                )
-                .trim()
-                .toLowerCase()
-            ===
-                cleanCategory
-                    .trim()
-                    .toLowerCase()
-            );
-
-        }
-    );
+    allTaweez;
 
     if (list.length === 0) {
 
