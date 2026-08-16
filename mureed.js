@@ -835,219 +835,112 @@ function openFullImage(imageUrl) {
     document.body.appendChild(overlay);
 }
 
-
 // ======================================================
-// TAWEEZ GALLERY
+// TAWEEZ LIBRARY - DYNAMIC STORAGE FOLDER SYSTEM
 // ======================================================
 
 async function selectTaweez() {
 
-    const {
-    data: folders,
-    error: folderError
-} =
-    await supabaseClient
-        .storage
-        .from("taweez-library")
-        .list("", {
-            limit: 1000,
-            sortBy: {
-                column: "name",
-                order: "asc"
-            }
-        });
-
-
-if (folderError) {
-
-    console.error(
-        "Taweez Storage Error:",
-        folderError
-    );
-
-    alert(
-        "Taweez Storage Error\n\n" +
-        folderError.message
-    );
-
-    return;
-}
-
-
-const allTaweez = [];
-
-
-const folderList =
-    (folders || []).filter(
-        function(item) {
-
-            return !item.id;
-        }
-    );
-
-
-for (
-    const folder
-    of folderList
-) {
-
-    const folderName =
-        folder.name;
-
+    // ==================================================
+    // STEP 1: LOAD ALL CATEGORY FOLDERS
+    // ==================================================
 
     const {
-        data: files,
-        error: fileError
+        data: folders,
+        error: folderError
     } =
         await supabaseClient
             .storage
             .from("taweez-library")
-            .list(
-                folderName,
-                {
-                    limit: 1000,
-                    sortBy: {
-                        column: "name",
-                        order: "asc"
-                    }
+            .list("", {
+                limit: 100,
+                sortBy: {
+                    column: "name",
+                    order: "asc"
                 }
-            );
+            });
 
 
-    if (fileError) {
+    if (folderError) {
 
         console.error(
-            "Folder Load Error:",
-            folderName,
-            fileError
+            "Taweez Category Error:",
+            folderError
         );
 
-        continue;
+        alert(
+            "Taweez Category Load Error\n\n" +
+            folderError.message
+        );
+
+        return;
     }
 
 
-    (files || []).forEach(
-        function(file) {
-
-            if (!file.id) {
-                return;
-            }
-
-
-            const fileName =
-                file.name || "";
-
-
-            const lowerName =
-                fileName.toLowerCase();
-
-
-            if (
-                !lowerName.endsWith(".jpg") &&
-                !lowerName.endsWith(".jpeg") &&
-                !lowerName.endsWith(".png") &&
-                !lowerName.endsWith(".webp") &&
-                !lowerName.endsWith(".gif")
-            ) {
-                return;
-            }
-
-
-            const storagePath =
-                folderName +
-                "/" +
-                fileName;
-
-
-            const publicUrl =
-                supabaseClient
-                    .storage
-                    .from("taweez-library")
-                    .getPublicUrl(
-                        storagePath
-                    )
-                    .data
-                    .publicUrl;
-
-
-            const taweezName =
-                fileName
-                    .replace(
-                        /\.[^/.]+$/,
-                        ""
-                    )
-                    .replace(
-                        /[_-]+/g,
-                        " "
-                    )
-                    .trim();
-
-
-            allTaweez.push({
-
-                Taweez_Name:
-                    taweezName,
-
-                Category:
-                    folderName,
-
-                File_Url:
-                    publicUrl
-
-            });
-
-        }
-    );
-
-}
-
-
-const list =
-    allTaweez;
-
-
-if (list.length === 0) {
-
-    alert(
-        "Taweez Library me koi image nahi mili."
-    );
-
-    return;
-}
-
     // ==================================================
-    // GALLERY OVERLAY
+    // ONLY FOLDERS
     // ==================================================
 
-    const overlay =
+    const categories =
+        (folders || []).filter(
+            function(item) {
+
+                return (
+                    item &&
+                    item.name &&
+                    !item.metadata
+                );
+
+            }
+        );
+
+
+    if (categories.length === 0) {
+
+        alert(
+            "Taweez Library me koi category folder nahi mila."
+        );
+
+        return;
+    }
+
+
+    // ==================================================
+    // CATEGORY OVERLAY
+    // ==================================================
+
+    const categoryOverlay =
         document.createElement("div");
 
-    overlay.id =
-        "taweezGalleryOverlay";
+    categoryOverlay.id =
+        "taweezCategoryOverlay";
 
-    overlay.style.position =
+    categoryOverlay.style.position =
         "fixed";
 
-    overlay.style.inset =
+    categoryOverlay.style.inset =
         "0";
 
-    overlay.style.zIndex =
-        "99999";
+    categoryOverlay.style.zIndex =
+        "999999";
 
-    overlay.style.background =
+    categoryOverlay.style.background =
         "rgba(0,0,0,0.95)";
 
-    overlay.style.overflowY =
+    categoryOverlay.style.overflowY =
         "auto";
 
-    overlay.style.padding =
+    categoryOverlay.style.padding =
         "20px";
 
-    overlay.style.boxSizing =
+    categoryOverlay.style.boxSizing =
         "border-box";
 
 
-    // HEADER
+    // ==================================================
+    // CATEGORY HEADER
+    // ==================================================
+
     const header =
         document.createElement("div");
 
@@ -1068,7 +961,7 @@ if (list.length === 0) {
         document.createElement("h2");
 
     heading.textContent =
-    "🧿 Taweez Library";
+        "🧿 Select Taweez Category";
 
     heading.style.color =
         "#ffffff";
@@ -1107,20 +1000,355 @@ if (list.length === 0) {
     closeButton.style.cursor =
         "pointer";
 
+
     closeButton.onclick =
         function() {
-            overlay.remove();
+
+            categoryOverlay.remove();
+
         };
 
 
-    header.appendChild(heading);
+    header.appendChild(
+        heading
+    );
 
-    header.appendChild(closeButton);
+    header.appendChild(
+        closeButton
+    );
 
-    overlay.appendChild(header);
+    categoryOverlay.appendChild(
+        header
+    );
 
 
+    // ==================================================
+    // CATEGORY GRID
+    // ==================================================
+
+    const categoryGrid =
+        document.createElement("div");
+
+    categoryGrid.style.display =
+        "grid";
+
+    categoryGrid.style.gridTemplateColumns =
+        "repeat(auto-fit, minmax(150px, 1fr))";
+
+    categoryGrid.style.gap =
+        "15px";
+
+
+    categories.forEach(
+        function(categoryItem) {
+
+            const categoryName =
+                categoryItem.name;
+
+
+            const categoryCard =
+                document.createElement("button");
+
+            categoryCard.type =
+                "button";
+
+            categoryCard.style.padding =
+                "20px 10px";
+
+            categoryCard.style.border =
+                "none";
+
+            categoryCard.style.borderRadius =
+                "12px";
+
+            categoryCard.style.background =
+                "#ffffff";
+
+            categoryCard.style.color =
+                "#111111";
+
+            categoryCard.style.fontSize =
+                "17px";
+
+            categoryCard.style.fontWeight =
+                "bold";
+
+            categoryCard.style.cursor =
+                "pointer";
+
+
+            // ------------------------------------------
+            // FOLDER NAME → DISPLAY NAME
+            // ------------------------------------------
+
+            const displayCategory =
+                categoryName
+                    .replace(
+                        /[-_]+/g,
+                        " "
+                    )
+                    .replace(
+                        /\b\w/g,
+                        function(letter) {
+
+                            return letter.toUpperCase();
+
+                        }
+                    );
+
+
+            categoryCard.textContent =
+                "🧿 " +
+                displayCategory;
+
+
+            // ------------------------------------------
+            // OPEN CATEGORY
+            // ------------------------------------------
+
+            categoryCard.onclick =
+                function() {
+
+                    categoryOverlay.remove();
+
+                    loadTaweezFromCategory(
+                        categoryName,
+                        displayCategory
+                    );
+
+                };
+
+
+            categoryGrid.appendChild(
+                categoryCard
+            );
+
+        }
+    );
+
+
+    categoryOverlay.appendChild(
+        categoryGrid
+    );
+
+
+    document.body.appendChild(
+        categoryOverlay
+    );
+}
+
+
+// ======================================================
+// LOAD TAWEEZ IMAGES FROM SELECTED FOLDER
+// ======================================================
+
+async function loadTaweezFromCategory(
+    categoryName,
+    displayCategory
+) {
+
+    // ==================================================
+    // LOAD FILES FROM FOLDER
+    // ==================================================
+
+    const {
+        data: files,
+        error
+    } =
+        await supabaseClient
+            .storage
+            .from("taweez-library")
+            .list(
+                categoryName,
+                {
+                    limit: 100,
+                    sortBy: {
+                        column: "name",
+                        order: "asc"
+                    }
+                }
+            );
+
+
+    if (error) {
+
+        console.error(
+            "Taweez Image Load Error:",
+            error
+        );
+
+        alert(
+            "Taweez Image Load Error\n\n" +
+            error.message
+        );
+
+        return;
+    }
+
+
+    // ==================================================
+    // ONLY IMAGE FILES
+    // ==================================================
+
+    const imageFiles =
+        (files || []).filter(
+            function(file) {
+
+                if (
+                    !file ||
+                    !file.name
+                ) {
+
+                    return false;
+
+                }
+
+
+                return (
+                    /\.(jpg|jpeg|png|webp|gif)$/i
+                        .test(
+                            file.name
+                        )
+                );
+
+            }
+        );
+
+
+    if (imageFiles.length === 0) {
+
+        alert(
+            displayCategory +
+            " category me koi image nahi mili."
+        );
+
+        return;
+    }
+
+
+    // ==================================================
+    // GALLERY OVERLAY
+    // ==================================================
+
+    const overlay =
+        document.createElement("div");
+
+    overlay.id =
+        "taweezGalleryOverlay";
+
+    overlay.style.position =
+        "fixed";
+
+    overlay.style.inset =
+        "0";
+
+    overlay.style.zIndex =
+        "999999";
+
+    overlay.style.background =
+        "rgba(0,0,0,0.95)";
+
+    overlay.style.overflowY =
+        "auto";
+
+    overlay.style.padding =
+        "20px";
+
+    overlay.style.boxSizing =
+        "border-box";
+
+
+    // ==================================================
+    // GALLERY HEADER
+    // ==================================================
+
+    const header =
+        document.createElement("div");
+
+    header.style.display =
+        "flex";
+
+    header.style.justifyContent =
+        "space-between";
+
+    header.style.alignItems =
+        "center";
+
+    header.style.marginBottom =
+        "20px";
+
+
+    const heading =
+        document.createElement("h2");
+
+    heading.textContent =
+        "🧿 " +
+        displayCategory +
+        " Taweez";
+
+    heading.style.color =
+        "#ffffff";
+
+    heading.style.margin =
+        "0";
+
+
+    const closeButton =
+        document.createElement("button");
+
+    closeButton.type =
+        "button";
+
+    closeButton.textContent =
+        "✕ Close";
+
+    closeButton.style.padding =
+        "10px 16px";
+
+    closeButton.style.border =
+        "none";
+
+    closeButton.style.borderRadius =
+        "8px";
+
+    closeButton.style.background =
+        "#ffffff";
+
+    closeButton.style.color =
+        "#111111";
+
+    closeButton.style.fontWeight =
+        "bold";
+
+    closeButton.style.cursor =
+        "pointer";
+
+
+    closeButton.onclick =
+        function() {
+
+            overlay.remove();
+
+        };
+
+
+    header.appendChild(
+        heading
+    );
+
+    header.appendChild(
+        closeButton
+    );
+
+    overlay.appendChild(
+        header
+    );
+
+
+    // ==================================================
     // GALLERY GRID
+    // ==================================================
+
     const gallery =
         document.createElement("div");
 
@@ -1134,8 +1362,46 @@ if (list.length === 0) {
         "15px";
 
 
-    list.forEach(
-        function(item) {
+    // ==================================================
+    // CREATE EACH IMAGE CARD
+    // ==================================================
+
+    imageFiles.forEach(
+        function(file) {
+
+            // ------------------------------------------
+            // FILE PATH
+            // ------------------------------------------
+
+            const filePath =
+                categoryName +
+                "/" +
+                file.name;
+
+
+            // ------------------------------------------
+            // PUBLIC URL
+            // ------------------------------------------
+
+            const {
+                data: publicUrlData
+            } =
+                supabaseClient
+                    .storage
+                    .from("taweez-library")
+                    .getPublicUrl(
+                        filePath
+                    );
+
+
+            const fileUrl =
+                publicUrlData?.publicUrl ||
+                "";
+
+
+            // ------------------------------------------
+            // CARD
+            // ------------------------------------------
 
             const card =
                 document.createElement("div");
@@ -1156,13 +1422,35 @@ if (list.length === 0) {
                 "border-box";
 
 
+            // ------------------------------------------
+            // NAME FROM FILE NAME
+            // ------------------------------------------
+
+            const cleanName =
+                file.name
+                    .replace(
+                        /\.[^/.]+$/,
+                        ""
+                    )
+                    .replace(
+                        /[-_]+/g,
+                        " "
+                    )
+                    .replace(
+                        /\b\w/g,
+                        function(letter) {
+
+                            return letter.toUpperCase();
+
+                        }
+                    );
+
+
             const name =
                 document.createElement("div");
 
             name.textContent =
-                safeText(
-                    item.Taweez_Name
-                );
+                cleanName;
 
             name.style.fontWeight =
                 "bold";
@@ -1173,63 +1461,16 @@ if (list.length === 0) {
             name.style.color =
                 "#111111";
 
-            card.appendChild(name);
+
+            card.appendChild(
+                name
+            );
 
 
-            const fileUrl =
-                item.File_Url || "";
-
-
-            if (fileUrl) {
-
-                const image =
-                    document.createElement("img");
-
-                image.src =
-                    fileUrl;
-
-                image.style.width =
-                    "100%";
-
-                image.style.height =
-                    "180px";
-
-                image.style.objectFit =
-                    "contain";
-
-                image.style.background =
-                    "#f5f5f5";
-
-                image.style.borderRadius =
-                    "8px";
-
-                image.style.cursor =
-                    "pointer";
-
-
-                image.onclick =
-                    function() {
-                        openFullImage(fileUrl);
-                    };
-
-
-                card.appendChild(image);
-
-            } else {
-
-                const noImage =
-                    document.createElement("p");
-                    noImage.textContent =
-                    "Image Available Nahi Hai";
-
-                noImage.style.color =
-                    "#777777";
-
-                card.appendChild(noImage);
-            }
-
-
+            // ------------------------------------------
             // SELECT BUTTON
+            // ------------------------------------------
+
             const selectButton =
                 document.createElement("button");
 
@@ -1267,6 +1508,106 @@ if (list.length === 0) {
                 "pointer";
 
 
+            // ------------------------------------------
+            // IMAGE
+            // ------------------------------------------
+
+            if (fileUrl) {
+
+                const image =
+                    document.createElement("img");
+
+                image.src =
+                    fileUrl;
+
+                image.alt =
+                    cleanName;
+
+                image.style.width =
+                    "100%";
+
+                image.style.height =
+                    "180px";
+
+                image.style.objectFit =
+                    "contain";
+
+                image.style.background =
+                    "#f5f5f5";
+
+                image.style.borderRadius =
+                    "8px";
+
+                image.style.cursor =
+                    "pointer";
+
+
+                // FULL IMAGE
+                image.onclick =
+                    function() {
+
+                        openFullImage(
+                            fileUrl
+                        );
+
+                    };
+
+
+                // IMAGE ERROR
+                image.onerror =
+                    function() {
+
+                        image.style.display =
+                            "none";
+
+
+                        const errorText =
+                            document.createElement(
+                                "p"
+                            );
+
+                        errorText.textContent =
+                            "Image Load Nahi Hui";
+
+                        errorText.style.color =
+                            "#cc0000";
+
+
+                        card.insertBefore(
+                            errorText,
+                            selectButton
+                        );
+
+                    };
+
+
+                card.appendChild(
+                    image
+                );
+
+            } else {
+
+                const noImage =
+                    document.createElement("p");
+
+                noImage.textContent =
+                    "Image Available Nahi Hai";
+
+                noImage.style.color =
+                    "#777777";
+
+
+                card.appendChild(
+                    noImage
+                );
+
+            }
+
+
+            // ------------------------------------------
+            // SELECT TAWEEZ
+            // ------------------------------------------
+
             selectButton.onclick =
                 function() {
 
@@ -1279,9 +1620,8 @@ if (list.length === 0) {
                     if (nameInput) {
 
                         nameInput.value =
-                            safeText(
-                                item.Taweez_Name
-                            );
+                            cleanName;
+
                     }
 
 
@@ -1301,13 +1641,15 @@ if (list.length === 0) {
                             "<p>" +
                             "✅ <b>Selected:</b> " +
                             escapeHtml(
-                                item.Taweez_Name
+                                cleanName
                             ) +
                             "</p>";
+
                     }
 
 
                     overlay.remove();
+
                 };
 
 
@@ -1316,16 +1658,24 @@ if (list.length === 0) {
             );
 
 
-            gallery.appendChild(card);
+            gallery.appendChild(
+                card
+            );
 
         }
     );
 
 
-    overlay.appendChild(gallery);
+    overlay.appendChild(
+        gallery
+    );
 
-    document.body.appendChild(overlay);
+
+    document.body.appendChild(
+        overlay
+    );
 }
+                     
 // ======================================================
 // MUREED.JS - PART 4 / 4
 // SAVE TREATMENT + BUTTON INITIALIZATION
