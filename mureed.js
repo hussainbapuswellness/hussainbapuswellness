@@ -1600,34 +1600,23 @@ async function selectTaweez() {
                         image.onerror =
     function() {
 
-        console.error(
-            "TAWEEZ IMAGE LOAD FAILED:",
-            imageUrl
-        );
-
         image.style.display =
             "none";
 
         const errorText =
             document.createElement("p");
 
-        errorText.innerHTML =
-            "⚠️ Image Load Nahi Hui<br>" +
-            "<small style='word-break:break-all;color:#777;'>" +
-            escapeHtml(imageUrl) +
-            "</small>";
+        errorText.textContent =
+            "⚠️ Image Load Nahi Hui";
 
         errorText.style.color =
             "#c0392b";
 
-        errorText.style.fontSize =
-            "13px";
-
         card.appendChild(
             errorText
         );
-    };
 
+    };
 
                         image.onclick =
                             function() {
