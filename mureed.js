@@ -1173,43 +1173,67 @@ async function selectTaweez() {
         return fileUrl;
     }
 
-    const cleanPath =
-        fileUrl
-            .replace(/^\/+/, "")
-            .trim();
-
-    const {
-        data: publicData
-    } =
-        supabaseClient
-            .storage
-            .from("taweez-library")
-            .getPublicUrl(
-                cleanPath
-            );
-
-    return (
-        publicData?.publicUrl ||
-        ""
-    );
-    }
+    
 
 
     // ==================================================
     // SHOW CATEGORY
     // ==================================================
 
-    function showCategory(
-        category
+    function getTaweezImageUrl(fileUrl) {
+
+    if (!fileUrl) {
+        return "";
+    }
+
+    const cleanPath =
+        String(fileUrl)
+            .replace(/^\/+/, "")
+            .trim();
+
+    if (!cleanPath) {
+        return "";
+    }
+
+    if (
+        cleanPath.startsWith("http://") ||
+        cleanPath.startsWith("https://")
     ) {
+        console.log(
+            "TAWEEZ IMAGE URL:",
+            cleanPath
+        );
 
-        categoryArea.innerHTML =
-            "";
+        return cleanPath;
+    }
 
+    const encodedPath =
+        cleanPath
+            .split("/")
+            .map(
+                function(part) {
+                    return encodeURIComponent(part);
+                }
+            )
+            .join("/");
 
-        galleryArea.innerHTML =
-            "";
+    const imageUrl =
+        supabaseClient.supabaseUrl +
+        "/storage/v1/object/public/taweez-library/" +
+        encodedPath;
 
+    console.log(
+        "TAWEEZ FILE PATH:",
+        cleanPath
+    );
+
+    console.log(
+        "TAWEEZ IMAGE URL:",
+        imageUrl
+    );
+
+    return imageUrl;
+    }
 
         // ----------------------------------------------
         // CATEGORY TITLE
@@ -1533,27 +1557,35 @@ async function selectTaweez() {
 
 
                         image.onerror =
-                            function() {
+    function() {
 
-                                image.style.display =
-                                    "none";
+        console.error(
+            "TAWEEZ IMAGE LOAD FAILED:",
+            imageUrl
+        );
 
+        image.style.display =
+            "none";
 
-                                const errorText =
-                                    document.createElement("p");
+        const errorText =
+            document.createElement("p");
 
-                                errorText.textContent =
-                                    "⚠️ Image Load Nahi Hui";
+        errorText.innerHTML =
+            "⚠️ Image Load Nahi Hui<br>" +
+            "<small style='word-break:break-all;color:#777;'>" +
+            escapeHtml(imageUrl) +
+            "</small>";
 
-                                errorText.style.color =
-                                    "#c0392b";
+        errorText.style.color =
+            "#c0392b";
 
-                                card.insertBefore(
-                                    errorText,
-                                    selectButton
-                                );
+        errorText.style.fontSize =
+            "13px";
 
-                            };
+        card.appendChild(
+            errorText
+        );
+    };
 
 
                         image.onclick =
