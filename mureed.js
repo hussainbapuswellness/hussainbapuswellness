@@ -1166,13 +1166,54 @@ async function selectTaweez() {
         return "";
     }
 
-    if (
-        fileUrl.startsWith("http://") ||
-        fileUrl.startsWith("https://")
-    ) {
-        return fileUrl;
+    const cleanPath =
+        String(fileUrl)
+            .replace(/^\/+/, "")
+            .trim();
+
+    if (!cleanPath) {
+        return "";
     }
 
+    if (
+        cleanPath.startsWith("http://") ||
+        cleanPath.startsWith("https://")
+    ) {
+        console.log(
+            "TAWEEZ IMAGE URL:",
+            cleanPath
+        );
+
+        return cleanPath;
+    }
+
+    const encodedPath =
+        cleanPath
+            .split("/")
+            .map(
+                function(part) {
+                    return encodeURIComponent(part);
+                }
+            )
+            .join("/");
+
+    const imageUrl =
+        supabaseClient.supabaseUrl +
+        "/storage/v1/object/public/taweez-library/" +
+        encodedPath;
+
+    console.log(
+        "TAWEEZ FILE PATH:",
+        cleanPath
+    );
+
+    console.log(
+        "TAWEEZ IMAGE URL:",
+        imageUrl
+    );
+
+    return imageUrl;
+    }
     
 
 
