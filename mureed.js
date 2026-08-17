@@ -1160,51 +1160,38 @@ async function selectTaweez() {
     // IMAGE URL HELPER
     // ==================================================
 
-    function getTaweezImageUrl(
-        fileUrl
+    function getTaweezImageUrl(fileUrl) {
+
+    if (!fileUrl) {
+        return "";
+    }
+
+    if (
+        fileUrl.startsWith("http://") ||
+        fileUrl.startsWith("https://")
     ) {
+        return fileUrl;
+    }
 
-        if (!fileUrl) {
+    const cleanPath =
+        fileUrl
+            .replace(/^\/+/, "")
+            .trim();
 
-            return "";
+    const {
+        data: publicData
+    } =
+        supabaseClient
+            .storage
+            .from("taweez-library")
+            .getPublicUrl(
+                cleanPath
+            );
 
-        }
-
-
-        // Already a complete URL
-        if (
-            fileUrl.startsWith(
-                "http://"
-            ) ||
-            fileUrl.startsWith(
-                "https://"
-            )
-        ) {
-
-            return fileUrl;
-
-        }
-
-
-        // Supabase Storage public URL
-        const {
-            data: publicData
-        } =
-            supabaseClient
-                .storage
-                .from(
-                    "taweez-library"
-                )
-                .getPublicUrl(
-                    fileUrl
-                );
-
-
-        return (
-            publicData?.publicUrl ||
-            ""
-        );
-
+    return (
+        publicData?.publicUrl ||
+        ""
+    );
     }
 
 
