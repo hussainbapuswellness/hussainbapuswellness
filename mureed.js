@@ -955,50 +955,68 @@ function openFullImage(imageUrl) {
 // TAWEEZ IMAGE URL HELPER
 // ======================================================
 
-function getTaweezImageUrl(
-    fileUrl
-) {
+function getTaweezImageUrl(fileUrl) {
 
     if (!fileUrl) {
         return "";
     }
 
-
-    const value =
-        String(
-            fileUrl
-        ).trim();
-
+    let value =
+        String(fileUrl).trim();
 
     if (!value) {
         return "";
     }
 
 
-    // Already a complete URL
+    // ==================================================
+    // ALREADY COMPLETE PUBLIC URL
+    // ==================================================
+
     if (
-        value.startsWith(
-            "http://"
-        ) ||
-        value.startsWith(
-            "https://"
-        )
+        value.startsWith("http://") ||
+        value.startsWith("https://")
     ) {
 
         return value;
-
     }
 
 
-    // Supabase Storage path
+    // ==================================================
+    // REMOVE LEADING SLASH
+    // ==================================================
+
+    value =
+        value.replace(/^\/+/, "");
+
+
+    // ==================================================
+    // IF DATABASE STORES FULL STORAGE PATH
+    // ==================================================
+
+    if (
+        value.includes(
+            "/storage/v1/object/public/taweez-library/"
+        )
+    ) {
+
+        value =
+            value.split(
+                "/storage/v1/object/public/taweez-library/"
+            )[1] || "";
+    }
+
+
+    // ==================================================
+    // SUPABASE PUBLIC URL
+    // ==================================================
+
     const {
         data
     } =
         supabaseClient
             .storage
-            .from(
-                "taweez-library"
-            )
+            .from("taweez-library")
             .getPublicUrl(
                 value
             );
@@ -1010,7 +1028,6 @@ function getTaweezImageUrl(
     ) {
 
         return data.publicUrl;
-
     }
 
 
