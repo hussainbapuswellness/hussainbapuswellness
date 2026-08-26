@@ -1423,99 +1423,267 @@ function openTaweezCropEditor(
         };
 
 
+ // ==================================================
+// RESIZE HANDLES
+// ==================================================
+
+const handles = [
+    "nw",
+    "n",
+    "ne",
+    "e",
+    "se",
+    "s",
+    "sw",
+    "w"
+];
+
+handles.forEach(
+    function(position) {
+
+        const handle =
+            document.createElement(
+                "div"
+            );
+
+        handle.dataset.handle =
+            position;
+
+        handle.style.position =
+            "absolute";
+
+        handle.style.width =
+            "18px";
+
+        handle.style.height =
+            "18px";
+
+        handle.style.background =
+            "#ffffff";
+
+        handle.style.border =
+            "3px solid red";
+
+        handle.style.borderRadius =
+            "50%";
+
+        handle.style.boxSizing =
+            "border-box";
+
+        handle.style.zIndex =
+            "20";
+
+        handle.style.touchAction =
+            "none";
+
+
+        if (
+            position.includes("n")
+        ) {
+            handle.style.top =
+                "-9px";
+        }
+
+        if (
+            position.includes("s")
+        ) {
+            handle.style.bottom =
+                "-9px";
+        }
+
+        if (
+            position.includes("e")
+        ) {
+            handle.style.right =
+                "-9px";
+        }
+
+        if (
+            position.includes("w")
+        ) {
+            handle.style.left =
+                "-9px";
+        }
+
+
+        if (
+            position === "n" ||
+            position === "s"
+        ) {
+
+            handle.style.left =
+                "50%";
+
+            handle.style.transform =
+                "translateX(-50%)";
+
+        }
+
+
+        if (
+            position === "e" ||
+            position === "w"
+        ) {
+
+            handle.style.top =
+                "50%";
+
+            handle.style.transform =
+                "translateY(-50%)";
+
+        }
+
+
+        if (
+            position === "nw" ||
+            position === "ne" ||
+            position === "sw" ||
+            position === "se"
+        ) {
+
+            handle.style.cursor =
+                position +
+                "-resize";
+
+        }
+
+
+        if (
+            position === "n" ||
+            position === "s"
+        ) {
+
+            handle.style.cursor =
+                "ns-resize";
+
+        }
+
+
+        if (
+            position === "e" ||
+            position === "w"
+        ) {
+
+            handle.style.cursor =
+                "ew-resize";
+
+        }
+
+
+        cropBox.appendChild(
+            handle
+        );
+
+    }
+);
+
     // ==================================================
-    // MOVE CROP BOX
-    // ==================================================
+// MOVE + RESIZE CROP BOX
+// ==================================================
 
-    let dragging =
-        false;
+let cropAction = null;
 
-    let startX =
-        0;
+let startX = 0;
+let startY = 0;
 
-    let startY =
-        0;
+let startLeft = 0;
+let startTop = 0;
 
-    let startLeft =
-        0;
-
-    let startTop =
-        0;
+let startWidth = 0;
+let startHeight = 0;
 
 
-    cropBox.addEventListener(
-        "pointerdown",
-        function(event) {
+cropBox.addEventListener(
+    "pointerdown",
+    function(event) {
 
-            event.preventDefault();
-
-
-            dragging =
-                true;
+        event.preventDefault();
+        event.stopPropagation();
 
 
-            cropBox.setPointerCapture(
-                event.pointerId
+        const handle =
+            event.target.closest(
+                "[data-handle]"
             );
 
 
-            startX =
-                event.clientX;
+        cropAction =
+            handle
+                ? handle.dataset.handle
+                : "move";
 
-            startY =
-                event.clientY;
+
+        startX =
+            event.clientX;
+
+        startY =
+            event.clientY;
 
 
-            startLeft =
-                cropBox.offsetLeft;
+        startLeft =
+            cropBox.offsetLeft;
 
-            startTop =
-                cropBox.offsetTop;
+        startTop =
+            cropBox.offsetTop;
 
+
+        startWidth =
+            cropBox.offsetWidth;
+
+        startHeight =
+            cropBox.offsetHeight;
+
+
+        cropBox.setPointerCapture(
+            event.pointerId
+        );
+
+    }
+);
+
+
+cropBox.addEventListener(
+    "pointermove",
+    function(event) {
+
+        if (!cropAction) {
+            return;
         }
-    );
 
 
-    cropBox.addEventListener(
-        "pointermove",
-        function(event) {
-
-            if (!dragging) {
-                return;
-            }
+        event.preventDefault();
 
 
-            event.preventDefault();
+        const dx =
+            event.clientX -
+            startX;
+
+        const dy =
+            event.clientY -
+            startY;
 
 
-            const dx =
-                event.clientX -
-                startX;
+        const maxWidth =
+            imageWrapper.clientWidth;
+
+        const maxHeight =
+            imageWrapper.clientHeight;
 
 
-            const dy =
-                event.clientY -
-                startY;
+        // ==========================================
+        // MOVE
+        // ==========================================
 
+        if (
+            cropAction ===
+            "move"
+        ) {
 
             let newLeft =
-                startLeft +
-                dx;
-
+                startLeft + dx;
 
             let newTop =
-                startTop +
-                dy;
-
-
-            const maxLeft =
-                imageWrapper.clientWidth -
-                cropBox.offsetWidth;
-
-
-            const maxTop =
-                imageWrapper.clientHeight -
-                cropBox.offsetHeight;
+                startTop + dy;
 
 
             newLeft =
@@ -1523,7 +1691,8 @@ function openTaweezCropEditor(
                     0,
                     Math.min(
                         newLeft,
-                        maxLeft
+                        maxWidth -
+                        startWidth
                     )
                 );
 
@@ -1533,7 +1702,8 @@ function openTaweezCropEditor(
                     0,
                     Math.min(
                         newTop,
-                        maxTop
+                        maxHeight -
+                        startHeight
                     )
                 );
 
@@ -1541,44 +1711,196 @@ function openTaweezCropEditor(
             cropBox.style.left =
                 newLeft + "px";
 
-
             cropBox.style.top =
                 newTop + "px";
 
+
+            return;
         }
-    );
 
 
-    cropBox.addEventListener(
-        "pointerup",
-        function(event) {
+        // ==========================================
+        // RESIZE
+        // ==========================================
 
-            dragging =
-                false;
+        let left =
+            startLeft;
 
-            try {
+        let top =
+            startTop;
 
-                cropBox.releasePointerCapture(
-                    event.pointerId
-                );
+        let width =
+            startWidth;
 
-            } catch (e) {}
+        let height =
+            startHeight;
+
+
+        const minSize =
+            40;
+
+
+        if (
+            cropAction.includes("e")
+        ) {
+
+            width =
+                startWidth + dx;
 
         }
-    );
 
 
-    cropBox.addEventListener(
-        "pointercancel",
-        function() {
+        if (
+            cropAction.includes("w")
+        ) {
 
-            dragging =
-                false;
+            left =
+                startLeft + dx;
+
+            width =
+                startWidth - dx;
 
         }
-    );
 
 
+        if (
+            cropAction.includes("s")
+        ) {
+
+            height =
+                startHeight + dy;
+
+        }
+
+
+        if (
+            cropAction.includes("n")
+        ) {
+
+            top =
+                startTop + dy;
+
+            height =
+                startHeight - dy;
+
+        }
+
+
+        // Minimum size
+        if (
+            width <
+            minSize
+        ) {
+
+            width =
+                minSize;
+
+        }
+
+
+        if (
+            height <
+            minSize
+        ) {
+
+            height =
+                minSize;
+
+        }
+
+
+        // Keep inside image
+        if (
+            left < 0
+        ) {
+
+            left =
+                0;
+
+        }
+
+
+        if (
+            top < 0
+        ) {
+
+            top =
+                0;
+
+        }
+
+
+        if (
+            left + width >
+            maxWidth
+        ) {
+
+            width =
+                maxWidth -
+                left;
+
+        }
+
+
+        if (
+            top + height >
+            maxHeight
+        ) {
+
+            height =
+                maxHeight -
+                top;
+
+        }
+
+
+        cropBox.style.left =
+            left + "px";
+
+        cropBox.style.top =
+            top + "px";
+
+        cropBox.style.width =
+            width + "px";
+
+        cropBox.style.height =
+            height + "px";
+
+    }
+);
+
+
+cropBox.addEventListener(
+    "pointerup",
+    function(event) {
+
+        cropAction =
+            null;
+
+
+        try {
+
+            cropBox.releasePointerCapture(
+                event.pointerId
+            );
+
+        } catch (e) {}
+
+    }
+);
+
+
+cropBox.addEventListener(
+    "pointercancel",
+    function() {
+
+        cropAction =
+            null;
+
+    }
+);
+
+    
     // ==================================================
     // PRINT CROPPED AREA
     // ==================================================
