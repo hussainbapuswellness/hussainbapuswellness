@@ -1033,7 +1033,797 @@ function getTaweezImageUrl(fileUrl) {
 
     return "";
 }
+// ======================================================
+// TAWEEZ CROP & PRINT EDITOR
+// ======================================================
 
+function openTaweezCropEditor(
+    imageUrl,
+    taweezName
+) {
+
+    if (!imageUrl) {
+
+        alert(
+            "Taweez image available nahi hai."
+        );
+
+        return;
+    }
+
+
+    // REMOVE OLD EDITOR
+    const oldEditor =
+        document.getElementById(
+            "taweezCropEditor"
+        );
+
+
+    if (oldEditor) {
+
+        oldEditor.remove();
+
+    }
+
+
+    // MAIN OVERLAY
+    const overlay =
+        document.createElement(
+            "div"
+        );
+
+
+    overlay.id =
+        "taweezCropEditor";
+
+
+    overlay.style.position =
+        "fixed";
+
+    overlay.style.inset =
+        "0";
+
+    overlay.style.zIndex =
+        "999999";
+
+    overlay.style.background =
+        "rgba(0,0,0,0.96)";
+
+    overlay.style.overflowY =
+        "auto";
+
+    overlay.style.padding =
+        "15px";
+
+    overlay.style.boxSizing =
+        "border-box";
+
+
+    // PANEL
+    const panel =
+        document.createElement(
+            "div"
+        );
+
+
+    panel.style.maxWidth =
+        "900px";
+
+    panel.style.margin =
+        "0 auto";
+
+    panel.style.background =
+        "#ffffff";
+
+    panel.style.borderRadius =
+        "12px";
+
+    panel.style.padding =
+        "15px";
+
+    panel.style.boxSizing =
+        "border-box";
+
+
+    // TITLE
+    const title =
+        document.createElement(
+            "h2"
+        );
+
+
+    title.textContent =
+        "✂️ Crop Taweez";
+
+
+    title.style.marginTop =
+        "0";
+
+
+    panel.appendChild(
+        title
+    );
+
+
+    const instruction =
+        document.createElement(
+            "p"
+        );
+
+
+    instruction.textContent =
+        "Image me sirf Arabic Taweez wala hissa select karein, phir Print dabayein.";
+
+
+    instruction.style.fontWeight =
+        "bold";
+
+
+    panel.appendChild(
+        instruction
+    );
+
+
+    // IMAGE WRAPPER
+    const imageWrapper =
+        document.createElement(
+            "div"
+        );
+
+
+    imageWrapper.style.position =
+        "relative";
+
+    imageWrapper.style.display =
+        "inline-block";
+
+    imageWrapper.style.maxWidth =
+        "100%";
+
+    imageWrapper.style.lineHeight =
+        "0";
+
+    imageWrapper.style.background =
+        "#eeeeee";
+
+    imageWrapper.style.overflow =
+        "hidden";
+
+
+    // SOURCE IMAGE
+    const sourceImage =
+        document.createElement(
+            "img"
+        );
+
+
+    sourceImage.crossOrigin =
+        "anonymous";
+
+    sourceImage.src =
+        imageUrl;
+
+    sourceImage.style.display =
+        "block";
+
+    sourceImage.style.maxWidth =
+        "100%";
+
+    sourceImage.style.maxHeight =
+        "70vh";
+
+    sourceImage.style.width =
+        "auto";
+
+    sourceImage.style.height =
+        "auto";
+
+    sourceImage.style.userSelect =
+        "none";
+
+
+    imageWrapper.appendChild(
+        sourceImage
+    );
+
+
+    panel.appendChild(
+        imageWrapper
+    );
+
+
+    // CROP BOX
+    const cropBox =
+        document.createElement(
+            "div"
+        );
+
+
+    cropBox.style.position =
+        "absolute";
+
+    cropBox.style.left =
+        "20%";
+
+    cropBox.style.top =
+        "20%";
+
+    cropBox.style.width =
+        "60%";
+
+    cropBox.style.height =
+        "60%";
+
+    cropBox.style.border =
+        "3px solid red";
+
+    cropBox.style.background =
+        "rgba(255,255,255,0.08)";
+
+    cropBox.style.cursor =
+        "move";
+
+    cropBox.style.boxSizing =
+        "border-box";
+
+    cropBox.style.touchAction =
+        "none";
+
+
+    imageWrapper.appendChild(
+        cropBox
+    );
+
+
+    // HELP TEXT
+    const help =
+        document.createElement(
+            "p"
+        );
+
+
+    help.textContent =
+        "🔴 Red box ko finger/mouse se move karke Arabic Taweez ke exact area par set karein.";
+
+
+    panel.appendChild(
+        help
+    );
+
+
+    // BUTTON AREA
+    const buttons =
+        document.createElement(
+            "div"
+        );
+
+
+    buttons.style.display =
+        "flex";
+
+    buttons.style.flexWrap =
+        "wrap";
+
+    buttons.style.gap =
+        "10px";
+
+    buttons.style.marginTop =
+        "10px";
+
+
+    // RESET
+    const resetButton =
+        document.createElement(
+            "button"
+        );
+
+
+    resetButton.type =
+        "button";
+
+    resetButton.textContent =
+        "↩️ Reset Crop";
+
+    resetButton.className =
+        "btn";
+
+
+    // PRINT
+    const printButton =
+        document.createElement(
+            "button"
+        );
+
+
+    printButton.type =
+        "button";
+
+    printButton.textContent =
+        "🖨️ Print Taweez";
+
+    printButton.className =
+        "btn gold";
+
+
+    // CLOSE
+    const closeButton =
+        document.createElement(
+            "button"
+        );
+
+
+    closeButton.type =
+        "button";
+
+    closeButton.textContent =
+        "✕ Close";
+
+    closeButton.className =
+        "btn";
+
+
+    buttons.appendChild(
+        resetButton
+    );
+
+    buttons.appendChild(
+        printButton
+    );
+
+    buttons.appendChild(
+        closeButton
+    );
+
+
+    panel.appendChild(
+        buttons
+    );
+
+
+    overlay.appendChild(
+        panel
+    );
+
+
+    document.body.appendChild(
+        overlay
+    );
+
+
+    // ==================================================
+    // RESET CROP
+    // ==================================================
+
+    function resetCrop() {
+
+        cropBox.style.left =
+            "20%";
+
+        cropBox.style.top =
+            "20%";
+
+        cropBox.style.width =
+            "60%";
+
+        cropBox.style.height =
+            "60%";
+
+    }
+
+
+    resetButton.onclick =
+        resetCrop;
+
+
+    closeButton.onclick =
+        function() {
+
+            overlay.remove();
+
+        };
+
+
+    // ==================================================
+    // MOVE CROP BOX
+    // ==================================================
+
+    let dragging =
+        false;
+
+    let startX =
+        0;
+
+    let startY =
+        0;
+
+    let startLeft =
+        0;
+
+    let startTop =
+        0;
+
+
+    cropBox.addEventListener(
+        "pointerdown",
+        function(event) {
+
+            event.preventDefault();
+
+
+            dragging =
+                true;
+
+
+            cropBox.setPointerCapture(
+                event.pointerId
+            );
+
+
+            startX =
+                event.clientX;
+
+            startY =
+                event.clientY;
+
+
+            startLeft =
+                cropBox.offsetLeft;
+
+            startTop =
+                cropBox.offsetTop;
+
+        }
+    );
+
+
+    cropBox.addEventListener(
+        "pointermove",
+        function(event) {
+
+            if (!dragging) {
+                return;
+            }
+
+
+            event.preventDefault();
+
+
+            const dx =
+                event.clientX -
+                startX;
+
+
+            const dy =
+                event.clientY -
+                startY;
+
+
+            let newLeft =
+                startLeft +
+                dx;
+
+
+            let newTop =
+                startTop +
+                dy;
+
+
+            const maxLeft =
+                imageWrapper.clientWidth -
+                cropBox.offsetWidth;
+
+
+            const maxTop =
+                imageWrapper.clientHeight -
+                cropBox.offsetHeight;
+
+
+            newLeft =
+                Math.max(
+                    0,
+                    Math.min(
+                        newLeft,
+                        maxLeft
+                    )
+                );
+
+
+            newTop =
+                Math.max(
+                    0,
+                    Math.min(
+                        newTop,
+                        maxTop
+                    )
+                );
+
+
+            cropBox.style.left =
+                newLeft + "px";
+
+
+            cropBox.style.top =
+                newTop + "px";
+
+        }
+    );
+
+
+    cropBox.addEventListener(
+        "pointerup",
+        function(event) {
+
+            dragging =
+                false;
+
+            try {
+
+                cropBox.releasePointerCapture(
+                    event.pointerId
+                );
+
+            } catch (e) {}
+
+        }
+    );
+
+
+    cropBox.addEventListener(
+        "pointercancel",
+        function() {
+
+            dragging =
+                false;
+
+        }
+    );
+
+
+    // ==================================================
+    // PRINT CROPPED AREA
+    // ==================================================
+
+    printButton.onclick =
+        function() {
+
+            if (!sourceImage.naturalWidth) {
+
+                alert(
+                    "Image abhi load ho rahi hai. Thodi der baad try karein."
+                );
+
+                return;
+            }
+
+
+            const displayWidth =
+                sourceImage.clientWidth;
+
+
+            const displayHeight =
+                sourceImage.clientHeight;
+
+
+            if (
+                !displayWidth ||
+                !displayHeight
+            ) {
+
+                alert(
+                    "Image size detect nahi ho paya."
+                );
+
+                return;
+            }
+
+
+            // SCALE FROM SCREEN TO ORIGINAL IMAGE
+            const scaleX =
+                sourceImage.naturalWidth /
+                displayWidth;
+
+
+            const scaleY =
+                sourceImage.naturalHeight /
+                displayHeight;
+
+
+            const cropX =
+                cropBox.offsetLeft *
+                scaleX;
+
+
+            const cropY =
+                cropBox.offsetTop *
+                scaleY;
+
+
+            const cropWidth =
+                cropBox.offsetWidth *
+                scaleX;
+
+
+            const cropHeight =
+                cropBox.offsetHeight *
+                scaleY;
+
+
+            const canvas =
+                document.createElement(
+                    "canvas"
+                );
+
+
+            canvas.width =
+                Math.round(
+                    cropWidth
+                );
+
+
+            canvas.height =
+                Math.round(
+                    cropHeight
+                );
+
+
+            const ctx =
+                canvas.getContext(
+                    "2d"
+                );
+
+
+            ctx.drawImage(
+                sourceImage,
+                cropX,
+                cropY,
+                cropWidth,
+                cropHeight,
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+
+            let croppedImage;
+
+
+            try {
+
+                croppedImage =
+                    canvas.toDataURL(
+                        "image/png"
+                    );
+
+            } catch (error) {
+
+                console.error(
+                    "Crop Export Error:",
+                    error
+                );
+
+
+                alert(
+                    "Image crop nahi ho pa raha. Supabase Storage CORS setting check karni padegi."
+                );
+
+                return;
+
+            }
+
+
+            // PRINT WINDOW
+            const printWindow =
+                window.open(
+                    "",
+                    "_blank"
+                );
+
+
+            if (!printWindow) {
+
+                alert(
+                    "Print window blocked hai. Browser me pop-up allow karein."
+                );
+
+                return;
+
+            }
+
+
+            printWindow.document.open();
+
+
+            printWindow.document.write(
+                `
+                <!DOCTYPE html>
+
+                <html>
+
+                <head>
+
+                <title>
+                ${escapeHtml(taweezName || "Taweez")}
+                </title>
+
+                <style>
+
+                @page {
+                    margin: 0;
+                }
+
+                html,
+                body {
+                    margin: 0;
+                    padding: 0;
+                    background: #ffffff;
+                }
+
+                body {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-height: 100vh;
+                }
+
+                img {
+                    max-width: 100%;
+                    max-height: 100vh;
+                    object-fit: contain;
+                }
+
+                </style>
+
+                </head>
+
+                <body>
+
+                <img
+                    src="${croppedImage}"
+                    alt="Taweez"
+                >
+
+                <script>
+
+                window.onload =
+                    function() {
+
+                        setTimeout(
+                            function() {
+
+                                window.print();
+
+                            },
+                            300
+                        );
+
+                    };
+
+                <\/script>
+
+                </body>
+
+                </html>
+                `
+            );
+
+
+            printWindow.document.close();
+
+        };
+
+
+    // IMAGE LOAD ERROR
+    sourceImage.onerror =
+        function() {
+
+            alert(
+                "Taweez image load nahi hui."
+            );
+
+        };
+
+}
 
 // ======================================================
 // TAWEEZ GALLERY
