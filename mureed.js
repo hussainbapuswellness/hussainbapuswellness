@@ -1854,12 +1854,7 @@ async function selectTaweez() {
 
                     const imageUrl =
     getTaweezImageUrl(
-        (
-            item.Category
-                ? item.Category + "/"
-                : ""
-        ) +
-        (item.File_Url || "")
+        item.File_Url || ""
     );
 
 
