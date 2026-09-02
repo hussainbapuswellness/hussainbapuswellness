@@ -3501,7 +3501,14 @@ if (editingTreatmentId) {
 
 
     closeTreatmentForm();
+const historyBox =
+    document.getElementById(
+        "treatmentHistory"
+    );
 
+if (historyBox) {
+    historyBox.innerHTML = "";
+}
     await loadTreatmentHistory();
 
     return;
