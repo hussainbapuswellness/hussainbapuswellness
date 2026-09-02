@@ -2213,79 +2213,163 @@ cropBox.addEventListener(
 }
 
 // ======================================================
-// TAWEEZ GALLERY
+// TAWEEZ GALLERY FROM SUPABASE STORAGE
 // ======================================================
 
 async function selectTaweez() {
 
+    const bucketName = "taweez-library";
+
+
+    // GET FOLDERS
     const {
-        data,
-        error
+        data: folders,
+        error: folderError
     } =
+    await supabaseClient
+        .storage
+        .from(bucketName)
+        .list(
+            "",
+            {
+                limit: 1000,
+                offset: 0
+            }
+        );
+
+
+    if (folderError) {
+
+        console.error(
+            "Folder Load Error:",
+            folderError
+        );
+
+        alert(
+            folderError.message
+        );
+
+        return;
+    }
+
+
+    const allTaweez = [];
+
+
+    for (
+        const folder of folders
+    ) {
+
+
+        if (
+            folder.name.includes(".")
+        ) {
+            continue;
+        }
+
+
+        const {
+            data: images,
+            error: imageError
+        }
+        =
         await supabaseClient
-            .from(
-                "Taweez_Library"
-            )
-            .select("*")
-            .order(
-                "Category"
-            )
-            .order(
-                "Taweez_Name"
+            .storage
+            .from(bucketName)
+            .list(
+                folder.name,
+                {
+                    limit: 1000,
+                    offset: 0
+                }
             );
 
 
-    if (error) {
+        if (imageError) {
 
-        console.error(
-            "Taweez Library Error:",
-            error
+            console.error(
+                imageError
+            );
+
+            continue;
+
+        }
+
+
+        images.forEach(
+            function(image){
+
+                if(
+                    image.name
+                ) {
+
+                    const {
+                        data
+                    }
+                    =
+                    supabaseClient
+                    .storage
+                    .from(bucketName)
+                    .getPublicUrl(
+                        folder.name +
+                        "/" +
+                        image.name
+                    );
+
+
+                    allTaweez.push({
+
+                        Category:
+                            folder.name,
+
+
+                        Taweez_Name:
+                            image.name
+                            .replace(
+                                /\.[^/.]+$/,
+                                ""
+                            ),
+
+
+                        File_Url:
+                            data
+                            .publicUrl
+
+                    });
+
+                }
+
+            }
         );
 
-
-        alert(
-            "Taweez Library Error\n\n" +
-            error.message
-        );
-
-
-        return;
     }
 
 
-    const allTaweez =
-        data || [];
-
-
-    if (
-        allTaweez.length ===
-        0
-    ) {
+    if(
+        allTaweez.length === 0
+    ){
 
         alert(
-            "Taweez_Library me abhi koi Taweez nahi hai."
+            "Storage me koi Taweez nahi mila"
         );
 
-
         return;
+
     }
-
-
-    // REMOVE OLD OVERLAY
+        // REMOVE OLD OVERLAY
     const oldOverlay =
         document.getElementById(
             "taweezGalleryOverlay"
         );
 
 
-    if (oldOverlay) {
+    if(oldOverlay){
 
         oldOverlay.remove();
 
     }
 
 
-    // MAIN OVERLAY
     const overlay =
         document.createElement(
             "div"
@@ -2320,37 +2404,6 @@ async function selectTaweez() {
         "15px";
 
 
-    overlay.style.boxSizing =
-        "border-box";
-
-
-    // HEADER
-    const header =
-        document.createElement(
-            "div"
-        );
-
-
-    header.style.display =
-        "flex";
-
-
-    header.style.justifyContent =
-        "space-between";
-
-
-    header.style.alignItems =
-        "center";
-
-
-    header.style.gap =
-        "10px";
-
-
-    header.style.marginBottom =
-        "15px";
-
-
     const heading =
         document.createElement(
             "h2"
@@ -2362,139 +2415,18 @@ async function selectTaweez() {
 
 
     heading.style.color =
-        "#ffffff";
+        "#fff";
 
 
-    heading.style.margin =
-        "0";
-
-
-    heading.style.fontSize =
-        "20px";
-
-
-    const closeButton =
-        document.createElement(
-            "button"
-        );
-
-
-    closeButton.type =
-        "button";
-
-
-    closeButton.textContent =
-        "✕ Close";
-
-
-    closeButton.style.padding =
-        "9px 14px";
-
-
-    closeButton.style.border =
-        "none";
-
-
-    closeButton.style.borderRadius =
-        "8px";
-
-
-    closeButton.style.background =
-        "#ffffff";
-
-
-    closeButton.style.color =
-        "#111111";
-
-
-    closeButton.style.fontWeight =
-        "bold";
-
-
-    closeButton.style.cursor =
-        "pointer";
-
-
-    closeButton.onclick =
-        function() {
-
-            overlay.remove();
-
-        };
-
-
-    header.appendChild(
+    overlay.appendChild(
         heading
     );
 
 
-    header.appendChild(
-        closeButton
-    );
-
-
-    overlay.appendChild(
-        header
-    );
-
-
-    // CATEGORY SEARCH
-    const categorySearch =
-        document.createElement(
-            "input"
-        );
-
-
-    categorySearch.type =
-        "search";
-
-
-    categorySearch.placeholder =
-        "🔎 Search Category / Folder...";
-
-
-    categorySearch.style.width =
-        "100%";
-
-
-    categorySearch.style.padding =
-        "13px";
-
-
-    categorySearch.style.borderRadius =
-        "10px";
-
-
-    categorySearch.style.border =
-        "none";
-
-
-    categorySearch.style.boxSizing =
-        "border-box";
-
-
-    categorySearch.style.marginBottom =
-        "15px";
-
-
-    categorySearch.style.fontSize =
-        "16px";
-
-
-    overlay.appendChild(
-        categorySearch
-    );
-
-
-    // CATEGORY AREA
     const categoryArea =
         document.createElement(
             "div"
         );
-
-
-    categoryArea.id =
-        "taweezCategoryArea";
 
 
     categoryArea.style.display =
@@ -2502,7 +2434,7 @@ async function selectTaweez() {
 
 
     categoryArea.style.gridTemplateColumns =
-        "repeat(auto-fit, minmax(150px, 1fr))";
+        "repeat(auto-fit,minmax(150px,1fr))";
 
 
     categoryArea.style.gap =
@@ -2514,19 +2446,14 @@ async function selectTaweez() {
     );
 
 
-    // GALLERY AREA
     const galleryArea =
         document.createElement(
             "div"
         );
 
 
-    galleryArea.id =
-        "taweezGalleryArea";
-
-
     galleryArea.style.marginTop =
-        "15px";
+        "20px";
 
 
     overlay.appendChild(
@@ -2539,856 +2466,237 @@ async function selectTaweez() {
     );
 
 
-    // UNIQUE CATEGORIES
+
     const categories =
-        [
-            ...new Set(
-                allTaweez
-                    .map(
-                        function(item) {
+    [
+        ...new Set(
+            allTaweez.map(
+                function(item){
 
-                            return (
-                                item.Category ||
-                                ""
-                            )
-                            .trim();
-
-                        }
-                    )
-                    .filter(
-                        function(category) {
-
-                            return (
-                                category !==
-                                ""
-                            );
-
-                        }
-                    )
-            )
-        ]
-        .sort(
-            function(a, b) {
-
-                return a.localeCompare(
-                    b,
-                    undefined,
-                    {
-                        sensitivity:
-                            "base"
-                    }
-                );
-
-            }
-        );
-
-    // ==================================================
-    // RENDER CATEGORIES
-    // ==================================================
-
-    function renderCategories(
-        searchText
-    ) {
-
-        categoryArea.innerHTML =
-            "";
-
-        galleryArea.innerHTML =
-            "";
-
-
-        const search =
-            (
-                searchText ||
-                ""
-            )
-            .trim()
-            .toLowerCase();
-
-
-        const filteredCategories =
-            categories.filter(
-                function(category) {
-
-                    return (
-                        !search ||
-                        category
-                            .toLowerCase()
-                            .includes(
-                                search
-                            )
-                    );
+                    return item.Category;
 
                 }
-            );
+            )
+        )
+    ];
 
 
-        if (
-            filteredCategories.length ===
-            0
-        ) {
 
-            const empty =
+    categories.forEach(
+        function(category){
+
+
+            const button =
                 document.createElement(
-                    "p"
+                    "button"
                 );
 
 
-            empty.textContent =
-                "🔎 Koi Category nahi mili.";
+            button.type =
+                "button";
 
 
-            empty.style.color =
-                "#ffffff";
+            button.textContent =
+                "📁 " + category;
 
 
-            categoryArea.appendChild(
-                empty
-            );
+            button.style.padding =
+                "12px";
 
 
-            return;
-        }
+            button.style.cursor =
+                "pointer";
 
 
-        filteredCategories.forEach(
-            function(category) {
+            button.onclick =
+            function(){
 
-                const button =
-                    document.createElement(
-                        "button"
-                    );
 
+                galleryArea.innerHTML =
+                    "";
 
-                button.type =
-                    "button";
 
-
-                button.textContent =
-                    "📁 " +
-                    category;
-
-
-                button.style.padding =
-                    "14px 10px";
-
-
-                button.style.border =
-                    "none";
-
-
-                button.style.borderRadius =
-                    "10px";
-
-
-                button.style.background =
-                    "#e5b935";
-
-
-                button.style.color =
-                    "#111111";
-
-
-                button.style.fontWeight =
-                    "bold";
-
-
-                button.style.fontSize =
-                    "15px";
-
-
-                button.style.cursor =
-                    "pointer";
-
-
-                button.onclick =
-                    function() {
-
-                        showCategory(
-                            category
-                        );
-
-                    };
-
-
-                categoryArea.appendChild(
-                    button
-                );
-
-            }
-        );
-
-    }
-
-
-    // ==================================================
-    // SHOW CATEGORY
-    // ==================================================
-
-    function showCategory(
-        category
-    ) {
-
-        categoryArea.innerHTML =
-            "";
-
-
-        galleryArea.innerHTML =
-            "";
-
-
-        const backButton =
-            document.createElement(
-                "button"
-            );
-
-
-        backButton.type =
-            "button";
-
-
-        backButton.textContent =
-            "← Back to Categories";
-
-
-        backButton.style.padding =
-            "9px 14px";
-
-
-        backButton.style.border =
-            "none";
-
-
-        backButton.style.borderRadius =
-            "8px";
-
-
-        backButton.style.background =
-            "#ffffff";
-
-
-        backButton.style.color =
-            "#111111";
-
-
-        backButton.style.fontWeight =
-            "bold";
-
-
-        backButton.style.cursor =
-            "pointer";
-
-
-        backButton.style.marginBottom =
-            "12px";
-
-
-        backButton.onclick =
-            function() {
-
-                renderCategories(
-                    categorySearch.value
-                );
-
-            };
-
-
-        galleryArea.appendChild(
-            backButton
-        );
-
-
-        const title =
-            document.createElement(
-                "h3"
-            );
-
-
-        title.textContent =
-            "📁 " +
-            category;
-
-
-        title.style.color =
-            "#ffffff";
-
-
-        galleryArea.appendChild(
-            title
-        );
-
-
-        const taweezSearch =
-            document.createElement(
-                "input"
-            );
-
-
-        taweezSearch.type =
-            "search";
-
-
-        taweezSearch.placeholder =
-            "🔎 Search Taweez in " +
-            category +
-            "...";
-
-
-        taweezSearch.style.width =
-            "100%";
-
-
-        taweezSearch.style.padding =
-            "12px";
-
-
-        taweezSearch.style.borderRadius =
-            "10px";
-
-
-        taweezSearch.style.border =
-            "none";
-
-
-        taweezSearch.style.boxSizing =
-            "border-box";
-
-
-        taweezSearch.style.marginBottom =
-            "15px";
-
-
-        galleryArea.appendChild(
-            taweezSearch
-        );
-
-
-        const gallery =
-            document.createElement(
-                "div"
-            );
-
-
-        gallery.style.display =
-            "grid";
-
-
-        gallery.style.gridTemplateColumns =
-            "repeat(auto-fit, minmax(160px, 1fr))";
-
-
-        gallery.style.gap =
-            "12px";
-
-
-        galleryArea.appendChild(
-            gallery
-        );
-
-
-        function renderTaweez(
-            searchText
-        ) {
-
-            gallery.innerHTML =
-                "";
-
-
-            const search =
-                (
-                    searchText ||
-                    ""
-                )
-                .trim()
-                .toLowerCase();
-
-
-            const filtered =
+                const images =
                 allTaweez.filter(
-                    function(item) {
-
-                        const itemCategory =
-                            (
-                                item.Category ||
-                                ""
-                            )
-                            .trim()
-                            .toLowerCase();
-
-
-                        const itemName =
-                            (
-                                item.Taweez_Name ||
-                                ""
-                            )
-                            .trim()
-                            .toLowerCase();
-
+                    function(item){
 
                         return (
-                            itemCategory ===
-                            category
-                                .trim()
-                                .toLowerCase()
-                        )
-                        &&
-                        (
-                            !search ||
-                            itemName.includes(
-                                search
-                            )
+                            item.Category === category
                         );
 
                     }
                 );
 
 
-            if (
-                filtered.length ===
-                0
-            ) {
 
-                const empty =
-                    document.createElement(
-                        "p"
-                    );
+                images.forEach(
+                    function(item){
 
 
-                empty.textContent =
-                    "Is category me koi Taweez nahi mila.";
+                        const card =
+                            document.createElement(
+                                "div"
+                            );
 
 
-                empty.style.color =
-                    "#ffffff";
+                        card.style.background =
+                            "#fff";
 
 
-                gallery.appendChild(
-                    empty
-                );
+                        card.style.padding =
+                            "10px";
 
 
-                return;
-            }
+                        card.style.marginBottom =
+                            "15px";
 
 
-            filtered.forEach(
-                function(item) {
-
-                    const card =
-                        document.createElement(
-                            "div"
-                        );
+                        card.style.borderRadius =
+                            "10px";
 
 
-                    card.style.background =
-                        "#ffffff";
 
-
-                    card.style.borderRadius =
-                        "12px";
-
-
-                    card.style.padding =
-                        "10px";
-
-
-                    card.style.boxSizing =
-                        "border-box";
-
-
-                    card.style.textAlign =
-                        "center";
-
-
-                    const name =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    name.textContent =
-                        safeText(
-                            item.Taweez_Name
-                        );
-
-
-                    name.style.fontWeight =
-                        "bold";
-
-
-                    name.style.color =
-                        "#111111";
-
-
-                    name.style.marginBottom =
-                        "8px";
-
-
-                    card.appendChild(
-                        name
-                    );
-
-
-                    const imageUrl =
-    getTaweezImageUrl(
-        item.File_Url || ""
-    );
-
-
-                    if (imageUrl) {
-
-                        const image =
+                        const img =
                             document.createElement(
                                 "img"
                             );
 
 
-                        image.src =
-                            imageUrl;
+                        img.src =
+                            item.File_Url;
 
 
-                        image.alt =
-                            safeText(
-                                item.Taweez_Name
-                            );
-
-
-                        image.style.width =
+                        img.style.width =
                             "100%";
 
 
-                        image.style.height =
-                            "180px";
+                        img.style.height =
+                            "200px";
 
 
-                        image.style.objectFit =
+                        img.style.objectFit =
                             "contain";
 
 
-                        image.style.background =
-                            "#f5f5f5";
-
-
-                        image.style.borderRadius =
-                            "8px";
-
-
-                        image.style.cursor =
-                            "pointer";
-
-
-                        image.onerror =
-                            function() {
-
-                                image.style.display =
-                                    "none";
-
-
-                                const errorText =
-                                    document.createElement(
-                                        "p"
-                                    );
-
-
-                                errorText.textContent =
-                                    "⚠️ Image Load Nahi Hui";
-
-
-                                errorText.style.color =
-                                    "#c0392b";
-
-
-                                card.appendChild(
-                                    errorText
-                                );
-
-                            };
-
-
-                        image.onclick =
-                            function() {
-
-                                openFullImage(
-                                    imageUrl
-                                );
-
-                            };
-
-
                         card.appendChild(
-                            image
+                            img
                         );
 
-                    } else {
 
-                        const noImage =
+
+                        const name =
                             document.createElement(
                                 "p"
                             );
 
 
-                        noImage.textContent =
-                            "Image Available Nahi Hai";
-
-
-                        noImage.style.color =
-                            "#777777";
+                        name.textContent =
+                            item.Taweez_Name;
 
 
                         card.appendChild(
-                            noImage
+                            name
                         );
+
+
+
+                        const selectBtn =
+                            document.createElement(
+                                "button"
+                            );
+
+
+                        selectBtn.textContent =
+                            "✅ Select This Taweez";
+
+
+                        selectBtn.style.width =
+                            "100%";
+
+
+                        selectBtn.style.padding =
+                            "10px";
+
+
+
+                        selectBtn.onclick =
+                        function(){
+
+
+                            const nameInput =
+                            document.getElementById(
+                                "Taweez_Name"
+                            );
+
+
+                            if(nameInput){
+
+                                nameInput.value =
+                                    item.Taweez_Name;
+
+                            }
+
+
+                            selectedTaweezImageUrl =
+                                item.File_Url;
+
+
+
+                            const selectedBox =
+                            document.getElementById(
+                                "selectedTaweez"
+                            );
+
+
+                            if(selectedBox){
+
+                                selectedBox.innerHTML =
+                                `
+                                <p>
+                                ✅ Selected:
+                                ${item.Taweez_Name}
+                                </p>
+
+                                <img src="${item.File_Url}"
+                                style="width:100%;max-width:500px;">
+                                `;
+
+                            }
+
+
+                            overlay.remove();
+
+
+                        };
+
+
+                        card.appendChild(
+                            selectBtn
+                        );
+
+
+                        galleryArea.appendChild(
+                            card
+                        );
+
 
                     }
+                );
 
 
-                    const selectButton =
-                        document.createElement(
-                            "button"
-                        );
+            };
 
 
-                    selectButton.type =
-                        "button";
-
-
-                    selectButton.textContent =
-                        "✅ Select This Taweez";
-
-
-                    selectButton.style.marginTop =
-                        "10px";
-
-
-                    selectButton.style.width =
-                        "100%";
-
-
-                    selectButton.style.padding =
-                        "11px";
-
-
-                    selectButton.style.border =
-                        "none";
-
-
-                    selectButton.style.borderRadius =
-                        "8px";
-
-
-                    selectButton.style.background =
-                        "#e5b935";
-
-
-                    selectButton.style.color =
-                        "#111111";
-
-
-                    selectButton.style.fontWeight =
-                        "bold";
-
-
-                    selectButton.style.cursor =
-                        "pointer";
-
-
-                    selectButton.onclick =
-    function() {
-
-        const nameInput =
-            document.getElementById(
-                "Taweez_Name"
+            categoryArea.appendChild(
+                button
             );
 
-
-        if (nameInput) {
-
-            nameInput.value =
-                safeText(
-                    item.Taweez_Name
-                );
 
         }
+    );
 
+                        }
 
-        // SAVE ORIGINAL IMAGE URL
-        selectedTaweezImageUrl =
-            imageUrl ||
-            null;
-
-
-        const selectedBox =
-            document.getElementById(
-                "selectedTaweez"
-            );
-
-
-        if (selectedBox) {
-
-            selectedBox.innerHTML = "";
-
-
-            // SELECTED MESSAGE
-            const selectedTitle =
-                document.createElement(
-                    "p"
-                );
-
-            selectedTitle.innerHTML =
-                "✅ <b>Selected:</b> " +
-                escapeHtml(
-                    item.Taweez_Name
-                ) +
-                "<br>" +
-                "📁 <b>Category:</b> " +
-                escapeHtml(
-                    item.Category
-                );
-
-            selectedBox.appendChild(
-                selectedTitle
-            );
-
-
-            // FULL IMAGE
-            if (imageUrl) {
-
-                const selectedImage =
-                    document.createElement(
-                        "img"
-                    );
-
-                selectedImage.src =
-                    imageUrl;
-
-                selectedImage.alt =
-                    safeText(
-                        item.Taweez_Name
-                    );
-
-                selectedImage.style.width =
-                    "100%";
-
-                selectedImage.style.maxWidth =
-                    "500px";
-
-                selectedImage.style.maxHeight =
-                    "600px";
-
-                selectedImage.style.objectFit =
-                    "contain";
-
-                selectedImage.style.display =
-                    "block";
-
-                selectedImage.style.margin =
-                    "12px auto";
-
-                selectedImage.style.background =
-                    "#f5f5f5";
-
-                selectedImage.style.padding =
-                    "5px";
-
-                selectedImage.style.borderRadius =
-                    "10px";
-
-                selectedImage.style.border =
-                    "1px solid #ddd";
-
-                selectedBox.appendChild(
-                    selectedImage
-                );
-
-
-                // CROP & PRINT BUTTON
-                const cropButton =
-                    document.createElement(
-                        "button"
-                    );
-
-                cropButton.type =
-                    "button";
-
-                cropButton.textContent =
-                    "✂️ Crop & Print Taweez";
-
-                cropButton.className =
-                    "btn gold";
-
-                cropButton.style.marginTop =
-                    "10px";
-
-                cropButton.style.display =
-                    "block";
-
-                cropButton.style.width =
-                    "100%";
-
-                cropButton.style.maxWidth =
-                    "500px";
-
-                cropButton.style.marginLeft =
-                    "auto";
-
-                cropButton.style.marginRight =
-                    "auto";
-
-
-                cropButton.onclick =
-                    function() {
-
-                        openTaweezCropEditor(
-                            imageUrl,
-                            item.Taweez_Name
-                        );
-
-                    };
-
-
-                selectedBox.appendChild(
-                    cropButton
-                );
-
-            }
-
-        }
-
-
-        overlay.remove();
-
-    };
-
-                    card.appendChild(
-                        selectButton
-                    );
-
-
-                    gallery.appendChild(
-                        card
-                    );
-
-                }
-            );
-
-        }
-
-
-        renderTaweez("");
-
-
-        taweezSearch.addEventListener(
-            "input",
-            function() {
-
-                renderTaweez(
-                    taweezSearch.value
-                );
-
-            }
-        );
-
-    }
 
 
     // ==================================================
