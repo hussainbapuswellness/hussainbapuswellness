@@ -312,8 +312,12 @@ function addOldTreatmentRecord(card, record) {
 
 function addTaweezRecord(card, record) {
 
-    if (!record.Taweez_Name) {
-        return;
+    if (
+    !record.Taweez_Name &&
+    !record.Taweez_Notes &&
+    !record.Taweez_Image_Url
+) {
+    return;
     }
 
 
@@ -402,8 +406,11 @@ function addTaweezRecord(card, record) {
 
 function addHerbalRecord(card, record) {
 
-    if (!record.Herbal_Remedy) {
-        return;
+    if (
+    !record.Herbal_Remedy &&
+    !record.Herbal_Notes
+) {
+    return;
     }
 
 
@@ -453,8 +460,11 @@ function addHerbalRecord(card, record) {
 
 function addWazifaRecord(card, record) {
 
-    if (!record.Wazifa) {
-        return;
+    if (
+    !record.Wazifa &&
+    !record.Wazifa_Notes
+) {
+    return;
     }
 
 
@@ -654,7 +664,10 @@ async function loadTreatmentHistory() {
 
     records.forEach(
         function(record) {
-
+console.log(
+    "DATABASE RECORD:",
+    record
+);
             const card =
                 document.createElement(
                     "div"
@@ -3593,8 +3606,8 @@ if (historyBox) {
 
             .insert([{
 
-                Mureed_Id:
-                    currentMureed.id,
+               Mureed_Id:
+    currentMureed?.id || null,
 
                 Appointment_Id:
                     appointmentId,
