@@ -3414,6 +3414,7 @@ async function selectTaweez() {
 // ======================================================
 
 async function saveTreatment() {
+    console.log("EDIT ID:", editingTreatmentId);
 if (editingTreatmentId) {
 
     const updateData = {
