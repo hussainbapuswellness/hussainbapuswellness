@@ -12,6 +12,7 @@ const appointmentId =
 
 let currentMureed = null;
 let selectedTaweezImageUrl = null;
+let editingTreatmentId = null;
 
 
 // ======================================================
@@ -530,7 +531,39 @@ function addAdditionalNotes(card, record) {
 
     card.appendChild(notes);
 }
+function editTreatment(record) {
 
+    editingTreatmentId = record.id;
+
+    openTreatmentForm();
+
+    const fields = [
+        "Taweez_Name",
+        "Taweez_Notes",
+        "Herbal_Remedy",
+        "Herbal_Notes",
+        "Wazifa",
+        "Wazifa_Notes",
+        "Additional_Notes"
+    ];
+
+    fields.forEach(function(id) {
+
+        const element =
+            document.getElementById(id);
+
+        if (element) {
+
+            element.value =
+                record[id] || "";
+
+        }
+
+    });
+
+    selectedTaweezImageUrl =
+        record.Taweez_Image_Url || null;
+}
 // ======================================================
 // MUREED.JS - PART 3 / 4
 // TREATMENT HISTORY + IMAGE PREVIEW + TAWEEZ GALLERY
@@ -694,7 +727,26 @@ async function loadTreatmentHistory() {
                 card,
                 record
             );
+const editButton =
+    document.createElement("button");
 
+editButton.type = "button";
+
+editButton.textContent = "✏️ Edit";
+
+editButton.style.marginTop = "12px";
+
+editButton.style.padding = "10px 16px";
+
+editButton.style.cursor = "pointer";
+
+editButton.onclick = function() {
+
+    editTreatment(record);
+
+};
+
+card.appendChild(editButton);
 
             box.appendChild(
                 card
@@ -3362,7 +3414,98 @@ async function selectTaweez() {
 // ======================================================
 
 async function saveTreatment() {
+if (editingTreatmentId) {
 
+    const updateData = {
+
+        Taweez_Name:
+            document.getElementById("Taweez_Name")?.value.trim() || null,
+
+        Taweez_Notes:
+            document.getElementById("Taweez_Notes")?.value.trim() || null,
+
+        Taweez_Image_Url:
+            selectedTaweezImageUrl,
+
+        Herbal_Remedy:
+            document.getElementById("Herbal_Remedy")?.value.trim() || null,
+
+        Herbal_Notes:
+            document.getElementById("Herbal_Notes")?.value.trim() || null,
+
+        Wazifa:
+            document.getElementById("Wazifa")?.value.trim() || null,
+
+        Wazifa_Notes:
+            document.getElementById("Wazifa_Notes")?.value.trim() || null,
+
+        Additional_Notes:
+            document.getElementById("Additional_Notes")?.value.trim() || null
+
+    };
+
+
+    const {
+        error
+    } = await supabaseClient
+        .from("Mureed_Treatment_History")
+        .update(updateData)
+        .eq("id", editingTreatmentId);
+
+
+    if (error) {
+
+        console.error(
+            "Update Treatment Error:",
+            error
+        );
+
+        alert(
+            "UPDATE ERROR\n\n" +
+            error.message
+        );
+
+        return;
+    }
+
+
+    alert(
+        "✅ Treatment Updated Successfully"
+    );
+
+
+    editingTreatmentId = null;
+
+
+    [
+        "Taweez_Name",
+        "Taweez_Notes",
+        "Herbal_Remedy",
+        "Herbal_Notes",
+        "Wazifa",
+        "Wazifa_Notes",
+        "Additional_Notes"
+    ].forEach(function(id) {
+
+        const element =
+            document.getElementById(id);
+
+        if (element) {
+            element.value = "";
+        }
+
+    });
+
+
+    selectedTaweezImageUrl = null;
+
+
+    closeTreatmentForm();
+
+    await loadTreatmentHistory();
+
+    return;
+}
     if (!currentMureed) {
 
         alert(
