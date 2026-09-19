@@ -3464,7 +3464,122 @@ async function refreshTreatmentHistory() {
 }
 
 
+// ======================================================
+// PRINT COURIER ADDRESS
+// ======================================================
 
+function printCourierAddress() {
+
+    if (!currentMureed) {
+        alert("Mureed information not loaded.");
+        return;
+    }
+
+    const name =
+        currentMureed.Full_Name || "-";
+
+    const address =
+        currentMureed["Full Address"] || "-";
+
+    const mobile =
+        currentMureed.Mobile || "-";
+
+    const whatsapp =
+        currentMureed.Whatsapp || "-";
+
+    const state =
+        currentMureed.State || "-";
+
+    const country =
+        currentMureed.Country || "-";
+
+    const printWindow =
+        window.open("", "_blank");
+
+    if (!printWindow) {
+        alert("Please allow pop-up window.");
+        return;
+    }
+
+    printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Courier Address</title>
+
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    padding: 30px;
+                    font-size: 18px;
+                }
+
+                h2 {
+                    text-align: center;
+                }
+
+                .address {
+                    border: 2px solid #000;
+                    padding: 25px;
+                    line-height: 1.7;
+                }
+
+                .name {
+                    font-size: 25px;
+                    font-weight: bold;
+                }
+            </style>
+        </head>
+
+        <body>
+
+            <h2>HUSSAIN BAPU'S WELLNESS</h2>
+
+            <div class="address">
+
+                <div class="name">
+                    ${escapeHtml(name)}
+                </div>
+
+                <br>
+
+                <b>Address:</b><br>
+                ${escapeHtml(address).replace(/\n/g, "<br>")}
+
+                <br><br>
+
+                <b>Mobile:</b>
+                ${escapeHtml(mobile)}
+
+                <br>
+
+                <b>WhatsApp:</b>
+                ${escapeHtml(whatsapp)}
+
+                <br>
+
+                <b>State:</b>
+                ${escapeHtml(state)}
+
+                <br>
+
+                <b>Country:</b>
+                ${escapeHtml(country)}
+
+            </div>
+
+            <script>
+                window.onload = function() {
+                    window.print();
+                };
+            <\/script>
+
+        </body>
+        </html>
+    `);
+
+    printWindow.document.close();
+}
 
 // ======================================================
 // FINAL BUTTON INITIALIZATION
@@ -3570,7 +3685,17 @@ document.addEventListener(
 
         }
 
+const printCourierButton =
+    document.getElementById(
+        "printCourierAddressBtn"
+    );
 
+if (printCourierButton) {
+    printCourierButton.addEventListener(
+        "click",
+        printCourierAddress
+    );
+}
 
 
         loadMureed();
