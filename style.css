@@ -1543,153 +1543,107 @@ border-radius:18px;
     }
 }
 /* =========================================================
-   QUICK NAVIGATION + ABOUT HUSSAIN BAPU'S WELLNESS
-   FINAL PREMIUM UPGRADE
+   FINAL — QUICK NAVIGATION + ABOUT HUSSAIN BAPU'S WELLNESS
+   PREMIUM GLASS • GOLD • HERITAGE CARD DESIGN
 ========================================================= */
-
 
 /* =========================
    QUICK NAVIGATION
 ========================= */
 
 #quick-links{
-    position:relative;
-    padding:75px 20px 80px;
-    text-align:center;
-
-    background:
-    radial-gradient(
-        circle at 50% 0%,
-        rgba(212,175,55,.12),
-        transparent 45%
-    ),
-    linear-gradient(
-        180deg,
-        rgba(4,28,23,.96),
-        rgba(8,42,35,1)
-    );
+    padding-top:55px;
+    padding-bottom:55px;
 }
 
 #quick-links h2{
-    position:relative;
-    color:#f5d76e;
-    font-family:'Cinzel',serif;
     font-size:42px;
-    font-weight:900;
-    letter-spacing:1px;
-    margin-bottom:40px;
-
-    text-shadow:
-        0 2px 12px rgba(212,175,55,.25);
-}
-
-#quick-links h2::before{
-    content:"✦";
-    color:#d4af37;
-    margin-right:12px;
-}
-
-#quick-links h2::after{
-    content:"✦";
-    color:#d4af37;
-    margin-left:12px;
+    line-height:1.2;
+    text-align:center;
+    color:#f4d37a;
+    margin-bottom:32px;
+    letter-spacing:.3px;
+    text-shadow:0 2px 12px rgba(0,0,0,.35);
 }
 
 #quick-links .cards{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:20px;
-    max-width:1050px;
-    margin:0 auto;
+    gap:22px;
 }
 
 #quick-links .card{
-
     position:relative;
-
-    width:auto;
-    min-height:90px;
-
-    padding:24px 18px;
+    min-height:115px;
+    height:auto;
 
     display:flex;
     align-items:center;
     justify-content:center;
+    text-align:center;
+
+    padding:25px 18px;
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15,65,52,.72),
+            rgba(5,30,24,.82)
+        );
+
+    border:1px solid rgba(224,184,82,.48);
+    border-top:3px solid #d9b85b;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.07);
+
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+
+    color:#fff;
+    font-size:19px;
+    font-weight:700;
+    line-height:1.35;
 
     text-decoration:none;
 
-    font-family:'Poppins',sans-serif;
-    font-size:18px;
-    font-weight:800;
-    letter-spacing:.4px;
-
-    color:#f8e7a0;
-
-    background:
-    linear-gradient(
-        145deg,
-        rgba(212,175,55,.16),
-        rgba(255,255,255,.045)
-    );
-
-    border:1px solid rgba(212,175,55,.50);
-    border-radius:19px;
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.12),
-        0 10px 28px rgba(0,0,0,.28);
-
-    overflow:hidden;
-
     transition:
-        transform .3s ease,
-        border-color .3s ease,
-        box-shadow .3s ease,
-        background .3s ease;
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease,
+        background .25s ease;
 }
 
 #quick-links .card::before{
-
-    content:"✦";
-
-    position:absolute;
-    top:9px;
-    left:13px;
-
-    color:rgba(212,175,55,.55);
-    font-size:15px;
+    display:block;
+    margin-right:10px;
+    font-size:25px;
+    flex-shrink:0;
 }
 
-#quick-links .card::after{
-
-    content:"✦";
-
-    position:absolute;
-    right:13px;
-    bottom:7px;
-
-    color:rgba(212,175,55,.42);
-    font-size:15px;
-}
+#nav-about::before{content:"🏛️";}
+#nav-heritage::before{content:"🌿";}
+#nav-services::before{content:"🤲";}
+#nav-why::before{content:"⭐";}
+#nav-products::before{content:"🌿";}
+#nav-contact::before{content:"📞";}
 
 #quick-links .card:hover{
-
-    transform:translateY(-7px);
-
-    color:#fff4bd;
-
-    border-color:#d4af37;
-
-    background:
-    linear-gradient(
-        145deg,
-        rgba(212,175,55,.27),
-        rgba(255,255,255,.08)
-    );
+    transform:translateY(-6px);
+    border-color:#e8c86a;
 
     box-shadow:
-        0 0 28px rgba(212,175,55,.18),
-        0 16px 32px rgba(0,0,0,.35);
+        0 18px 38px rgba(0,0,0,.38),
+        0 0 18px rgba(220,184,90,.12);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(22,82,65,.82),
+            rgba(6,34,27,.92)
+        );
 }
 
 
@@ -1698,213 +1652,154 @@ border-radius:18px;
 ========================= */
 
 #about{
-
-    position:relative;
-
-    padding:85px 0 90px;
-
-    background:
-    radial-gradient(
-        circle at 50% 10%,
-        rgba(212,175,55,.09),
-        transparent 40%
-    ),
-    linear-gradient(
-        180deg,
-        #082a23 0%,
-        #061f1a 100%
-    );
+    padding-top:65px;
+    padding-bottom:65px;
 }
 
 #about .section-title{
-
-    position:relative;
-
+    font-size:45px;
+    line-height:1.2;
     text-align:center;
-
-    color:#f5d76e;
-
-    font-size:43px;
-    font-weight:900;
-
-    letter-spacing:.5px;
-
-    margin-bottom:20px;
-
-    text-shadow:
-        0 2px 14px rgba(212,175,55,.25);
-}
-
-#about .section-title::before{
-
-    content:"🌿";
-
-    margin-right:10px;
-
-    font-size:.72em;
+    color:#f4d37a;
+    margin-bottom:38px;
+    letter-spacing:.2px;
+    text-shadow:0 2px 12px rgba(0,0,0,.35);
 }
 
 #about .cards{
-
     display:grid;
-
     grid-template-columns:repeat(3,1fr);
-
-    gap:23px;
-
-    max-width:1100px;
-
-    margin:40px auto 0;
+    gap:22px;
 }
 
 #about .card{
-
     position:relative;
 
-    min-height:225px;
+    min-height:235px;
+    height:auto;
 
-    padding:30px 24px 27px;
+    padding:28px 23px 25px;
 
     display:flex;
     flex-direction:column;
-    justify-content:center;
+    justify-content:flex-start;
 
-    text-align:center;
+    border-radius:20px;
 
     background:
-    linear-gradient(
-        145deg,
-        rgba(255,255,255,.075),
-        rgba(255,255,255,.025)
-    );
+        linear-gradient(
+            145deg,
+            rgba(15,65,52,.72),
+            rgba(5,30,24,.84)
+        );
 
-    border:1px solid rgba(212,175,55,.42);
-
-    border-radius:22px;
+    border:1px solid rgba(224,184,82,.45);
+    border-top:3px solid #d9b85b;
 
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.10),
-        0 12px 32px rgba(0,0,0,.28);
+        0 12px 30px rgba(0,0,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.07);
 
-    overflow:hidden;
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
 
     transition:
-        transform .3s ease,
-        border-color .3s ease,
-        box-shadow .3s ease;
-}
-
-#about .card::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-    left:0;
-    right:0;
-
-    height:3px;
-
-    background:
-    linear-gradient(
-        90deg,
-        transparent,
-        #d4af37,
-        #f8e7a0,
-        #d4af37,
-        transparent
-    );
-}
-
-#about .card::after{
-
-    content:"✦";
-
-    position:absolute;
-
-    right:17px;
-    bottom:10px;
-
-    color:rgba(212,175,55,.25);
-
-    font-size:28px;
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
 }
 
 #about .card:hover{
-
-    transform:translateY(-7px);
-
-    border-color:rgba(212,175,55,.80);
+    transform:translateY(-6px);
+    border-color:#e8c86a;
 
     box-shadow:
-        0 0 28px rgba(212,175,55,.14),
-        0 18px 38px rgba(0,0,0,.35);
+        0 18px 38px rgba(0,0,0,.38),
+        0 0 18px rgba(220,184,90,.12);
 }
 
 #about .card h3{
+    display:flex;
+    align-items:center;
 
-    position:relative;
-    z-index:2;
-
+    min-height:auto;
     margin:0 0 15px;
 
-    color:#f5d76e;
+    color:#f4d37a;
+    font-size:23px;
+    line-height:1.3;
+    font-weight:800;
 
-    font-size:22px;
-    font-weight:900;
-
-    line-height:1.35;
+    text-shadow:0 2px 8px rgba(0,0,0,.3);
 }
+
+#about .card h3::before{
+    margin-right:11px;
+    font-size:26px;
+    flex-shrink:0;
+}
+
+#about-card1-title::before{content:"🏛️";}
+#about-card2-title::before{content:"🤲";}
+#about-card3-title::before{content:"🌿";}
+#about-card4-title::before{content:"✨";}
+#about-card5-title::before{content:"💬";}
+#about-card6-title::before{content:"❤️";}
 
 #about .card p{
+    margin:0;
 
-    position:relative;
-    z-index:2;
+    color:rgba(255,255,255,.91);
 
-    margin:0 auto;
-
-    max-width:95%;
-
-    color:#f1f1e8;
-
-    font-size:16px;
-    font-weight:500;
-
-    line-height:1.75;
+    font-size:17px;
+    line-height:1.7;
+    font-weight:400;
 }
 
 
-/* --- ABOUT CARD ICONS --- */
+/* =========================
+   TABLET
+========================= */
 
-#about-card1-title::before{
-    content:"🏛️";
-    margin-right:9px;
-}
+@media (max-width:900px){
 
-#about-card2-title::before{
-    content:"🤲";
-    margin-right:9px;
-}
+    #quick-links h2{
+        font-size:36px;
+    }
 
-#about-card3-title::before{
-    content:"🌿";
-    margin-right:9px;
-}
+    #quick-links .cards{
+        grid-template-columns:repeat(2,1fr);
+        gap:18px;
+    }
 
-#about-card4-title::before{
-    content:"✨";
-    margin-right:9px;
-}
+    #quick-links .card{
+        min-height:105px;
+        font-size:18px;
+        padding:22px 15px;
+    }
 
-#about-card5-title::before{
-    content:"💬";
-    margin-right:9px;
-}
+    #about .section-title{
+        font-size:38px;
+    }
 
-#about-card6-title::before{
-    content:"❤️";
-    margin-right:9px;
+    #about .cards{
+        grid-template-columns:repeat(2,1fr);
+        gap:18px;
+    }
+
+    #about .card{
+        min-height:220px;
+        padding:24px 19px;
+    }
+
+    #about .card h3{
+        font-size:21px;
+    }
+
+    #about .card p{
+        font-size:16px;
+        line-height:1.65;
+    }
 }
 
 
@@ -1912,236 +1807,130 @@ border-radius:18px;
    MOBILE
 ========================= */
 
-@media(max-width:768px){
+@media (max-width:600px){
 
     #quick-links{
-        padding:58px 15px 65px;
+        padding-top:42px;
+        padding-bottom:42px;
     }
 
     #quick-links h2{
-
-        font-size:30px;
-
-        line-height:1.3;
-
-        margin-bottom:28px;
+        font-size:31px;
+        margin-bottom:25px;
     }
 
     #quick-links .cards{
-
         grid-template-columns:repeat(2,1fr);
-
-        gap:14px;
+        gap:13px;
     }
 
     #quick-links .card{
+        min-height:96px;
 
-        min-height:82px;
-
-        padding:20px 9px;
-
-        font-size:15px;
+        padding:17px 9px;
 
         border-radius:16px;
+        border-top-width:2px;
+
+        font-size:15.5px;
+        line-height:1.3;
     }
 
     #quick-links .card::before{
-
-        left:8px;
-        top:6px;
-
-        font-size:12px;
-    }
-
-    #quick-links .card::after{
-
-        right:8px;
-        bottom:5px;
-
-        font-size:12px;
+        margin-right:6px;
+        font-size:20px;
     }
 
 
     #about{
-
-        padding:62px 0 68px;
+        padding-top:48px;
+        padding-bottom:48px;
     }
 
     #about .section-title{
-
-        font-size:30px;
-
-        line-height:1.3;
-
-        padding:0 10px;
-
-        margin-bottom:10px;
+        font-size:31px;
+        margin-bottom:27px;
+        line-height:1.25;
     }
 
     #about .cards{
-
-        grid-template-columns:1fr;
-
-        gap:17px;
-
-        margin-top:30px;
-
-        padding:0 5px;
+        grid-template-columns:repeat(2,1fr);
+        gap:13px;
     }
 
     #about .card{
+        min-height:205px;
 
-        min-height:auto;
+        padding:19px 13px 18px;
 
-        padding:27px 20px 26px;
-
-        border-radius:19px;
+        border-radius:16px;
+        border-top-width:2px;
     }
 
     #about .card h3{
+        font-size:17px;
+        line-height:1.3;
+        margin-bottom:11px;
+    }
 
+    #about .card h3::before{
+        margin-right:6px;
         font-size:20px;
-
-        line-height:1.4;
-
-        margin-bottom:13px;
     }
 
     #about .card p{
-
-        font-size:15px;
-
-        line-height:1.7;
-
-        max-width:100%;
+        font-size:14.5px;
+        line-height:1.6;
     }
 }
-/* =========================================================
-   QUICK NAVIGATION + ABOUT
-   FINAL READABILITY & ICON UPGRADE
-========================================================= */
 
 
 /* =========================
-   QUICK NAVIGATION
+   VERY SMALL PHONES
 ========================= */
 
-#quick-links .card{
-    font-size:20px;
-    font-weight:800;
-    line-height:1.35;
-    min-height:95px;
-    padding:24px 18px;
-}
+@media (max-width:380px){
 
-/* Navigation Emojis */
+    #quick-links h2{
+        font-size:28px;
+    }
 
-#nav-about::before{
-    content:"🏠";
-    margin-right:10px;
-    font-size:22px;
-}
-
-#nav-heritage::before{
-    content:"🏛️";
-    margin-right:10px;
-    font-size:22px;
-}
-
-#nav-services::before{
-    content:"🤲";
-    margin-right:10px;
-    font-size:22px;
-}
-
-#nav-why::before{
-    content:"⭐";
-    margin-right:10px;
-    font-size:22px;
-}
-
-#nav-products::before{
-    content:"🌿";
-    margin-right:10px;
-    font-size:22px;
-}
-
-#nav-contact::before{
-    content:"📞";
-    margin-right:10px;
-    font-size:22px;
-}
-
-
-/* =========================
-   ABOUT — BIGGER & CLEARER
-========================= */
-
-#about .section-title{
-    font-size:46px;
-    line-height:1.3;
-    margin-bottom:25px;
-}
-
-#about .card{
-    min-height:245px;
-    padding:32px 25px 30px;
-}
-
-#about .card h3{
-    font-size:24px;
-    line-height:1.4;
-    margin-bottom:16px;
-}
-
-#about .card p{
-    font-size:18px;
-    line-height:1.75;
-    max-width:96%;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:768px){
+    #quick-links .cards,
+    #about .cards{
+        gap:10px;
+    }
 
     #quick-links .card{
         min-height:90px;
-        padding:20px 7px;
-        font-size:17px;
-        line-height:1.35;
+        padding:14px 7px;
+        font-size:14px;
     }
 
-    #nav-about::before,
-    #nav-heritage::before,
-    #nav-services::before,
-    #nav-why::before,
-    #nav-products::before,
-    #nav-contact::before{
-        margin-right:6px;
+    #quick-links .card::before{
         font-size:18px;
+        margin-right:4px;
     }
 
     #about .section-title{
-        font-size:34px;
-        line-height:1.3;
-        padding:0 8px;
+        font-size:28px;
     }
 
     #about .card{
-        min-height:auto;
-        padding:30px 20px 29px;
+        min-height:195px;
+        padding:16px 10px;
     }
 
     #about .card h3{
-        font-size:22px;
-        line-height:1.4;
+        font-size:15.5px;
+    }
+
+    #about .card h3::before{
+        font-size:18px;
+        margin-right:5px;
     }
 
     #about .card p{
-        font-size:16.5px;
-        line-height:1.75;
+        font-size:13.5px;
+        line-height:1.55;
     }
-}
+                      }
