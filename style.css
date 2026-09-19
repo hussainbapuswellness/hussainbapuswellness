@@ -1599,48 +1599,27 @@ border-radius:18px;
 
 @media (max-width: 768px) {
 
-    #hero-line1 { font-size: 18px; }
-    #hero-line2 { font-size: 17px; }
-    #hero-line3 { font-size: 16px; }
-
-    .hero-stats {
-        gap: 10px;
+    #stat2-title {
+        font-size: 0 !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        text-align: center;
+        line-height: 1.15;
     }
 
-    .hero-stats .stat {
-    width: 30%;
-    height: 155px;
-    min-height: 155px;
-    padding: 14px 8px;
-    border-radius: 18px;
-    flex: 1 1 0;
+    #stat2-title::before {
+        content: "World";
+        display: block;
+        font-size: 20px;
+        line-height: 1.15;
     }
 
-    .hero-stats .stat h3 {
-    font-size: 18px;
-    letter-spacing: -0.6px;
-    white-space: normal;
-    line-height: 1.15;
-    text-align: center;
-    max-width: 100%;
-}
-
-#stat2-title {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    font-size: 20px !important;
-    line-height: 1.15;
-    letter-spacing: 0;
-    white-space: normal;
-    overflow-wrap: anywhere;
-    text-align: center;
-}
-
-    .hero-stats .stat p {
-    font-size: 12px;
-    max-width: 100%;
-    line-height: 1.25;
-    text-align: center;
+    #stat2-title::after {
+        content: "Wide";
+        display: block;
+        font-size: 20px;
+        line-height: 1.15;
     }
 }
