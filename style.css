@@ -1608,11 +1608,12 @@ border-radius:18px;
     }
 
     .hero-stats .stat {
-        width: 31%;
-        height: 145px;
-        min-height: 145px;
-        padding: 14px 6px;
-        border-radius: 18px;
+    width: 30%;
+    height: 155px;
+    min-height: 155px;
+    padding: 14px 8px;
+    border-radius: 18px;
+    flex: 1 1 0;
     }
 
     .hero-stats .stat h3 {
