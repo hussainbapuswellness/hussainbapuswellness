@@ -1490,3 +1490,68 @@ border-radius:18px;
         line-height: 1.8;
     }
 }
+
+/* ===== HERO DETAILS PREMIUM — STEP 2 ===== */
+
+#hero-line1,
+#hero-line2,
+#hero-line3 {
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+#hero-line1 {
+    font-size: 21px;
+}
+
+#hero-line2 {
+    font-size: 20px;
+}
+
+#hero-line3 {
+    font-size: 19px;
+}
+
+.hero-stats {
+    margin-top: 35px;
+    gap: 20px;
+}
+
+.hero-stats .stat {
+    min-height: 135px;
+    padding: 22px 18px;
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.hero-stats .stat h3 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.hero-stats .stat p {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    #hero-line1 {
+        font-size: 18px;
+    }
+
+    #hero-line2 {
+        font-size: 17px;
+    }
+
+    #hero-line3 {
+        font-size: 16px;
+    }
+
+    .hero-stats .stat h3 {
+        font-size: 25px;
+    }
+
+    .hero-stats .stat p {
+        font-size: 15px;
+    }
+}
