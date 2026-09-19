@@ -1543,13 +1543,14 @@ border-radius:18px;
     }
 }
 /* =========================================================
-   FINAL — QUICK NAVIGATION + ABOUT HUSSAIN BAPU'S WELLNESS
-   PREMIUM GLASS • GOLD • HERITAGE CARD DESIGN
+   FINAL — QUICK NAVIGATION + ABOUT
+   PREMIUM HERITAGE CARD DESIGN
 ========================================================= */
 
-/* =========================
+
+/* =========================================================
    QUICK NAVIGATION
-========================= */
+========================================================= */
 
 #quick-links{
     padding-top:55px;
@@ -1557,13 +1558,14 @@ border-radius:18px;
 }
 
 #quick-links h2{
-    font-size:42px;
-    line-height:1.2;
     text-align:center;
+    font-size:43px;
+    line-height:1.2;
+    font-weight:800;
     color:#f4d37a;
-    margin-bottom:32px;
+    margin-bottom:34px;
     letter-spacing:.3px;
-    text-shadow:0 2px 12px rgba(0,0,0,.35);
+    text-shadow:0 2px 8px rgba(0,0,0,.55);
 }
 
 #quick-links .cards{
@@ -1574,37 +1576,38 @@ border-radius:18px;
 
 #quick-links .card{
     position:relative;
-    min-height:115px;
-    height:auto;
+    overflow:hidden;
+
+    min-height:125px;
+    padding:28px 22px;
 
     display:flex;
     align-items:center;
     justify-content:center;
     text-align:center;
 
-    padding:25px 18px;
     border-radius:20px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(15,65,52,.72),
-            rgba(5,30,24,.82)
+            rgba(18,73,57,.98) 0%,
+            rgba(8,47,36,.99) 52%,
+            rgba(4,29,23,1) 100%
         );
 
-    border:1px solid rgba(224,184,82,.48);
-    border-top:3px solid #d9b85b;
+    border:1px solid rgba(225,186,87,.60);
+    border-top:3px solid #dfbd5d;
 
     box-shadow:
-        0 12px 30px rgba(0,0,0,.28),
-        inset 0 1px 0 rgba(255,255,255,.07);
-
-    backdrop-filter:blur(16px);
-    -webkit-backdrop-filter:blur(16px);
+        0 13px 28px rgba(0,0,0,.48),
+        inset 0 1px 0 rgba(255,255,255,.08),
+        inset 0 -12px 25px rgba(0,0,0,.18);
 
     color:#fff;
-    font-size:19px;
-    font-weight:700;
+
+    font-size:20px;
+    font-weight:800;
     line-height:1.35;
 
     text-decoration:none;
@@ -1612,44 +1615,43 @@ border-radius:18px;
     transition:
         transform .25s ease,
         box-shadow .25s ease,
-        border-color .25s ease,
-        background .25s ease;
+        border-color .25s ease;
 }
+
+
+/* Premium top shine */
 
 #quick-links .card::before{
-    display:block;
-    margin-right:10px;
-    font-size:25px;
-    flex-shrink:0;
+    content:"";
+    position:absolute;
+    top:0;
+    left:12%;
+    width:76%;
+    height:1px;
+
+    background:rgba(255,225,140,.70);
+
+    box-shadow:0 0 12px rgba(240,203,104,.40);
 }
 
-#nav-about::before{content:"🏛️";}
-#nav-heritage::before{content:"🌿";}
-#nav-services::before{content:"🤲";}
-#nav-why::before{content:"⭐";}
-#nav-products::before{content:"🌿";}
-#nav-contact::before{content:"📞";}
+
+/* Quick Navigation hover */
 
 #quick-links .card:hover{
-    transform:translateY(-6px);
-    border-color:#e8c86a;
+    transform:translateY(-7px);
+
+    border-color:#f0cf73;
 
     box-shadow:
-        0 18px 38px rgba(0,0,0,.38),
-        0 0 18px rgba(220,184,90,.12);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(22,82,65,.82),
-            rgba(6,34,27,.92)
-        );
+        0 19px 38px rgba(0,0,0,.58),
+        0 0 22px rgba(224,184,82,.16),
+        inset 0 1px 0 rgba(255,255,255,.12);
 }
 
 
-/* =========================
+/* =========================================================
    ABOUT HUSSAIN BAPU'S WELLNESS
-========================= */
+========================================================= */
 
 #about{
     padding-top:65px;
@@ -1657,13 +1659,14 @@ border-radius:18px;
 }
 
 #about .section-title{
+    text-align:center;
     font-size:45px;
     line-height:1.2;
-    text-align:center;
+    font-weight:800;
     color:#f4d37a;
     margin-bottom:38px;
     letter-spacing:.2px;
-    text-shadow:0 2px 12px rgba(0,0,0,.35);
+    text-shadow:0 2px 8px rgba(0,0,0,.55);
 }
 
 #about .cards{
@@ -1672,13 +1675,17 @@ border-radius:18px;
     gap:22px;
 }
 
+
+/* =========================================================
+   ABOUT PREMIUM CARDS
+========================================================= */
+
 #about .card{
     position:relative;
+    overflow:hidden;
 
-    min-height:235px;
-    height:auto;
-
-    padding:28px 23px 25px;
+    min-height:245px;
+    padding:27px 23px 25px;
 
     display:flex;
     flex-direction:column;
@@ -1689,19 +1696,18 @@ border-radius:18px;
     background:
         linear-gradient(
             145deg,
-            rgba(15,65,52,.72),
-            rgba(5,30,24,.84)
+            rgba(18,73,57,.98) 0%,
+            rgba(8,47,36,.99) 52%,
+            rgba(4,29,23,1) 100%
         );
 
-    border:1px solid rgba(224,184,82,.45);
-    border-top:3px solid #d9b85b;
+    border:1px solid rgba(225,186,87,.60);
+    border-top:3px solid #dfbd5d;
 
     box-shadow:
-        0 12px 30px rgba(0,0,0,.28),
-        inset 0 1px 0 rgba(255,255,255,.07);
-
-    backdrop-filter:blur(16px);
-    -webkit-backdrop-filter:blur(16px);
+        0 13px 28px rgba(0,0,0,.48),
+        inset 0 1px 0 rgba(255,255,255,.08),
+        inset 0 -14px 28px rgba(0,0,0,.20);
 
     transition:
         transform .25s ease,
@@ -1709,87 +1715,113 @@ border-radius:18px;
         border-color .25s ease;
 }
 
-#about .card:hover{
-    transform:translateY(-6px);
-    border-color:#e8c86a;
 
-    box-shadow:
-        0 18px 38px rgba(0,0,0,.38),
-        0 0 18px rgba(220,184,90,.12);
+/* Premium top shine */
+
+#about .card::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:12%;
+    width:76%;
+    height:1px;
+
+    background:rgba(255,225,140,.70);
+
+    box-shadow:0 0 12px rgba(240,203,104,.40);
 }
 
+
+/* =========================================================
+   ABOUT HEADINGS
+========================================================= */
+
 #about .card h3{
+    position:relative;
+
     display:flex;
     align-items:center;
 
     min-height:auto;
     margin:0 0 15px;
 
-    color:#f4d37a;
+    color:#f5d577;
+
     font-size:23px;
-    line-height:1.3;
     font-weight:800;
+    line-height:1.3;
 
-    text-shadow:0 2px 8px rgba(0,0,0,.3);
+    text-shadow:0 2px 7px rgba(0,0,0,.60);
 }
 
-#about .card h3::before{
-    margin-right:11px;
-    font-size:26px;
-    flex-shrink:0;
+
+/* Emoji styling from HTML */
+
+#about .card h3{
+    gap:9px;
 }
 
-#about-card1-title::before{content:"🏛️";}
-#about-card2-title::before{content:"🤲";}
-#about-card3-title::before{content:"🌿";}
-#about-card4-title::before{content:"✨";}
-#about-card5-title::before{content:"💬";}
-#about-card6-title::before{content:"❤️";}
+
+/* =========================================================
+   ABOUT TEXT
+========================================================= */
 
 #about .card p{
     margin:0;
 
-    color:rgba(255,255,255,.91);
+    color:rgba(255,255,255,.94);
 
     font-size:17px;
     line-height:1.7;
     font-weight:400;
+
+    text-shadow:0 1px 3px rgba(0,0,0,.35);
 }
 
 
-/* =========================
+/* =========================================================
+   ABOUT CARD HOVER
+========================================================= */
+
+#about .card:hover{
+    transform:translateY(-7px);
+
+    border-color:#f0cf73;
+
+    box-shadow:
+        0 19px 38px rgba(0,0,0,.58),
+        0 0 22px rgba(224,184,82,.16),
+        inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+
+/* =========================================================
    TABLET
-========================= */
+========================================================= */
 
 @media (max-width:900px){
 
     #quick-links h2{
-        font-size:36px;
-    }
-
-    #quick-links .cards{
-        grid-template-columns:repeat(2,1fr);
-        gap:18px;
-    }
-
-    #quick-links .card{
-        min-height:105px;
-        font-size:18px;
-        padding:22px 15px;
+        font-size:37px;
     }
 
     #about .section-title{
-        font-size:38px;
+        font-size:39px;
     }
 
+    #quick-links .cards,
     #about .cards{
         grid-template-columns:repeat(2,1fr);
         gap:18px;
     }
 
+    #quick-links .card{
+        min-height:115px;
+        font-size:18px;
+    }
+
     #about .card{
-        min-height:220px;
-        padding:24px 19px;
+        min-height:225px;
     }
 
     #about .card h3{
@@ -1803,79 +1835,62 @@ border-radius:18px;
 }
 
 
-/* =========================
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media (max-width:600px){
 
     #quick-links{
-        padding-top:42px;
-        padding-bottom:42px;
+        padding-top:45px;
+        padding-bottom:45px;
     }
 
     #quick-links h2{
         font-size:31px;
-        margin-bottom:25px;
+        margin-bottom:27px;
     }
-
-    #quick-links .cards{
-        grid-template-columns:repeat(2,1fr);
-        gap:13px;
-    }
-
-    #quick-links .card{
-        min-height:96px;
-
-        padding:17px 9px;
-
-        border-radius:16px;
-        border-top-width:2px;
-
-        font-size:15.5px;
-        line-height:1.3;
-    }
-
-    #quick-links .card::before{
-        margin-right:6px;
-        font-size:20px;
-    }
-
 
     #about{
-        padding-top:48px;
-        padding-bottom:48px;
+        padding-top:50px;
+        padding-bottom:50px;
     }
 
     #about .section-title{
         font-size:31px;
-        margin-bottom:27px;
-        line-height:1.25;
+        margin-bottom:29px;
     }
 
+    #quick-links .cards,
     #about .cards{
         grid-template-columns:repeat(2,1fr);
         gap:13px;
     }
 
+    #quick-links .card{
+        min-height:105px;
+        padding:18px 10px;
+
+        border-radius:17px;
+        border-top-width:2px;
+
+        font-size:16px;
+        line-height:1.3;
+    }
+
     #about .card{
-        min-height:205px;
+        min-height:210px;
+        padding:20px 13px 18px;
 
-        padding:19px 13px 18px;
-
-        border-radius:16px;
+        border-radius:17px;
         border-top-width:2px;
     }
 
     #about .card h3{
         font-size:17px;
         line-height:1.3;
-        margin-bottom:11px;
-    }
-
-    #about .card h3::before{
-        margin-right:6px;
-        font-size:20px;
+        margin-bottom:12px;
+        gap:6px;
     }
 
     #about .card p{
@@ -1885,13 +1900,17 @@ border-radius:18px;
 }
 
 
-/* =========================
+/* =========================================================
    VERY SMALL PHONES
-========================= */
+========================================================= */
 
 @media (max-width:380px){
 
     #quick-links h2{
+        font-size:28px;
+    }
+
+    #about .section-title{
         font-size:28px;
     }
 
@@ -1901,36 +1920,23 @@ border-radius:18px;
     }
 
     #quick-links .card{
-        min-height:90px;
-        padding:14px 7px;
+        min-height:95px;
+        padding:15px 7px;
         font-size:14px;
-    }
-
-    #quick-links .card::before{
-        font-size:18px;
-        margin-right:4px;
-    }
-
-    #about .section-title{
-        font-size:28px;
     }
 
     #about .card{
         min-height:195px;
-        padding:16px 10px;
+        padding:17px 10px;
     }
 
     #about .card h3{
         font-size:15.5px;
-    }
-
-    #about .card h3::before{
-        font-size:18px;
-        margin-right:5px;
+        gap:5px;
     }
 
     #about .card p{
         font-size:13.5px;
         line-height:1.55;
     }
-                      }
+                         }
