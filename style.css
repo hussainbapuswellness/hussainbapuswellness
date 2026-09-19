@@ -1491,13 +1491,23 @@ border-radius:18px;
     }
 }
 
-/* ===== HERO DETAILS PREMIUM — STEP 2 ===== */
+/* ===== HERO DETAILS + PREMIUM GOLD STATS — STEP 2 & 3 ===== */
+
+/* --- Three Supporting Lines --- */
 
 #hero-line1,
 #hero-line2,
 #hero-line3 {
+    display: inline-block;
     font-weight: 600;
     letter-spacing: 0.3px;
+    padding: 7px 14px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.055);
+    border-left: 3px solid rgba(212, 175, 55, 0.7);
+    border-right: 3px solid rgba(212, 175, 55, 0.7);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.15);
+    max-width: 900px;
 }
 
 #hero-line1 {
@@ -1512,29 +1522,90 @@ border-radius:18px;
     font-size: 19px;
 }
 
+
+/* --- Premium Gold Rectangular Coins --- */
+
 .hero-stats {
     margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 .hero-stats .stat {
-    min-height: 135px;
-    padding: 22px 18px;
-    border: 1px solid rgba(212, 175, 55, 0.35);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    position: relative;
+    width: 180px;
+    height: 145px;
+    min-height: 145px;
+    padding: 18px 12px;
+    border-radius: 20px;
+
+    border: 3px solid #d4af37;
+
+    background:
+        radial-gradient(circle at 25% 20%, #fff3a6 0%, transparent 32%),
+        linear-gradient(145deg, #f8df72 0%, #d4af37 45%, #a87918 100%);
+
+    box-shadow:
+        inset 0 2px 4px rgba(255,255,255,0.7),
+        inset 0 -6px 10px rgba(70,45,0,0.35),
+        0 0 0 3px rgba(212,175,55,0.18),
+        0 10px 25px rgba(0,0,0,0.4);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-stats .stat::before {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border: 1px solid rgba(255,248,190,0.8);
+    border-radius: 14px;
+    pointer-events: none;
 }
 
 .hero-stats .stat h3 {
-    font-size: 30px;
-    margin-bottom: 10px;
+    position: relative;
+    z-index: 2;
+    margin: 0 0 8px;
+    color: #241700;
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1.15;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.45);
 }
 
 .hero-stats .stat p {
-    font-size: 17px;
-    font-weight: 600;
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    color: #241700;
+    font-size: 15px;
+    font-weight: 900;
+    line-height: 1.3;
+    text-align: center;
 }
 
+.hero-stats .stat:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        inset 0 2px 4px rgba(255,255,255,0.7),
+        inset 0 -6px 10px rgba(70,45,0,0.35),
+        0 0 25px rgba(212,175,55,0.5),
+        0 12px 28px rgba(0,0,0,0.45);
+}
+
+
+/* --- Mobile --- */
+
 @media (max-width: 768px) {
+
     #hero-line1 {
         font-size: 18px;
     }
@@ -1547,110 +1618,24 @@ border-radius:18px;
         font-size: 16px;
     }
 
-    .hero-stats .stat h3 {
-        font-size: 25px;
-    }
-
-    .hero-stats .stat p {
-        font-size: 15px;
-    }
-}
-
-/* ===== HERO STATS PREMIUM GOLD COINS — STEP 3 ===== */
-
-.hero-stats .stat {
-    position: relative;
-    width: 155px;
-    height: 155px;
-    min-height: 155px;
-    padding: 20px;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    border: 4px solid #d4af37;
-
-    background:
-        radial-gradient(circle at 35% 30%,
-        #fff1a8 0%,
-        #f5d76e 18%,
-        #d4af37 45%,
-        #9b7417 75%,
-        #5f4308 100%);
-
-    box-shadow:
-        0 0 0 5px rgba(212,175,55,0.18),
-        0 0 0 8px rgba(212,175,55,0.08),
-        inset 0 3px 8px rgba(255,255,255,0.55),
-        inset 0 -7px 12px rgba(70,45,0,0.45),
-        0 12px 30px rgba(0,0,0,0.45);
-
-    color: #3d2904;
-    overflow: hidden;
-}
-
-.hero-stats .stat::before {
-    content: "✦";
-    position: absolute;
-    inset: 7px;
-    border: 1px solid rgba(255,248,190,0.65);
-    border-radius: 50%;
-    font-size: 0;
-}
-
-.hero-stats .stat h3 {
-    position: relative;
-    z-index: 2;
-    margin: 0 0 7px;
-    color: #3d2904;
-    font-size: 25px;
-    font-weight: 900;
-    text-shadow: 0 1px 1px rgba(255,255,255,0.45);
-}
-
-.hero-stats .stat p {
-    position: relative;
-    z-index: 2;
-    margin: 0;
-    color: #3d2904;
-    font-size: 14px;
-    font-weight: 800;
-    line-height: 1.25;
-    text-align: center;
-    text-shadow: 0 1px 1px rgba(255,255,255,0.4);
-}
-
-.hero-stats .stat:hover {
-    transform: translateY(-6px) scale(1.04);
-    box-shadow:
-        0 0 0 5px rgba(212,175,55,0.25),
-        0 0 35px rgba(212,175,55,0.5),
-        inset 0 3px 8px rgba(255,255,255,0.55),
-        inset 0 -7px 12px rgba(70,45,0,0.45);
-}
-
-@media (max-width: 768px) {
-
     .hero-stats {
-        gap: 14px;
+        gap: 10px;
     }
 
     .hero-stats .stat {
-        width: 125px;
-        height: 125px;
-        min-height: 125px;
-        padding: 14px;
-        border-width: 3px;
+        width: 31%;
+        height: 135px;
+        min-height: 135px;
+        padding: 14px 7px;
+        border-radius: 17px;
     }
 
     .hero-stats .stat h3 {
-        font-size: 20px;
-        margin-bottom: 5px;
+        font-size: 22px;
     }
 
     .hero-stats .stat p {
-        font-size: 11px;
+        font-size: 12px;
     }
 }
+    
