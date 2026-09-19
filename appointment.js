@@ -48,7 +48,7 @@ form.addEventListener("submit", async function (e) {
 
         State: form.state.value.trim(),
 
-        City: form.city.value.trim(),
+        "Full Address": form.fullAddress.value.trim(),
 
         Consultation_Type: form.consultationType.value,
 
@@ -59,8 +59,8 @@ form.addEventListener("submit", async function (e) {
         Appointment_Status: "Pending"
 
     };
-    // Save Appointment in Supabase
 
+    // Save Appointment in Supabase
     const { data, error } = await supabaseClient
 
         .from("clients")
@@ -69,16 +69,15 @@ form.addEventListener("submit", async function (e) {
 
     if (error) {
 
-    console.error(error);
+        console.error(error);
 
-    alert(JSON.stringify(error));
+        alert(JSON.stringify(error));
 
-    return;
+        return;
 
     }
 
     // Success Screen
-
     appointmentID.innerHTML = appointmentId;
 
     form.reset();
@@ -94,6 +93,7 @@ form.addEventListener("submit", async function (e) {
     });
 
 });
+
 // ======================================
 // Simple Console Messages
 // ======================================
@@ -102,4 +102,5 @@ console.log("=================================");
 console.log("Hussain Bapu's Wellness");
 console.log("Appointment System Loaded");
 console.log("Supabase Connected");
+console.log("Full Address System Active");
 console.log("=================================");
