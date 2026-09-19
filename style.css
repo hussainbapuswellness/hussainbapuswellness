@@ -1626,13 +1626,15 @@ border-radius:18px;
 }
 
 #stat2-title {
+    display: block;
+    width: 100%;
+    max-width: 100%;
     font-size: 20px !important;
+    line-height: 1.15;
     letter-spacing: 0;
     white-space: normal;
-    line-height: 1.15;
+    overflow-wrap: anywhere;
     text-align: center;
-    max-width: 100px;
-    margin: 0 auto;
 }
 
     .hero-stats .stat p {
