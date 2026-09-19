@@ -1616,12 +1616,18 @@ border-radius:18px;
     }
 
     .hero-stats .stat h3 {
-        font-size: 21px;
-        letter-spacing: -0.8px;
+    font-size: 18px;
+    letter-spacing: -0.6px;
+    white-space: normal;
+    line-height: 1.15;
+    text-align: center;
+    max-width: 100%;
     }
 
     .hero-stats .stat p {
-        font-size: 12px;
-        max-width: 120px;
+    font-size: 12px;
+    max-width: 100%;
+    line-height: 1.25;
+    text-align: center;
     }
 }
