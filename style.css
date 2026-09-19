@@ -1622,7 +1622,13 @@ border-radius:18px;
     line-height: 1.15;
     text-align: center;
     max-width: 100%;
-    }
+}
+
+#stat2-title {
+    font-size: 14px !important;
+    letter-spacing: -0.8px;
+    white-space: nowrap;
+}
 
     .hero-stats .stat p {
     font-size: 12px;
